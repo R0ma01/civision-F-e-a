@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import qcMrcs from '@/geojson/qc_mrcs2.json';
 import useGlobalFilterStore from '@/stores/global-filter-store';
@@ -16,8 +16,10 @@ const MrcGrid: React.FC<ChloroplethProps> = ({
 }) => {
     const hoveredRegionIdRef = useRef<number[]>([]); // Array of highlighted region IDs
     const matchStage = useGlobalFilterStore((state) => state.matchStage);
+    const [loaded, setLoaded] = useState<boolean>(false);
+
     useEffect(() => {
-        if (!map) return;
+        if (!map || !loaded) return;
         const newFilters: number[] = [];
         const mrc_match = matchStage['MRC_IDU'];
         if (mrc_match) {
@@ -126,6 +128,7 @@ const MrcGrid: React.FC<ChloroplethProps> = ({
                     // Update the existing source if it already exists
                     (map.getSource('gridMrc-source') as any).setData(qcMrcs);
                 }
+                setLoaded(true);
             } else {
                 if (map.getLayer('mrc-outline')) map.removeLayer('mrc-outline');
                 if (map.getLayer('mrc-fill')) map.removeLayer('mrc-fill');
@@ -133,6 +136,7 @@ const MrcGrid: React.FC<ChloroplethProps> = ({
                     map.removeLayer('mrc-outlines');
                 if (map.getSource('gridMrc-source'))
                     map.removeSource('gridMrc-source');
+                setLoaded(false);
             }
         };
 

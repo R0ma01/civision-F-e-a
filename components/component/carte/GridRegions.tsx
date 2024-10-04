@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import qc_regions from '@/geojson/quebec_regions.json';
 import useGlobalFilterStore from '@/stores/global-filter-store';
 
@@ -16,8 +16,10 @@ const RegionGrid: React.FC<ChloroplethProps> = ({
 }) => {
     const hoveredRegionIdRef = useRef<number[]>([]); // Array of highlighted region IDs
     const matchStage = useGlobalFilterStore((state) => state.matchStage);
+    const [loaded, setLoaded] = useState<boolean>(false);
+
     useEffect(() => {
-        if (!map) return;
+        if (!map || !loaded) return;
         const newFilters: number[] = [];
         const mrc_match = matchStage['REG_IDU'];
         if (mrc_match) {
@@ -128,6 +130,7 @@ const RegionGrid: React.FC<ChloroplethProps> = ({
                         qc_regions,
                     );
                 }
+                setLoaded(true);
             } else {
                 if (map.getLayer('region-outline'))
                     map.removeLayer('region-outline');
@@ -136,6 +139,7 @@ const RegionGrid: React.FC<ChloroplethProps> = ({
                     map.removeLayer('regions-outlines');
                 if (map.getSource('gridRegion-source'))
                     map.removeSource('gridRegion-source');
+                setLoaded(false);
             }
         };
 

@@ -26,6 +26,7 @@ const Chloropleth: React.FC<ChloroplethProps> = ({
 }) => {
     const [hoveredRegionIds, setHoveredRegionIds] = useState<string[]>([]); // Store region IDs in state
     const matchStage = useGlobalFilterStore((state) => state.matchStage);
+    const [loaded, setLoaded] = useState<boolean>(false);
 
     // Memoized function to create region features based on data
     const regionFeatures = useMemo(() => {
@@ -40,7 +41,7 @@ const Chloropleth: React.FC<ChloroplethProps> = ({
 
     // Update hoveredRegionIds based on matchStage
     useEffect(() => {
-        if (!map) return;
+        if (!map || !loaded) return;
 
         const mapEntries = Array.from(MapRegions.get(mapType)?.entries() || []);
 
@@ -147,6 +148,7 @@ const Chloropleth: React.FC<ChloroplethProps> = ({
                     }
                 });
             }
+            setLoaded(true);
         };
 
         if (map.isStyleLoaded()) {
