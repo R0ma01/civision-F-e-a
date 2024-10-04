@@ -132,6 +132,7 @@ const RegionGrid: React.FC<ChloroplethProps> = ({
                 }
                 setLoaded(true);
             } else {
+                if (!loaded) return;
                 if (map.getLayer('region-outline'))
                     map.removeLayer('region-outline');
                 if (map.getLayer('region-fill')) map.removeLayer('region-fill');
@@ -151,13 +152,15 @@ const RegionGrid: React.FC<ChloroplethProps> = ({
 
         return () => {
             map.off('load', handleMapLoad);
-            if (map.getLayer('region-outline'))
-                map.removeLayer('region-outline');
-            if (map.getLayer('region-fill')) map.removeLayer('region-fill');
-            if (map.getLayer('region-outlines'))
-                map.removeLayer('region-outlines');
-            if (map.getSource('gridRegion-source'))
-                map.removeSource('gridRegion-source');
+            if (loaded) {
+                if (map.getLayer('region-outline'))
+                    map.removeLayer('region-outline');
+                if (map.getLayer('region-fill')) map.removeLayer('region-fill');
+                if (map.getLayer('region-outlines'))
+                    map.removeLayer('region-outlines');
+                if (map.getSource('gridRegion-source'))
+                    map.removeSource('gridRegion-source');
+            }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [map, mapGrid]);

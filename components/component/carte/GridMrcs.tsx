@@ -130,6 +130,7 @@ const MrcGrid: React.FC<ChloroplethProps> = ({
                 }
                 setLoaded(true);
             } else {
+                if (!loaded) return;
                 if (map.getLayer('mrc-outline')) map.removeLayer('mrc-outline');
                 if (map.getLayer('mrc-fill')) map.removeLayer('mrc-fill');
                 if (map.getLayer('mrc-outlines'))
@@ -148,11 +149,14 @@ const MrcGrid: React.FC<ChloroplethProps> = ({
 
         return () => {
             map.off('load', handleMapLoad);
-            if (map.getLayer('mrc-outline')) map.removeLayer('mrc-outline');
-            if (map.getLayer('mrc-fill')) map.removeLayer('mrc-fill');
-            if (map.getLayer('mrc-outlines')) map.removeLayer('mrc-outlines');
-            if (map.getSource('gridMrc-source'))
-                map.removeSource('gridMrc-source');
+            if (loaded) {
+                if (map.getLayer('mrc-outline')) map.removeLayer('mrc-outline');
+                if (map.getLayer('mrc-fill')) map.removeLayer('mrc-fill');
+                if (map.getLayer('mrc-outlines'))
+                    map.removeLayer('mrc-outlines');
+                if (map.getSource('gridMrc-source'))
+                    map.removeSource('gridMrc-source');
+            }
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
