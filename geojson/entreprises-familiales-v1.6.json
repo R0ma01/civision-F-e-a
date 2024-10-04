@@ -1,0 +1,133 @@
+[
+  {
+    "_id": {
+      "$oid": "64b66a9ea35f19dccd47de6c"
+    },
+    "annee_fondation": 1988,
+    "revenus_rang": 2,
+    "secteur_activite": 10,
+    "femmes_direction_%": "50% à 75%",
+    "nom_entreprise": "165368 Canada Inc",
+    "taille_entreprise": "petite",
+    "continuite_familiale": true,
+    "a_determiner": {
+      "q9b": "",
+      "quest": 9,
+      "ciediff": "1",
+      "dyade": "",
+      "cent": "00003",
+      "q0a": "1",
+      "q0b": "1",
+      "ExpAnt": 1,
+      "Poste": 3,
+      "selectio": 4,
+      "Formatio": 6,
+      "Gestion": 4,
+      "retribut": 5.3333333333,
+      "partese": 5,
+      "partemp": 6,
+      "secteur": 12,
+      "q57": "99",
+      "q9ab": "4,00"
+    },
+    "repondant": {
+      "age": null,
+      "sexe": "femme",
+      "niveau_etude": "6",
+      "niveau_sante": "très bonne",
+      "poste": [],
+      "membre_famille": "2ème génération",
+      "annees_travaillees": 15,
+      "annee_naissance": 1984
+    },
+    "imports": {
+      "pourcentage": "jamais",
+      "marches": [],
+      "principal": null,
+      "marginal": null
+    },
+    "exports": {
+      "pourcentage": "jamais",
+      "marches": [],
+      "principal": null,
+      "marginal": null
+    },
+    "actionnaires": {
+      "majoritaire": "2ème génération",
+      "nombre": 5,
+      "externe": false,
+      "type": []
+    },
+    "autres_entreprises": {
+      "famille_proprietaire": {
+        "possede": true,
+        "secteurs": ["15"]
+      },
+      "autres_membres_famille": {
+        "possede": false,
+        "liens_parente": [],
+        "relations_affaires": []
+      }
+    },
+    "dirigeant": {
+      "generation": "2ème génération",
+      "sexe": "femme",
+      "age": "35 à 44 ans",
+      "preside_conseil": true
+    },
+    "gouvernance": {
+      "structures": [
+        "assemblée d’actionnaires",
+        "conseil aviseur (ou consultatif)",
+        "conseil d'administration"
+      ],
+      "accompagnement_pro": true,
+      "conseil_consultatif": {
+        "composition": [
+          "employé non membre de la famille en affaires",
+          "professionnel, expert externe à l’entreprise"
+        ],
+        "%_femmes": 50,
+        "principales_activites": [
+          "approuver les orientations stratégiques, le plan d’affaires et les budgets qui en découlent, en assurant que la direction y donne suite",
+          "approuver les règlements généraux",
+          "assurer la mise en place d’un système intégré de gestion des risques",
+          "assurer que la gestion de l’entreprise est effectuée avec efficacité et efficience",
+          "déterminer la rémunération des hauts dirigeants et les critères d’évaluation de leur performance",
+          "élire et pourvoir à la nomination du président et des membres du conseil, du président de l’entreprise ainsi que des autres hauts dirigeants, déterminer leurs responsabilités et la portée de leur autorité"
+        ]
+      }
+    },
+    "gestion_familiale": {
+      "multiples_familles": true,
+      "generations_impliquees": ["2ème"],
+      "protocole_familial": "informel",
+      "politiques_familiales": ["aucune"]
+    },
+    "succession": {
+      "plan": "2",
+      "accompagnement_pro": true,
+      "accompagnement_type": ["01", "02", "04", "06", "07"]
+    },
+    "coordonnees": {
+      "latitude": 45.393927,
+      "longitude": -73.580131,
+      "code_postal": "J5C1G5",
+      "mrc": "Roussillon",
+      "region": "Montérégie",
+      "adresse": "1760 rue Centrale Sainte-Catherine Canada"
+    },
+    "questionnaires": {
+      "q46_controle_influence": [5, 4, 5, 2, 2, 4],
+      "q47_identification_appartenance": [5, 4, 5, 5, 5, 4],
+      "q48_liens_sociaux": [4, 4, 4, 4, 4],
+      "q49_aspects_emotionnels": [4, 4, 5, 4, 5],
+      "q50_succession": [5, 5, 5, 4],
+      "q51_conscience_environnementale_en_recrutement": [4, 4, 4],
+      "q52_formation_environnementale": [6, 6, 4],
+      "q53_gestion_developpement_environnemental": [4, 4, 4, 4],
+      "q54_retributions_environnementales_recompenses": [6, 6, 4],
+      "q55_participation_environnementale": [6, 6, 4, 6, 6, 4]
+    }
+  }
+]

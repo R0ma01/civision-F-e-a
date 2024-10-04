@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+    --popup-bg-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0; */
+        --popup-bg-rgb: 255, 164, 164;
+    }
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))
+        )
+        rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8dd0cf;
+    border-radius: 10px;
+}
+
+/* For Firefox 
+html {
+    scrollbar-width: thin;
+
+    scroll-behavior: smooth;
+
+    scrollbar-color: #8dd0cf white;
+}
+
+* {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+} */
+
+.scroll-hide::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+.scroll-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Style the Mapbox popups */
+.mapboxgl-popup {
+    max-width: 300px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: black;
+    border-radius: 8px;
+}
+
+.mapboxgl-popup-content {
+    padding: 15px;
+    background-color: grey;
+    border-radius: 8px;
+}
+
+.mapboxgl-popup-tip {
+    border-bottom-color: grey;
+}
+
+.mapboxgl-popup-close-button {
+    color: red;
+    font-size: 16px;
+    top: 8px;
+    left: 93%;
+}
+
+.mapboxgl-popup-content h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0077cc;
+}
+
+.mapboxgl-popup-content p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+}
+
+.mapboxgl-popup-content p + p {
+    margin-top: 8px;
+}
+
+.mapboxgl-popup-content a {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.mapboxgl-popup-content a:hover {
+    text-decoration: underline;
+}
+
+.shepeard-modal {
+    /* background-color: #d6dbdc !important; */
+}
+
+/* HTML: <div class="loader"></div> */
+.loader-circle {
+    width: 50px;
+    aspect-ratio: 1;
+    box-shadow: 0 0 0 3px #95c973 inset;
+    border-radius: 50%;
+    position: relative;
+}
+
+.loader-circle:before,
+.loader-circle:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: calc(50% - 12.5px);
+    box-shadow: inherit;
+    width: 25px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform-origin: 50% calc(100% - 5px);
+    animation: l7 1.5s linear infinite;
+}
+
+.loader-circle:after {
+    top: calc(100% + 2px);
+    transform-origin: 50% -27px;
+    animation-delay: -0.75s;
+}
+
+.loader-circle-small {
+    width: 20px;
+    aspect-ratio: 1;
+    box-shadow: 0 0 0 3px #95c973 inset;
+    border-radius: 50%;
+    position: relative;
+}
+
+.loader-circle-small:before,
+.loader-circle-small:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: calc(50% - 5.5px);
+    box-shadow: inherit;
+    width: 10px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform-origin: 50% calc(100% - 1px);
+    animation: l7 1.5s linear infinite;
+}
+
+.loader-circle-small:after {
+    top: calc(100% + 2px);
+    transform-origin: 50% -7px;
+    animation-delay: -0.75s;
+}
+
+/* HTML: <div class="loader"></div>
+.loader-circles-triangle {
+    width: 50px;
+    aspect-ratio: 1;
+    border: 2px solid;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: grid;
+    animation: l11 1.5s infinite linear;
+    transform-origin: 50% 80%;
+}
+.loader-circles-triangle:before,
+.loader-circles-triangle:after {
+    content: '';
+    grid-area: 1/1;
+    border: inherit;
+    border-radius: 50%;
+    animation: inherit;
+    animation-duration: 1s;
+    transform-origin: inherit;
+}
+.loader-circles-triangle:after {
+    --s: -1;
+}
+@keyframes l11 {
+    100% {
+        transform: rotate(calc(var(--s, 1) * 1turn));
+    }
+} */
+
+@keyframes l7 {
+    to {
+        transform: rotate(360deg);
+    }
+}
