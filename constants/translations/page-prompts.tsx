@@ -114,13 +114,13 @@ export const RepertoirePromptsTranslations: PromptsTranslations = {
 
 export const FournisseurPromptsTranslations: PromptsTranslations = {
     fournisseur_box_title: {
-        FR: 'Liste et profils des fournisseurs',
-        EN: 'List and profiles of all suppliers',
+        FR: 'Liste et profils des accompagnateurs',
+        EN: 'List and profiles of all service providers',
     },
 
     rechercher_fournisseur: {
-        FR: 'Rechercher un Fournisseur',
-        EN: 'Search for a Supplier',
+        FR: 'Rechercher un Accompagnateur',
+        EN: 'Search for a Service Provider',
     },
 
     region: {
@@ -134,8 +134,8 @@ export const FournisseurPromptsTranslations: PromptsTranslations = {
     },
 
     page_title: {
-        FR: 'Fournisseurs',
-        EN: 'Suppliers',
+        FR: 'Accompagnateurs',
+        EN: 'Service Providers',
     },
     prenom: {
         FR: 'Prénom',
@@ -180,8 +180,8 @@ export const SideBarPromptsTranslations: PromptsTranslations = {
         EN: 'Repertory',
     },
     suppliers: {
-        FR: 'Fournisseurs',
-        EN: 'Suppliers',
+        FR: 'Accompagnateurs',
+        EN: 'Service Providers',
     },
     thematiques: {
         FR: 'Thématiques',
