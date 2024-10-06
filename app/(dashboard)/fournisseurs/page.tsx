@@ -105,7 +105,7 @@ function Fournisseurs() {
         <>
             <PageContentContainer
                 filterMenu={true}
-                className="overflow-auto pb-10 pl-[30px] pt-10 relative"
+                className="overflow-auto pb-10 pl-[30px] pt-10"
             >
                 <ListeFournisseurs
                     admin={user === UserType.ADMIN}
@@ -145,14 +145,14 @@ function Fournisseurs() {
                         deleteItem={currentFournisseur}
                     />
                 )}
-                <Image
-                    src="/images/ORIA.png"
-                    width={150}
-                    height={100}
-                    alt="logo-ORIA"
-                    className="absolute bottom-0 right-10"
-                />
             </PageContentContainer>
+            <Image
+                src="/images/ORIA.png"
+                width={150}
+                height={100}
+                alt="logo-ORIA"
+                className="absolute bottom-0 right-10"
+            />
         </>
     );
 }
