@@ -129,7 +129,7 @@ function Repertoire() {
                             {!nombreEntreprises && (
                                 <div className="loader-circle-small absolute top-10 left-16"></div>
                             )}
-                            <p className="text-xs absolute top-20 left-16">
+                            <p className="text-xs absolute top-24 left-16">
                                 {
                                     RepertoirePromptsTranslations
                                         .div1_descriptive[lang]
