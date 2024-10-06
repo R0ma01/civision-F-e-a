@@ -22,7 +22,7 @@ const DataCardDiv: React.FC<{
 }> = ({ children }) => {
     return (
         <div
-            className={`w-[270px] h-[100px] bg-[#f5ebe0] dark:bg-[#363636] dark:bg-opacity-50 dark:text-white backdrop-filter
+            className={`w-[270px] h-[130px] bg-[#f5ebe0] dark:bg-[#363636] dark:bg-opacity-50 dark:text-white backdrop-filter
                  backdrop-blur bg-opacity-50 saturate-100 backdrop-contrast-100 rounded-xl shadow-3xl pointer-events-auto
                  flex flex-col items-center`}
         >

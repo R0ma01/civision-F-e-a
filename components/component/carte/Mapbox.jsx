@@ -81,17 +81,22 @@ export default MapBox;
 
 function popUpHTML(content) {
     return (
-        <div>
-            <strong>${content.properties.nom_entreprise}</strong>
-            <br />
-            Secteur d&lsquo;activité: ${content.properties.secteur_activite}
-            <br />
-            Taille de l&lsquo;entreprise: $
-            {content.properties.taille_entreprise}
-            <br />
-            Année de fondation: ${content.properties.annee_fondation}
-            <br />
-            Adresse: ${content.properties.adresse}
+        <div className="flex flex-col">
+            <p className="px-2 py-1 border border-none rounded-full bg-logo-green text-white text-center font-bold">
+                ${content.properties.nom_entreprise}
+            </p>
+            <p className="font-bold text-logo-dark-blue">
+                Secteur d&lsquo;activité:
+            </p>
+            <p>${content.properties.secteur_activite}</p>
+            <p className="font-bold text-logo-dark-blue">
+                Taille de l&lsquo;entreprise:
+            </p>
+            <p>${content.properties.taille_entreprise}</p>
+            <p className="font-bold text-logo-dark-blue">Année de fondation:</p>
+            <p>${content.properties.annee_fondation}</p>
+            <p className="font-bold text-logo-dark-blue">Adresse: </p>
+            <p>${content.properties.adresse}</p>
         </div>
     );
 }
