@@ -145,14 +145,14 @@ function Fournisseurs() {
                         deleteItem={currentFournisseur}
                     />
                 )}
+                <Image
+                    src="/images/ORIA.png"
+                    width={150}
+                    height={100}
+                    alt="logo-ORIA"
+                    className="absolute bottom-0 left-1"
+                />
             </PageContentContainer>
-            <Image
-                src="/images/ORIA.png"
-                width={150}
-                height={100}
-                alt="logo-ORIA"
-                className="absolute bottom-0 right-10"
-            />
         </>
     );
 }
