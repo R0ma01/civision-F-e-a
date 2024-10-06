@@ -150,7 +150,7 @@ function Fournisseurs() {
                     width={150}
                     height={100}
                     alt="logo-ORIA"
-                    className="absolute bottom-0 left-5"
+                    className="absolute bottom-0 left-10"
                 />
             </PageContentContainer>
         </>
