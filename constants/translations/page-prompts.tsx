@@ -87,21 +87,14 @@ export const RepertoirePromptsTranslations: PromptsTranslations = {
         EN: 'List of all the family companies in Quebec',
     },
     div1_sentence: {
-        FR: 'NOMBRE ENTREPRISES FAMILIALES',
-        EN: 'NUMBER OF FAMILY COMPANIES',
+        FR: "NOMBRE D' ENTREPRISES FAMILIALES RÉPERTOIRIÉES",
+        EN: 'NUMBER OF FAMILY COMPANIES LISTED',
     },
     div1_descriptive: {
         FR: 'en 2023 au Québec',
         EN: 'in 2023 in Quebec',
     },
-    div2_sentence: {
-        FR: 'TAUX ENTREPRISES FAMILIALES',
-        EN: 'FAMILY BUSINESS RATES',
-    },
-    div2_descriptive: {
-        FR: 'en 2023 au Canada',
-        EN: 'in 2023 in Canada',
-    },
+
     data_card3_title: {
         FR: 'Rechercher une Entreprise',
         EN: 'Search for a company',

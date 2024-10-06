@@ -67,11 +67,7 @@ const MapBox = () => {
                 .setLngLat(point.geometry.coordinates)
                 .setHTML(
                     `
-                    <strong>${point.properties.nom_entreprise}</strong><br>
-                    Secteur d'activité: ${point.properties.secteur_activite}<br>
-                    Taille de l'entreprise: ${point.properties.taille_entreprise}<br>
-                    Année de fondation: ${point.properties.annee_fondation}<br>
-                    Adresse: ${point.properties.adresse}
+                    ${popUpHTML(point)}
                 `,
                 )
                 .addTo(mapRef.current);
@@ -82,3 +78,20 @@ const MapBox = () => {
 };
 
 export default MapBox;
+
+function popUpHTML(content) {
+    return (
+        <div>
+            <strong>${content.properties.nom_entreprise}</strong>
+            <br />
+            Secteur d&lsquo;activité: ${content.properties.secteur_activite}
+            <br />
+            Taille de l&lsquo;entreprise: $
+            {content.properties.taille_entreprise}
+            <br />
+            Année de fondation: ${content.properties.annee_fondation}
+            <br />
+            Adresse: ${content.properties.adresse}
+        </div>
+    );
+}

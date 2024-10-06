@@ -137,27 +137,6 @@ function Repertoire() {
                             </p>
                         </div>
                     </DataCardDiv>
-                    <DataCardDiv>
-                        <div className="flex flex-row justify-start items-center w-full relative">
-                            <h1 className="w-full text-sm absolute top-2 left-5">
-                                {
-                                    RepertoirePromptsTranslations.div2_sentence[
-                                        lang
-                                    ]
-                                }
-                            </h1>
-                            <FactorySVG className="w-9 h-9 absolute top-8 left-4"></FactorySVG>
-                            <p className="text-4xl absolute top-7 left-16">
-                                63,1 %
-                            </p>
-                            <p className="text-xs absolute top-[72px] left-16">
-                                {
-                                    RepertoirePromptsTranslations
-                                        .div2_descriptive[lang]
-                                }
-                            </p>
-                        </div>
-                    </DataCardDiv>
                 </div>
                 <DataCard content={fetchedData.thirdField} year={2022} />
             </div>
