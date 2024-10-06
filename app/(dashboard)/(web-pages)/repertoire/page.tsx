@@ -120,16 +120,16 @@ function Repertoire() {
                             </h1>
                             {nombreEntreprises && (
                                 <>
-                                    <UpArrowSVG className="w-10 h-10 absolute top-8 left-4"></UpArrowSVG>
-                                    <p className="text-4xl absolute top-7 left-16">
+                                    <UpArrowSVG className="w-10 h-10 absolute top-12 left-4"></UpArrowSVG>
+                                    <p className="text-4xl absolute top-10 left-16">
                                         {nombreEntreprises}
                                     </p>
                                 </>
                             )}
                             {!nombreEntreprises && (
-                                <div className="loader-circle-small absolute top-7 left-16"></div>
+                                <div className="loader-circle-small absolute top-10 left-16"></div>
                             )}
-                            <p className="text-xs absolute top-[72px] left-16">
+                            <p className="text-xs absolute top-16 left-16">
                                 {
                                     RepertoirePromptsTranslations
                                         .div1_descriptive[lang]
