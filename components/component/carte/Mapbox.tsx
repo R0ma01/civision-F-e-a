@@ -85,19 +85,19 @@ export default MapBox;
 function popUpHTML(content: any) {
     return `
         <div class="flex flex-col">
-            <p class="px-2 py-1 border border-none rounded-full bg-logo-green text-white text-center font-bold">
-                $${content.properties.nom}
+            <p class="px-3 py-2 border border-none rounded-full bg-logo-green text-white text-center font-bold">
+                ${content.properties.nom}
             </p>
             <p class="font-bold text-logo-dark-blue">
                 Secteur d&lsquo;activité:
             </p>
-            <p>$${content.properties.secteur_activite}</p>
+            <p>${content.properties.secteur_activite}</p>
             <p class="font-bold text-logo-dark-blue">
                 Taille de l&lsquo;entreprise:
             </p>
-            <p>$${content.properties.taille_entreprise}</p>
+            <p>${content.properties.taille_entreprise}</p>
             <p class="font-bold text-logo-dark-blue">Adresse: </p>
-            <p>$${content.properties.adresse}</p>
+            <p>${content.properties.adresse}</p>
         </div>
     `;
 }
