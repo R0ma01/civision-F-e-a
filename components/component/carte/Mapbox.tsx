@@ -72,14 +72,7 @@ const MapBox = () => {
 
             new mapboxgl.Popup()
                 .setLngLat(point.geometry.coordinates)
-                .setHTML(
-                    `
-                    <strong>${point.properties.nom}</strong><br>
-                    Secteur d'activité: ${point.properties.secteur_activite}<br>
-                    Taille Entreprise: ${point.properties.taille_entreprise}<br>
-                    Adresse: ${point.properties.adresse}<br>
-                `,
-                )
+                .setHTML(popUpHTML(point))
                 .addTo(mapRef.current);
         }
     }, [point]);
@@ -88,3 +81,24 @@ const MapBox = () => {
 };
 
 export default MapBox;
+
+function popUpHTML(content: any) {
+    return JSON.stringify(
+        <div className="flex flex-col">
+            <p className="px-2 py-1 border border-none rounded-full bg-logo-green text-white text-center font-bold">
+                ${content.properties.nom}
+            </p>
+            <p className="font-bold text-logo-dark-blue">
+                Secteur d&lsquo;activité:
+            </p>
+            <p>${content.properties.secteur_activite}</p>
+            <p className="font-bold text-logo-dark-blue">
+                Taille de l&lsquo;entreprise:
+            </p>
+            <p>${content.properties.taille_entreprise}</p>
+
+            <p className="font-bold text-logo-dark-blue">Adresse: </p>
+            <p>${content.properties.adresse}</p>
+        </div>,
+    );
+}
