@@ -83,7 +83,7 @@ const MapBox = () => {
 export default MapBox;
 
 function popUpHTML(content: any) {
-    return JSON.stringify(
+    return `
         <div className="flex flex-col">
             <p className="px-2 py-1 border border-none rounded-full bg-logo-green text-white text-center font-bold">
                 ${content.properties.nom}
@@ -99,6 +99,5 @@ function popUpHTML(content: any) {
 
             <p className="font-bold text-logo-dark-blue">Adresse: </p>
             <p>${content.properties.adresse}</p>
-        </div>,
-    );
+        </div>`;
 }
