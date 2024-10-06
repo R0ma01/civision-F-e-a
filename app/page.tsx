@@ -122,6 +122,12 @@ const LandingPage = () => {
                             height={100}
                             alt="logo-FEA"
                         />
+                        <Image
+                            src="/images/la_sphere.png"
+                            width={150}
+                            height={100}
+                            alt="logo-FEA"
+                        />
                     </div>
                 </div>
             </div>

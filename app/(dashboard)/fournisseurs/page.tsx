@@ -19,6 +19,7 @@ import FournisseurPageTutorial from '@/components/component/tutorials/fournisseu
 import { TutorialPages, UserType } from '@/components/enums/user-type-enum';
 import { ButtonType } from '@/components/enums/button-type-enum';
 import Button from '@/components/component/buttons/button';
+import Image from 'next/image';
 
 function Fournisseurs() {
     const lang: Language = useDataStore((state) => state.lang);
@@ -104,7 +105,7 @@ function Fournisseurs() {
         <>
             <PageContentContainer
                 filterMenu={true}
-                className="overflow-auto pb-10 pl-[30px] pt-10"
+                className="overflow-auto pb-10 pl-[30px] pt-10 relative"
             >
                 <ListeFournisseurs
                     admin={user === UserType.ADMIN}
@@ -144,6 +145,13 @@ function Fournisseurs() {
                         deleteItem={currentFournisseur}
                     />
                 )}
+                <Image
+                    src="/images/ORIA.png"
+                    width={150}
+                    height={100}
+                    alt="logo-ORIA"
+                    className="absolute bottom-0 right-10"
+                />
             </PageContentContainer>
         </>
     );
