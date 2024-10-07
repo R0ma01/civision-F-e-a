@@ -84,7 +84,7 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
         <div className="dark:text-white text-wrap">
             <ResponsiveContainer
                 width={calculateWidth()}
-                height={size}
+                height={size - 20}
                 className="flex justify-center items-center"
             >
                 <BarChart data={chartData}>
