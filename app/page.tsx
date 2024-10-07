@@ -111,13 +111,13 @@ const LandingPage = () => {
                         />
                         <Image
                             src="/images/Logos-civision.png"
-                            alt="logo-FEA"
+                            alt="logo-Civision"
                             className="w-56 h-auto"
                         />
                         <Image
                             src="/images/logo-meie.jpg"
                             className="w-56 h-auto"
-                            alt="logo-FEA"
+                            alt="logo-MEIE"
                         />
                         <Image
                             src="/images/la_sphere.png"
