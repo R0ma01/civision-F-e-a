@@ -41,7 +41,7 @@ export function Tab({ content, className }: TabProps) {
         >
             {currentYear && (
                 <>
-                    <div className="flex flex-row w-full justify-evenly">
+                    <div className="flex flex-row w-[550px]">
                         <p className="text-base text-gray-600 dark:text-gray-300 w-[60%]">
                             {tabContent.description[lang]}
                         </p>
