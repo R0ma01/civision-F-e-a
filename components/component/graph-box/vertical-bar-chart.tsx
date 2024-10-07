@@ -91,7 +91,7 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
                     <XAxis
                         dataKey="name"
                         type="category"
-                        height={xAxisHeight}
+                        height={50}
                         fontSize={size === ChartSize.SMALL ? 6 : 10}
                         stroke="currentColor"
                         tickFormatter={(value: any, index: number) =>
