@@ -42,7 +42,7 @@ export function Tab({ content, className }: TabProps) {
             {currentYear && (
                 <>
                     <div className="flex flex-row justify-between w-[550px]">
-                        <p className="text-base text-gray-600 dark:text-gray-300 w-[60%]">
+                        <p className="text-base text-gray-600 dark:text-gray-300 w-[80%]">
                             {tabContent.description[lang]}
                         </p>
                         <Dropdown
@@ -52,7 +52,6 @@ export function Tab({ content, className }: TabProps) {
                             onChange={(value: any) => {
                                 setCurrentYear(value);
                             }}
-                            className="w-[40%]"
                         />
                     </div>
                     {/* Render Data Cards */}
