@@ -84,7 +84,9 @@ const DataCard: React.FC<DataCardProps> = ({
         case DataCardType.SIMPLE_GRAPH:
             return (
                 <DataCardDiv title={content.title[lang]}>
-                    <GraphBox content={content.graphData[0]} year={year} />
+                    <div className="gap-2 mt-5">
+                        <GraphBox content={content.graphData[0]} year={year} />
+                    </div>
                     <DescriptionComponent>
                         {content.description[lang]}
                     </DescriptionComponent>
@@ -94,9 +96,11 @@ const DataCard: React.FC<DataCardProps> = ({
         case DataCardType.MULTIPLE_GRAPH:
             return (
                 <DataCardDiv title={content.title[lang]}>
-                    {content.graphData?.map((graph, index) => (
-                        <GraphBox key={index} content={graph} year={year} />
-                    ))}
+                    <div className="gap-2 mt-5">
+                        {content.graphData?.map((graph, index) => (
+                            <GraphBox key={index} content={graph} year={year} />
+                        ))}
+                    </div>
                     <DescriptionComponent>
                         {content.description[lang]}
                     </DescriptionComponent>
@@ -113,9 +117,14 @@ const DataCard: React.FC<DataCardProps> = ({
         case DataCardType.SOLO_GRAPH:
             return (
                 <DataCardDiv title={content.title[lang]}>
-                    {content.graphData !== undefined && (
-                        <GraphBox content={content.graphData[0]} year={year} />
-                    )}
+                    <div className="gap-2 mt-5">
+                        {content.graphData !== undefined && (
+                            <GraphBox
+                                content={content.graphData[0]}
+                                year={year}
+                            />
+                        )}
+                    </div>
                 </DataCardDiv>
             );
 
