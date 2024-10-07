@@ -84,7 +84,7 @@ const DataCard: React.FC<DataCardProps> = ({
         case DataCardType.SIMPLE_GRAPH:
             return (
                 <DataCardDiv title={content.title[lang]}>
-                    <div className="mt-5">
+                    <div className="mt-5 border border-black">
                         <GraphBox content={content.graphData[0]} year={year} />
                     </div>
                     <DescriptionComponent>
