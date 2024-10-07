@@ -82,7 +82,11 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
 
     return (
         <div className="dark:text-white text-wrap">
-            <ResponsiveContainer width={calculateWidth()} height={size}>
+            <ResponsiveContainer
+                width={calculateWidth()}
+                height={size}
+                className="flex justify-center items-center"
+            >
                 <BarChart data={chartData}>
                     <XAxis
                         dataKey="name"
@@ -112,9 +116,7 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
                                 : size === ChartSize.MEDIUM
                                   ? 15
                                   : chartData && chartData.length > 8
-                                    ? Math.round(
-                                          size - 100 / chartData?.length ?? 10,
-                                      )
+                                    ? Math.round(size - 100 / chartData?.length)
                                     : 20
                         }
                     >
