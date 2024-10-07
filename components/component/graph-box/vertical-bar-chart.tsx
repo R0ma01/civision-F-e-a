@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     BarChart,
     Bar,
@@ -48,7 +48,7 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
         const baseWidth = size === ChartSize.SMALL ? 200 : 400;
         return size === ChartSize.SMALL
             ? baseWidth
-            : Math.max(baseWidth, dataLength * 60);
+            : Math.min(baseWidth, dataLength * 60, 600); // Set max width to 600
     };
 
     useEffect(() => {
@@ -81,59 +81,61 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
     };
 
     return (
-        <div className="dark:text-white text-wrap">
-            <ResponsiveContainer width={calculateWidth()} height={size}>
-                <BarChart data={chartData}>
-                    <XAxis
-                        dataKey="name"
-                        type="category"
-                        height={xAxisHeight}
-                        fontSize={size === ChartSize.SMALL ? 6 : 10}
-                        stroke="currentColor"
-                        tickFormatter={(value: any, index: number) =>
-                            GraphTextService.getFieldLabel(
-                                chartContent.donnees[0],
-                                value,
-                                lang,
-                            ).toString()
-                        }
-                    />
-                    <YAxis
-                        type="number"
-                        fontSize={size === ChartSize.SMALL ? 6 : 10}
-                        stroke="currentColor"
-                    />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar
-                        dataKey="value"
-                        barSize={
-                            size === ChartSize.SMALL
-                                ? 10
-                                : size === ChartSize.MEDIUM
-                                  ? 15
-                                  : 20
-                        }
-                    >
-                        {chartData &&
-                            chartData.map((entry, index) => (
-                                <Cell
-                                    key={`cell-${index}`}
-                                    fill={
-                                        chartPalette[
-                                            index % chartPalette.length
-                                        ]
-                                    }
-                                    onClick={() =>
-                                        filterData(
-                                            chartContent.donnees[0],
-                                            entry,
-                                        )
-                                    }
-                                />
-                            ))}
-                    </Bar>
-                </BarChart>
-            </ResponsiveContainer>
+        <div className="flex justify-center dark:text-white text-wrap">
+            <div style={{ maxWidth: calculateWidth() }}>
+                <ResponsiveContainer width="100%" height={size}>
+                    <BarChart data={chartData}>
+                        <XAxis
+                            dataKey="name"
+                            type="category"
+                            height={xAxisHeight}
+                            fontSize={size === ChartSize.SMALL ? 6 : 10}
+                            stroke="currentColor"
+                            tickFormatter={(value: any, index: number) =>
+                                GraphTextService.getFieldLabel(
+                                    chartContent.donnees[0],
+                                    value,
+                                    lang,
+                                ).toString()
+                            }
+                        />
+                        <YAxis
+                            type="number"
+                            fontSize={size === ChartSize.SMALL ? 6 : 10}
+                            stroke="currentColor"
+                        />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Bar
+                            dataKey="value"
+                            barSize={
+                                size === ChartSize.SMALL
+                                    ? 10
+                                    : size === ChartSize.MEDIUM
+                                      ? 15
+                                      : 20
+                            }
+                        >
+                            {chartData &&
+                                chartData.map((entry, index) => (
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={
+                                            chartPalette[
+                                                index % chartPalette.length
+                                            ]
+                                        }
+                                        onClick={() =>
+                                            filterData(
+                                                chartContent.donnees[0],
+                                                entry,
+                                            )
+                                        }
+                                    />
+                                ))}
+                        </Bar>
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     );
 };
