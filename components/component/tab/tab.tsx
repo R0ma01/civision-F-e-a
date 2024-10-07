@@ -52,7 +52,6 @@ export function Tab({ content, className }: TabProps) {
                             onChange={(value: any) => {
                                 setCurrentYear(value);
                             }}
-                            className="w-[10%]"
                         />
                     </div>
                     {/* Render Data Cards */}
