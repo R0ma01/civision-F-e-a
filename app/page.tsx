@@ -107,21 +107,21 @@ const LandingPage = () => {
                         <Image
                             src="/images/fea-full-logo.png"
                             alt="logo-FEA"
-                            className="w-auto h-auto"
+                            className="w-auto h-32"
                         />
                         <Image
                             src="/images/Logos-civision.png"
                             alt="logo-Civision"
-                            className="w-auto h-auto"
+                            className="w-auto h-32"
                         />
                         <Image
                             src="/images/logo-meie.jpg"
-                            className="w-auto h-auto"
+                            className="w-auto h-32"
                             alt="logo-MEIE"
                         />
                         <Image
                             src="/images/la_sphere.png"
-                            className="w-auto h-auto"
+                            className="w-auto h-32"
                             alt="logo-laSphere"
                         />
                     </div>
