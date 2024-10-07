@@ -111,8 +111,10 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
                                 ? 10
                                 : size === ChartSize.MEDIUM
                                   ? 15
-                                  : chartData.length > 8
-                                    ? round(size - 100 / chartData.length)
+                                  : chartData && chartData.length > 8
+                                    ? Math.round(
+                                          size - 100 / chartData?.length ?? 10,
+                                      )
                                     : 20
                         }
                     >
