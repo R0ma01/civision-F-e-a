@@ -84,7 +84,7 @@ const DataCard: React.FC<DataCardProps> = ({
         case DataCardType.SIMPLE_GRAPH:
             return (
                 <DataCardDiv title={content.title[lang]}>
-                    <div className="mt-5 border border-black">
+                    <div className="mt-8 border border-black">
                         <GraphBox content={content.graphData[0]} year={year} />
                     </div>
                     <DescriptionComponent>
@@ -96,7 +96,7 @@ const DataCard: React.FC<DataCardProps> = ({
         case DataCardType.MULTIPLE_GRAPH:
             return (
                 <DataCardDiv title={content.title[lang]}>
-                    <div className="gap-2 mt-5">
+                    <div className="gap-2 mt-8">
                         {content.graphData?.map((graph, index) => (
                             <GraphBox key={index} content={graph} year={year} />
                         ))}
@@ -117,7 +117,7 @@ const DataCard: React.FC<DataCardProps> = ({
         case DataCardType.SOLO_GRAPH:
             return (
                 <DataCardDiv title={content.title[lang]}>
-                    <div className="gap-2 mt-5">
+                    <div className="mt-8">
                         {content.graphData !== undefined && (
                             <GraphBox
                                 content={content.graphData[0]}
