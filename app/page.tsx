@@ -22,19 +22,18 @@ const LandingPage = () => {
                     <div
                         className="absolute inset-0 w-full top-36 hidden md:block"
                         style={{
-                            transform: 'scale(1.2) translateX(200px)',
+                            transform:
+                                'scale(1.2) translateX(160px) translateY(25px)',
                         }}
                     >
-                        <RotatingLogo />
+                        <RotatingLogo></RotatingLogo>
                     </div>
                     {/* Content Overlay */}
                     <div className="absolute top-8 left-10 z-10 p-4">
-                        {/* Your text and other content here */}
                         <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-7 text-[#262626]">
                             Découvrez les{' '}
                         </h1>
                         <div className="flex items-center">
-                            {/* Wrap h1 and underline image in a container */}
                             <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-7 text-[#262626]">
                                 entreprises familiales
                                 <Image
@@ -108,21 +107,36 @@ const LandingPage = () => {
                             src="/images/fea-full-logo.png"
                             alt="logo-FEA"
                             className="w-auto h-12"
+                            width={100}
+                            height={100}
                         />
                         <Image
                             src="/images/Logos-civision.png"
                             alt="logo-Civision"
                             className="w-auto h-12"
+                            width={100}
+                            height={100}
                         />
                         <Image
                             src="/images/logo-meie.jpg"
                             className="w-auto h-12"
                             alt="logo-MEIE"
+                            width={100}
+                            height={100}
                         />
                         <Image
                             src="/images/la_sphere.png"
                             className="w-auto h-12"
                             alt="logo-laSphere"
+                            width={100}
+                            height={100}
+                        />{' '}
+                        <Image
+                            src="/images/ORIA_NV.png"
+                            className="w-auto h-12"
+                            alt="logo-laSphere"
+                            width={100}
+                            height={100}
                         />
                     </div>
                 </div>

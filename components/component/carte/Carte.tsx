@@ -4,7 +4,7 @@ import Mapbox from '@/components/component/carte/Mapbox';
 import useGlobalDataStore from '@/stores/global-data-store';
 import useGlobalFilterStore from '@/stores/global-filter-store';
 import useMapStore from '@/stores/global-map-store';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Chloropleth from './Chloropleth';
 import ClusterCloud from './ClusterCloud';
 import { MapType } from '@/components/enums/map-type-enum';
