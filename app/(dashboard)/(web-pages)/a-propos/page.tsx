@@ -54,7 +54,7 @@ export default function APropos() {
                                 className="rounded-lg shadow-md w-full h-auto object-cover"
                             />{' '}
                             <a href="/login" className="text-[10px] underline">
-                                Pour en savoir plus sur l'album de familles,
+                                Pour en savoir plus sur l’album de familles,
                                 cliquez ici!
                             </a>
                         </div>
@@ -65,7 +65,7 @@ export default function APropos() {
                                 className="rounded-lg shadow-md w-full h-auto object-cover"
                             />
                             <a href="/login" className="text-[10px] underline">
-                                Pour en savoir plus sur l'indice entrepreneurial
+                                Pour en savoir plus sur l’indice entrepreneurial
                                 cliquez ici!
                             </a>
                         </div>
