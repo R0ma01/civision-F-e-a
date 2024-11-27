@@ -15,9 +15,9 @@ export default function APropos() {
     };
 
     return (
-        <PageContentContainer className="bg-white text-black overflow-auto z-20 p-3">
+        <PageContentContainer className="bg-white text-black overflow-auto z-20 px-20 pt-6">
             <section className="section">
-                <div className="flex flex-row gap-2">
+                <div className="flex flex-row space-x-10 justify-between w-full">
                     <div className="text-justify">
                         <h2 className="font-bold">
                             La Plateforme Familles en Affaires
@@ -46,26 +46,15 @@ export default function APropos() {
                         </p>
                     </div>
 
-                    <div className="flex flex-col justify-evenly">
+                    <div className="flex flex-col justify-evenly w-full">
                         <div>
                             <Image
                                 src={cover}
                                 alt="Page titre de l'album"
-                                className="rounded-lg shadow-md w-full h-auto object-cover"
+                                className="rounded-lg shadow-md w-[200px] h-fit object-cover"
                             />{' '}
                             <a href="/login" className="text-[10px] underline">
                                 Pour en savoir plus sur l’album de familles,
-                                cliquez ici!
-                            </a>
-                        </div>
-                        <div>
-                            <Image
-                                src={cover}
-                                alt="Page titre de l'album"
-                                className="rounded-lg shadow-md w-full h-auto object-cover"
-                            />
-                            <a href="/login" className="text-[10px] underline">
-                                Pour en savoir plus sur l’indice entrepreneurial
                                 cliquez ici!
                             </a>
                         </div>
@@ -74,7 +63,7 @@ export default function APropos() {
             </section>
 
             <section className="section">
-                <h2 className="font-bold">
+                <h2 className="font-bold mb-3">
                     Pour nous contacter ou en connaître davantage sur nos
                     organisations :
                 </h2>
@@ -170,12 +159,27 @@ export default function APropos() {
             <section className="section">
                 <h2 className="font-bold">Merci à nos partenaires</h2>
                 <p>En collaboration avec :</p>
-                <ul>
-                    <li>Réseau Mentorat</li>
-                    <li>ORIA</li>
-                    <li>Québec</li>
-                    <li>Application développée par l’équipe de CIVISION</li>
-                </ul>
+                <div className="flex flex-row w-fit">
+                    <Image
+                        src="/images/RESEAU_MENTORAT_Logo.png"
+                        width={100}
+                        height={100}
+                        alt={'hello'}
+                    ></Image>
+                    <Image
+                        src="/images/ORIA_NV.png"
+                        width={100}
+                        height={100}
+                        alt={'logo-ORIA'}
+                    ></Image>{' '}
+                    <Image
+                        src="/images/logo-meie.jpg"
+                        className="w-auto h-12"
+                        alt="logo-MEIE"
+                        width={100}
+                        height={100}
+                    />
+                </div>
             </section>
             <footer>
                 <p>&copy; 2024 Familles en affaires. Tous droits réservés.</p>

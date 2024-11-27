@@ -57,7 +57,7 @@ const ForgotPasswordDialog: React.FC<ForgotPasswordProps> = ({
                 {({ isSubmitting, status }) => (
                     <Form
                         className="max-w-[30rem] mx-auto p-6 rounded-lg shadow-2xl bg-gradient-to-b from-zinc-100
-                     to-zinc-50/70 relative"
+                    to-zinc-50/70 relative dark:bg-[#262626] dark:bg-none"
                     >
                         <FormInput
                             name="email"

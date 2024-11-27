@@ -1,7 +1,7 @@
 import EmailType from '@/components/interface/email-type';
 import sgMail from '@sendgrid/mail'; // sgMail: max de 100 e-mails par jour
 
-const { SENDGRID_API, CIVGEO_URL } = process.env;
+const { SENDGRID_API, WEBSITE_URL } = process.env;
 
 if (!SENDGRID_API) {
     throw new Error('SENDGRID_API environment variable is not set');
@@ -39,7 +39,7 @@ export async function sendNoReplyEmail(
         html: `
       <p>
         Please use the link below to ${message}:<br />
-        <a href="${CIVGEO_URL}/${path}?token=${token}">${CIVGEO_URL}/${path}</a>
+        <a href="${WEBSITE_URL}/${path}?token=${token}">${WEBSITE_URL}/${path}</a>
       </p>
       <hr />
       <p>

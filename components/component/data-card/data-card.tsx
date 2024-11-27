@@ -17,6 +17,7 @@ interface DataCardProps {
     content: DataCardContent;
     year: StudyYears;
     admin?: boolean;
+    children?: React.ReactNode;
 }
 
 const DataCard: React.FC<DataCardProps> = ({
@@ -24,6 +25,7 @@ const DataCard: React.FC<DataCardProps> = ({
     className,
     year,
     admin = false,
+    children = <></>,
 }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const lang: Language = useDataStore((state) => state.lang);
@@ -78,6 +80,7 @@ const DataCard: React.FC<DataCardProps> = ({
                     <DescriptionComponent>
                         {content.description[lang]}
                     </DescriptionComponent>
+                    {children}
                 </DataCardDiv>
             );
 
@@ -90,6 +93,7 @@ const DataCard: React.FC<DataCardProps> = ({
                     <DescriptionComponent>
                         {content.description[lang]}
                     </DescriptionComponent>
+                    {children}
                 </DataCardDiv>
             );
 
@@ -104,6 +108,7 @@ const DataCard: React.FC<DataCardProps> = ({
                     <DescriptionComponent>
                         {content.description[lang]}
                     </DescriptionComponent>
+                    {children}
                 </DataCardDiv>
             );
 
@@ -111,6 +116,7 @@ const DataCard: React.FC<DataCardProps> = ({
             return (
                 <DataCardDiv title={''}>
                     <SearchBox />
+                    {children}
                 </DataCardDiv>
             );
 
@@ -125,6 +131,7 @@ const DataCard: React.FC<DataCardProps> = ({
                             />
                         )}
                     </div>
+                    {children}
                 </DataCardDiv>
             );
 
@@ -134,6 +141,7 @@ const DataCard: React.FC<DataCardProps> = ({
                     <StaticDropdown
                         onClick={content.chercheurDropdownOnCLick}
                     />
+                    {children}
                 </DataCardDiv>
             );
 

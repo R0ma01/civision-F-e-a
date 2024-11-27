@@ -14,31 +14,31 @@ const Dashboard = ({ children }: DashboardProps) => {
         setUser: state.setUser,
     }));
 
-    useEffect(() => {
-        const handleBeforeUnload = async (event: BeforeUnloadEvent) => {
-            event.preventDefault();
+    // useEffect(() => {
+    //     const handleBeforeUnload = async (event: BeforeUnloadEvent) => {
+    //         event.preventDefault();
 
-            localStorage.setItem('isClosing', 'true');
-            clearZustandStore();
-            clearCookies();
+    //         localStorage.setItem('isClosing', 'true');
+    //         clearZustandStore();
+    //         clearCookies();
 
-            event.returnValue = ''; // Some browsers need this for confirmation
-            return ''; // Detect if this is a refresh
-        };
+    //         event.returnValue = ''; // Some browsers need this for confirmation
+    //         return ''; // Detect if this is a refresh
+    //     };
 
-        const handleLoad = () => {
-            const isClosing = localStorage.getItem('isClosing');
-            localStorage.removeItem('isClosing'); // Reset flag on page load
-        };
+    //     const handleLoad = () => {
+    //         const isClosing = localStorage.getItem('isClosing');
+    //         localStorage.removeItem('isClosing'); // Reset flag on page load
+    //     };
 
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        window.addEventListener('load', handleLoad);
+    //     window.addEventListener('beforeunload', handleBeforeUnload);
+    //     window.addEventListener('load', handleLoad);
 
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-            window.removeEventListener('load', handleLoad);
-        };
-    }, [setUser]);
+    //     return () => {
+    //         window.removeEventListener('beforeunload', handleBeforeUnload);
+    //         window.removeEventListener('load', handleLoad);
+    //     };
+    // }, [setUser]);
 
     return (
         <>

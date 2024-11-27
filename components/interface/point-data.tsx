@@ -3,7 +3,7 @@ export interface EntreprisePointData {
     coords: number[];
     nom: string;
     adresse: string;
-    secteur_activite: number;
+    secteur_activite: string;
     taille_entreprise: string;
 }
 

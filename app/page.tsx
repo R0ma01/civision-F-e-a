@@ -134,7 +134,7 @@ const LandingPage = () => {
                         <Image
                             src="/images/ORIA_NV.png"
                             className="w-auto h-12"
-                            alt="logo-laSphere"
+                            alt="logo-ORIA"
                             width={100}
                             height={100}
                         />

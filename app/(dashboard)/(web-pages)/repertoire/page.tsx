@@ -16,6 +16,10 @@ import {
     FactorySVG,
 } from '@/components/component/svg-icons/svg-icons';
 import { GraphDataHttpRequestService } from '@/services/data-http-request-service';
+import { AddEntrepriseDialog } from '@/components/component/dialogs/add-entreprise-dialog';
+import Button from '@/components/component/buttons/button';
+import { ButtonType } from '@/components/enums/button-type-enum';
+import { AddCircleSVG } from '@/components/component/svg-icons/svg-icons';
 
 const DataCardDiv: React.FC<{
     children: React.ReactNode;
@@ -67,6 +71,8 @@ function Repertoire() {
         null,
     );
     const [loading, setLoading] = useState<boolean>(false);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         async function fetchNombreEntreprises() {
@@ -105,7 +111,7 @@ function Repertoire() {
     return (
         <PageContentContainer
             filterMenu={true}
-            className="overflow-auto pb-10 pl-[30px]"
+            className="overflow-auto pb-10 pl-[30px] relative"
         >
             <div className="flex flex-col space-y-4 max-w-[550px] mt-16">
                 <div className="flex flex-row gap-4 w-full">
@@ -138,8 +144,27 @@ function Repertoire() {
                         </div>
                     </DataCardDiv>
                 </div>
-                <DataCard content={fetchedData.thirdField} year={2022} />
+                <DataCard content={fetchedData.thirdField} year={2022}>
+                    <Button
+                        buttonType={ButtonType.ICON}
+                        onClick={() => {
+                            setIsDialogOpen(true);
+                        }}
+                    >
+                        <AddCircleSVG></AddCircleSVG>
+                    </Button>
+                </DataCard>
             </div>
+            {isDialogOpen && (
+                <AddEntrepriseDialog
+                    closeDialog={() => {
+                        setIsDialogOpen(false);
+                    }}
+                    handleSubmit={(values) => {
+                        console.log(values);
+                    }}
+                ></AddEntrepriseDialog>
+            )}
         </PageContentContainer>
     );
 }

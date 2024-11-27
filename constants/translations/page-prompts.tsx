@@ -103,6 +103,74 @@ export const RepertoirePromptsTranslations: PromptsTranslations = {
         FR: 'des entreprises privées au Québec sont familiales',
         EN: 'of the private companies in Quebec are family owned',
     },
+    DAT_IMMAT: {
+        FR: "Date d'immatriculation",
+        EN: 'Immatriculation date',
+    },
+    DAT_CONSTI: {
+        FR: 'Date de constitution',
+        EN: 'Constitution date',
+    },
+    CAE: {
+        FR: 'Code CAE',
+        EN: 'CAE code',
+    },
+    ADR1: {
+        FR: 'Adresse civile',
+        EN: 'Civic adress',
+    },
+    ADR2: {
+        FR: 'Ville',
+        EN: 'City',
+    },
+    ADR4: {
+        FR: 'Code postal',
+        EN: 'Postal code',
+    },
+    NB_EMPLO: {
+        FR: "Nombre d'employés",
+        EN: 'Number of employees',
+    },
+    NOM_ASSUJ: {
+        FR: "Nom de l'entrprise",
+        EN: 'Company Name',
+    },
+    LONG: {
+        FR: 'Longitude',
+        EN: 'Longitude',
+    },
+    LAT: {
+        FR: 'Latitude',
+        EN: 'LAtitude',
+    },
+    NEQ: {
+        FR: 'NEQ',
+        EN: 'NEQ',
+    },
+    infoLegales: {
+        FR: 'Informations Légales',
+        EN: 'Legal information',
+    },
+    infosGenerales: {
+        FR: 'Informations Générales',
+        EN: 'General Information',
+    },
+    adresse: {
+        FR: 'Adresse Civile',
+        EN: 'Civic Adress',
+    },
+    coordonnesGeographiques: {
+        FR: 'Coordonnées Géographiques',
+        EN: 'Geographic Coordinates',
+    },
+    addCompany: {
+        FR: 'Ajouter une Entreprise',
+        EN: 'Add a Company',
+    },
+    requiered: {
+        FR: '*requis',
+        EN: '*requiered',
+    },
 };
 
 export const FournisseurPromptsTranslations: PromptsTranslations = {

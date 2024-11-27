@@ -57,7 +57,7 @@ const ResetPasswordDialog: React.FC<ResetPasswordProps> = ({ token }) => {
                 {({ isSubmitting, status }) => (
                     <Form
                         className="max-w-[30rem] mx-auto p-6 rounded-lg shadow-2xl bg-gradient-to-b
-                     from-zinc-100 to-zinc-50/70 relative"
+                     from-zinc-100 to-zinc-50/70 dark:bg-[#262626] relative"
                     >
                         <FormInput
                             name="newPassword"
