@@ -87,7 +87,7 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
 
     return (
         <div className="dark:text-white text-wrap">
-            <ResponsiveContainer width={size} height={calculateHeight()}>
+            <ResponsiveContainer width="100%" height={calculateHeight()}>
                 <BarChart layout="vertical" data={chartData}>
                     <XAxis
                         type="number"

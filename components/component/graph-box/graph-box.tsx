@@ -236,7 +236,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({ content, chartSize, year }) => {
             );
         case GraphBoxType.HORIZONTAL_BARCHART:
             return (
-                <>
+                <div className="w-full overflow-auto bg-orange-200">
                     <HorizontalBarChart
                         chartContent={chartContent}
                         chartSize={size}
@@ -248,11 +248,11 @@ const GraphBox: React.FC<GraphBoxProps> = ({ content, chartSize, year }) => {
                             sont pas prises en compte ici
                         </p>
                     )} */}
-                </>
+                </div>
             );
         case GraphBoxType.VERTICAL_BARCHART:
             return (
-                <>
+                <div className="w-[520px] overflow-auto flex justify-center">
                     <VerticalBarChart
                         chartContent={chartContent}
                         chartSize={size}
@@ -264,7 +264,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({ content, chartSize, year }) => {
                             sont pas prises en compte ici
                         </p>
                     )} */}
-                </>
+                </div>
             );
         case GraphBoxType.STACKED_BARCHART:
             return (
