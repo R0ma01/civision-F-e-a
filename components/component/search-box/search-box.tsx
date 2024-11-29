@@ -137,7 +137,7 @@ function SearchBox() {
 
             <div
                 className="overflow-y-auto"
-                style={{ maxHeight: '320px' }} // Ensure this is correctly sized to allow overflow
+                style={{ maxHeight: '240px' }} // Ensure this is correctly sized to allow overflow
             >
                 {loading && (
                     <div className="w-full h-32 flex justify-center items-center">

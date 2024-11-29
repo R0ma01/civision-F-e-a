@@ -26,11 +26,11 @@ export default function Logo() {
             camera={{ position: [0, 0, 20], fov: 50 }}
         >
             <group position={[0, -0.65, 0]}>
-                <ClippedCapsule planeConstant={2} position={[0.5, 4, 2]} />{' '}
-                <ClippedCapsule2 planeConstant={1.6} position={[1, 8, 2]} />{' '}
-                <Sphere1 position={[1.5, 3.6, 2]} />{' '}
-                <Sphere2 position={[0, 7.5, 2]} />
-                {/* <NewFEALogo></NewFEALogo> */}
+                <ClippedCapsule planeConstant={2} position={[0.5, 4, 3]} />{' '}
+                <ClippedCapsule2 planeConstant={1.6} position={[1, 8, 3]} />{' '}
+                <Sphere1 position={[1.5, 3.6, 3]} />{' '}
+                <Sphere2 position={[0, 7.5, 3]} />
+                <NewFEALogo></NewFEALogo>
                 <SphereRotatingLogo />{' '}
                 <AccumulativeShadows
                     temporal

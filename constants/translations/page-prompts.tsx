@@ -171,6 +171,10 @@ export const RepertoirePromptsTranslations: PromptsTranslations = {
         FR: '*requis',
         EN: '*requiered',
     },
+    subscribe: {
+        FR: 'Inscrivez votre entreprise',
+        EN: 'Submit your company',
+    },
 };
 
 export const FournisseurPromptsTranslations: PromptsTranslations = {
@@ -225,6 +229,10 @@ export const FournisseurPromptsTranslations: PromptsTranslations = {
     toutes_regions: {
         FR: 'Toutes les régions',
         EN: 'All regions',
+    },
+    subscribe: {
+        FR: 'Soumettez votre profile',
+        EN: 'Submit your profile',
     },
 };
 

@@ -16,10 +16,10 @@ export default function APropos() {
 
     return (
         <PageContentContainer className="bg-white text-black overflow-auto z-20 px-20 pt-6">
-            <section className="section">
+            <section className="section w-full">
                 <div className="flex flex-row space-x-10 justify-between w-full">
-                    <div className="text-justify">
-                        <h2 className="font-bold">
+                    <div className="text-justify w-full">
+                        <h2 className="font-bold mb-12">
                             La Plateforme Familles en Affaires
                         </h2>
                         <p className="font-bold">
@@ -46,12 +46,12 @@ export default function APropos() {
                         </p>
                     </div>
 
-                    <div className="flex flex-col justify-evenly w-full">
+                    <div className="flex flex-col justify-evenly w-[20%] items-center">
                         <div>
                             <Image
                                 src={cover}
                                 alt="Page titre de l'album"
-                                className="rounded-lg shadow-md w-[200px] h-fit object-cover"
+                                className="rounded-lg shadow-md w-[150px] h-fit object-cover"
                             />{' '}
                             <a href="/login" className="text-[10px] underline">
                                 Pour en savoir plus sur l’album de familles,
@@ -62,17 +62,17 @@ export default function APropos() {
                 </div>
             </section>
 
-            <section className="section">
+            <section className="section mt-8">
                 <h2 className="font-bold mb-3">
                     Pour nous contacter ou en connaître davantage sur nos
                     organisations :
                 </h2>
-                <div className="flex flex-row">
-                    <div className="flex flex-row">
+                <div className="flex flex-row justify-evenly">
+                    <div className="flex flex-row justify-evenly w-[50%]">
                         <img
                             src="/images/simple-logo-fae.png"
-                            alt="logo_CROP"
-                            className=" object-cover h-12 w-auto"
+                            alt="simple_logo_fae"
+                            className=" object-cover h-32 w-20"
                         />
                         <div className="flex flex-col">
                             <p>
@@ -80,48 +80,55 @@ export default function APropos() {
                                     Familles en affaires - HEC Montréal
                                 </strong>
                             </p>
-                            <p>
-                                3000, chemin de la Côte-Sainte-Catherine,
-                                Montréal, QC, H3T 2A7 <br />
+                            <p className="font-thin">
+                                HEC Montréal - Édifice Decelles
+                                <br /> 5255, av. Decelles, 5e étage espace 5.200
+                                <br /> Montréal, QC, H3T 2B1
+                                <br />
                                 Adresse courriel :{' '}
-                                <a href="mailto:info@famillesaffaires.ca">
-                                    info@famillesaffaires.ca
+                                <a href="mailto:lasphere@hec.ca">
+                                    famillesenaffaires@hec.ca
                                 </a>
                             </p>
-
-                            <Button buttonType={ButtonType.PULSE}>
-                                Visitez notre site web
-                            </Button>
+                            <div className="w-full flex items-center justify-center mt-2">
+                                <button className="bg-[#9BD5D6] text-white p-2 rounded-md w-fit">
+                                    Visitez notre site web
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex flex-row">
+
+                    <div className="flex flex-row justify-evenly w-[50%]">
                         <img
-                            src="/images/simple-logo-fae.png"
-                            alt="logo_CROP"
-                            width={50}
-                            className=" object-cover h-12 w-auto"
+                            src="/images/la_sphere_simple.png"
+                            alt="logo_sphere"
+                            className=" object-cover h-32 w-20"
                         />
                         <div className="flex flex-col">
                             <p>
-                                <strong>Laboratoire</strong>
+                                <strong>La sphère - HEC Montréal</strong>
                             </p>
-                            <p>
-                                3000, chemin de la Côte-Sainte-Catherine,
-                                Montréal, QC, H3T 2A7 <br />
-                                Adresse courriel :{' '}
-                                <a href="mailto:info@famillesaffaires.ca">
-                                    info@famillesaffaires.ca
+                            <p className="font-thin">
+                                HEC Montréal - Édifice Decelles
+                                <br /> 5255, av. Decelles, 5e étage espace 5.200
+                                <br /> Montréal, QC, H3T 2A7
+                                <br /> Adresse courriel :{' '}
+                                <a href="mailto:lasphere@hec.ca">
+                                    lasphere@hec.ca
                                 </a>
-                                <Button buttonType={ButtonType.PULSE}>
-                                    Visitez notre site web
-                                </Button>
                             </p>
+
+                            <div className="w-full flex items-center justify-center mt-2">
+                                <button className="bg-[#00AEC7] text-white p-2 rounded-md">
+                                    Visitez notre site web
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section className="text-justify">
+            <section className="text-justify mt-8">
                 <h2 className="font-bold">
                     Pourquoi étudier les entreprises familiales ?
                 </h2>
@@ -156,29 +163,40 @@ export default function APropos() {
                 </div>
             </section>
 
-            <section className="section">
+            <section className="section mt-8">
                 <h2 className="font-bold">Merci à nos partenaires</h2>
-                <p>En collaboration avec :</p>
+
+                <div className="flex flex-row w-fit gap-6">
+                    <img
+                        src="/images/RESEAU_MENTORAT_Logo.png"
+                        alt={'hello'}
+                        className="h-20"
+                    ></img>
+                    <img
+                        src="/images/ORIA_NV.png"
+                        alt={'logo-ORIA'}
+                        className="h-16"
+                    ></img>{' '}
+                    <div>
+                        <p>En collaboration avec</p>
+                        <img
+                            src="/images/logo_quebec.png"
+                            className="w-auto h-12"
+                            alt="logo-MEIE"
+                        />
+                    </div>
+                </div>
+            </section>
+            <section className="section mt-8">
+                <h2 className="font-bold">Propulsé par : </h2>
+
                 <div className="flex flex-row w-fit">
                     <Image
-                        src="/images/RESEAU_MENTORAT_Logo.png"
-                        width={100}
+                        src="/images/Logos-civision.png"
+                        width={200}
                         height={100}
                         alt={'hello'}
                     ></Image>
-                    <Image
-                        src="/images/ORIA_NV.png"
-                        width={100}
-                        height={100}
-                        alt={'logo-ORIA'}
-                    ></Image>{' '}
-                    <Image
-                        src="/images/logo-meie.jpg"
-                        className="w-auto h-12"
-                        alt="logo-MEIE"
-                        width={100}
-                        height={100}
-                    />
                 </div>
             </section>
             <footer>

@@ -142,7 +142,7 @@ function Fournisseurs() {
                     className="m-3 self-center"
                     title="redirect:https://forms.gle/x1rgzmTpfrT49LMG9"
                 >
-                    Inscrivez-vous sur la liste
+                    {FournisseurPromptsTranslations.subscribe[lang]}
                 </Button>
 
                 {isEditDialogOpen && currentFournisseur && (

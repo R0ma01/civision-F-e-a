@@ -183,6 +183,16 @@ function Repertoire() {
                     }}
                 ></AddEntrepriseDialog>
             )}
+            <Button
+                buttonType={ButtonType.CONFIRM}
+                onClick={() =>
+                    window.open('https://forms.gle/AYNdESgqbf48U73P8', '_blank')
+                }
+                className="m-3 self-center"
+                title="redirect:https://forms.gle/AYNdESgqbf48U73P8"
+            >
+                {RepertoirePromptsTranslations.subscribe[lang]}
+            </Button>
         </PageContentContainer>
     );
 }
