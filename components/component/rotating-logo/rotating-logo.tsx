@@ -30,6 +30,7 @@ export default function Logo() {
                 <ClippedCapsule2 planeConstant={1.6} position={[1, 8, 2]} />{' '}
                 <Sphere1 position={[1.5, 3.6, 2]} />{' '}
                 <Sphere2 position={[0, 7.5, 2]} />
+                {/* <NewFEALogo></NewFEALogo> */}
                 <SphereRotatingLogo />{' '}
                 <AccumulativeShadows
                     temporal
@@ -275,5 +276,103 @@ function Cylinder2({ color, position }: CylinderProps) {
 
             <meshStandardMaterial ref={materialRef} color={color || '#000'} />
         </mesh>
+    );
+}
+
+interface Cylinder2Props {
+    position: Vector3;
+    color: string;
+    args: any;
+    rotation: any;
+}
+
+function Cylinder3({ color, position, args, rotation }: Cylinder2Props) {
+    const materialRef: any = useRef();
+    const pos: Vector3 = position ? position.clone() : new Vector3(0, 0, 0);
+
+    return (
+        <mesh position={pos} rotation={rotation} castShadow>
+            <cylinderGeometry args={args} />
+            {/* <boxGeometry args={[2.05, 2.05, 2.05, 100, 1]} /> */}
+
+            <meshStandardMaterial ref={materialRef} color={color} />
+        </mesh>
+    );
+}
+
+interface Torus2Props {
+    position: Vector3;
+    color: string;
+    args: any;
+    rotation: any;
+}
+
+function Torus({ color, position, args, rotation }: Torus2Props) {
+    const materialRef: any = useRef();
+    const pos: Vector3 = position ? position.clone() : new Vector3(0, 0, 0);
+
+    return (
+        <mesh position={pos} rotation={rotation} castShadow>
+            <torusGeometry args={args} />
+            <meshStandardMaterial ref={materialRef} color={color || '#000'} />
+        </mesh>
+    );
+}
+
+function NewFEALogo() {
+    const y = 2;
+    const pos = new Vector3(0, 0 + y, 0);
+    return (
+        <>
+            <Cylinder3
+                position={new Vector3(0, y, 0)}
+                color="#41BA77"
+                args={[0.5, 0.5, 3, 100, 100, false]}
+                rotation={[0, 0, 0]}
+            />
+            <Cylinder3
+                position={new Vector3(0, 2 + y, 0)}
+                color="#0F2D52"
+                args={[0.5, 0.5, 1, 100, 100, false]}
+                rotation={[0, 0, 1.57]}
+            />{' '}
+            <Cylinder3
+                position={new Vector3(0, 2 + y, 0)}
+                color="#0F2D52"
+                args={[0.5, 0.5, 1, 100, 100, false]}
+                rotation={[0, 0, 0]}
+            />{' '}
+            <Cylinder3
+                position={new Vector3(-1, 2 + y, 0)}
+                color="#00ABC7"
+                args={[0.5, 0.5, 1, 100, 100, false]}
+                rotation={[0, 0, 1.57]}
+            />{' '}
+            <Cylinder3
+                position={new Vector3(1, 2 + y, 0)}
+                color="#41BA77"
+                args={[0.5, 0.5, 1, 100, 100, false]}
+                rotation={[0, 0, 1.57]}
+            />
+            <Cylinder3
+                position={new Vector3(0, 2.75 + y, 0)}
+                color="#00ABC7"
+                args={[0.5, 0.5, 0.5, 100, 100, false]}
+                rotation={[0, 0, 0]}
+            />
+            <Cylinder3
+                position={new Vector3(-1.85, 4.7 + y, 0)}
+                color="#00ABC7"
+                args={[0.5, 0.5, 0.5, 100, 100, false]}
+                rotation={[0, 0, 1.57]}
+            />{' '}
+            {/* <Plane3 position={new Vector3(-3.5, 4.7 + y, 0)} /> */}
+            <Torus
+                position={new Vector3(-1.7, 3 + y, 0)}
+                color={'#00ABC7'}
+                args={[1.7, 0.5, 50, 50, 1.57]}
+                rotation={[0, 0, 0]}
+            />
+        </>
     );
 }
