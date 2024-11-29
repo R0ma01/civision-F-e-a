@@ -38,13 +38,8 @@ const ResetPasswordDialog: React.FC<ResetPasswordProps> = ({ token }) => {
             setSubmitting,
             setStatus,
             lang,
-            resetForm,
-            PagePaths.LOGIN,
-            router,
-            (user) => {
-                return;
-            },
         );
+        resetForm();
     };
 
     return (

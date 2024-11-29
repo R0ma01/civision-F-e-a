@@ -26,9 +26,6 @@ const SignupDialog: React.FC = () => {
     const { signupValidationSchema } = authValidationSchemas();
     const { lang } = useDataStore();
     const t = authTranslations[lang as Language];
-    const { setUser } = useGlobalUserStore((state: any) => ({
-        setUser: state.setUser,
-    }));
 
     const router = useRouter();
 
@@ -53,10 +50,6 @@ const SignupDialog: React.FC = () => {
             setSubmitting,
             setStatus,
             lang,
-            resetForm,
-            null,
-            router,
-            setUser,
         );
     };
 

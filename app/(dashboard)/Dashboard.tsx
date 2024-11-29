@@ -44,10 +44,12 @@ const Dashboard = ({ children }: DashboardProps) => {
             <div className="relative h-screen overflow-hidden">
                 <div className="relative w-full h-full">
                     <div className="fixed top-0 left-0 w-full h-full">
-                        {!path.startsWith('/login') && <Carte />}
+                        {!path.startsWith('/login') &&
+                            !path.startsWith('/signup') && <Carte />}
                     </div>
                     <div className="flex h-full absolute top-0">
-                        {!path.startsWith('/login') && <Sidebar />}
+                        {!path.startsWith('/login') &&
+                            !path.startsWith('/signup') && <Sidebar />}
                         {children}
                     </div>
                 </div>

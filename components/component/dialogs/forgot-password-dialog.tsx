@@ -38,13 +38,8 @@ const ForgotPasswordDialog: React.FC<ForgotPasswordProps> = ({
             setSubmitting,
             setStatus,
             lang,
-            resetForm,
-            null,
-            router,
-            (user) => {
-                return;
-            },
         );
+        resetForm();
     };
 
     return (
