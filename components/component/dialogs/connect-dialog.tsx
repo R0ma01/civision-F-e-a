@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { PagePaths } from '@/components/enums/page-paths-enum';
@@ -18,7 +18,11 @@ import {
 } from '@/components/interface/auth/connect-dialog';
 import { Language } from '@/components/enums/language';
 import Modal from '@/components/component/modal/modal';
-
+import {
+    credentialsSignIn,
+    getAuthSession,
+} from '@/services/credentials-login';
+import axios from 'axios';
 import useGlobalUserStore from '@/stores/global-user-store';
 //import { useGlobalUserStore } from '@/stores/global-user-store';
 
@@ -29,10 +33,11 @@ const ConnectDialog: React.FC<ConnectDialogProps> = ({
     const { lang } = useDataStore();
     const t = authTranslations[lang as Language];
     const router = useRouter();
-    const { setLoginTutorials, setUser } = useGlobalUserStore((state: any) => ({
+    const { setLoginTutorials } = useGlobalUserStore((state: any) => ({
         setLoginTutorials: state.setLoginTutorials,
-        setUser: state.setUser,
     }));
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const handleEsc = (event: any) => {
@@ -51,23 +56,35 @@ const ConnectDialog: React.FC<ConnectDialogProps> = ({
         values: FormValues,
         { setSubmitting, setStatus, resetForm }: FormikHelpers<FormValues>,
     ) => {
-        await submitForm(
-            'login',
-            { email: values.email, password: values.password },
-            t.loginRequestFailed,
-            setSubmitting,
-            setStatus,
-            lang,
-            resetForm,
-            PagePaths.THEMATIQUES,
-            router,
-            setUser, // Pass the setUser function
-            setLoginTutorials,
-        );
+        setSubmitting(true);
+        try {
+            await credentialsSignIn({
+                email: values.email,
+                password: values.password,
+                lang,
+            });
+
+            const tutorials = await axios.get('/api/user/fetch-accesses');
+
+            console.log(tutorials);
+            setLoginTutorials(tutorials.data.tutorials);
+        } catch (error: any) {
+            if ((error.stack.split(':')[0] = 'AccessDenied')) {
+                console.log(error);
+                setErrorMessage(t.accessDenied);
+            } else {
+                setErrorMessage('BBBBBBBBB');
+
+                console.log(error);
+            }
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
         <Modal title="Bonjour à nouveau !">
+            <p className="text-red-500">{errorMessage}</p>
             <Formik
                 initialValues={{ email: '', password: '' }}
                 validationSchema={loginValidationSchema}

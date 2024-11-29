@@ -20,6 +20,7 @@ import AdminPageTutorial from '@/components/component/tutorials/admin-page-tutor
 import { TutorialPages, UserType } from '@/components/enums/user-type-enum';
 import { html_object_constants } from '@/constants/constants';
 
+import { getAuthSession } from '@/services/credentials-login';
 export default function Admin() {
     const lang: Language = useDataStore((state) => state.lang);
     const [pages, setPages] = useState<PageTabContent[]>([]);
@@ -30,9 +31,25 @@ export default function Admin() {
         backgroundImage: '',
         visible: false,
     };
-    const { user, tutorials, updateCompletedTutorials } = useGlobalUserStore(
+
+    const [user, setUser] = useState(UserType.VISITOR);
+
+    useEffect(() => {
+        async function fectchSession() {
+            const session: any = await getAuthSession();
+
+            if (session && session.user && session.user.email) {
+                if (session.user.admin) {
+                    setUser(UserType.ADMIN);
+                } else {
+                    setUser(UserType.USER);
+                }
+            }
+        }
+        fectchSession();
+    }, []);
+    const { tutorials, updateCompletedTutorials } = useGlobalUserStore(
         (state: any) => ({
-            user: state.user,
             tutorials: state.tutorials,
             updateCompletedTutorials: state.updateCompletedTutorials,
         }),

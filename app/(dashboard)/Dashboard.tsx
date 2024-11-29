@@ -3,17 +3,13 @@ import React, { useEffect } from 'react';
 import Carte from '@/components/component/carte/Carte';
 import Sidebar from '@/components/component/sidebar/sidebar';
 import MobileWarningPopup from '@/components/component/mobile-popup/mobile-popup';
-import useGlobalUserStore from '@/stores/global-user-store';
+import { usePathname } from 'next/navigation';
 
 interface DashboardProps {
     children: any;
 }
 
 const Dashboard = ({ children }: DashboardProps) => {
-    const { setUser } = useGlobalUserStore((state: any) => ({
-        setUser: state.setUser,
-    }));
-
     // useEffect(() => {
     //     const handleBeforeUnload = async (event: BeforeUnloadEvent) => {
     //         event.preventDefault();
@@ -40,6 +36,8 @@ const Dashboard = ({ children }: DashboardProps) => {
     //     };
     // }, [setUser]);
 
+    const path = usePathname();
+
     return (
         <>
             <MobileWarningPopup />
@@ -50,7 +48,7 @@ const Dashboard = ({ children }: DashboardProps) => {
                             <Carte />
                         </div>
                         <div className="flex h-full absolute top-0">
-                            <Sidebar />
+                            {!path.startsWith('/login') && <Sidebar />}
                             {children}
                         </div>
                     </div>

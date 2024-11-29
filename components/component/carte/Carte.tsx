@@ -4,17 +4,16 @@ import Mapbox from '@/components/component/carte/Mapbox';
 import useGlobalDataStore from '@/stores/global-data-store';
 import useGlobalFilterStore from '@/stores/global-filter-store';
 import useMapStore from '@/stores/global-map-store';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Chloropleth from './Chloropleth';
 import ClusterCloud from './ClusterCloud';
 import { MapType } from '@/components/enums/map-type-enum';
 import { Fournisseur } from '@/components/interface/fournisseur';
 import ColorLegend from './Color-Legend';
 import { choroplethColors, clusterColors } from '@/constants/color-palet';
-import useGlobalUserStore from '@/stores/global-user-store';
 import { UserType } from '@/components/enums/user-type-enum';
 import RegionGrid from '@/components/component/carte/GridRegions';
-
+import { getAuthSession } from '@/services/credentials-login';
 import {
     AlbumDataFields,
     FournisseurDataFields,
@@ -27,7 +26,23 @@ import MrcGrid from './GridMrcs';
 
 export default function Carte() {
     // global variables
-    const user = useGlobalUserStore((state: any) => state.user);
+
+    const [user, setUser] = useState(UserType.VISITOR);
+
+    useEffect(() => {
+        async function fectchSession() {
+            const session: any = await getAuthSession();
+
+            if (session && session.user && session.user.email) {
+                if (session.user.admin) {
+                    setUser(UserType.ADMIN);
+                } else {
+                    setUser(UserType.USER);
+                }
+            }
+        }
+        fectchSession();
+    }, []);
     const mapRef = useRef(null);
     const map = useMapStore((state) => state.map);
     const mapType = useMapStore((state) => state.mapType);
@@ -88,7 +103,6 @@ export default function Carte() {
     useEffect(() => {
         // update map reference
         mapRef.current = map;
-        console.log(map);
     }, [map]);
 
     useEffect(() => {

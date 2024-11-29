@@ -35,9 +35,6 @@ const submitForm = async (
 
         if (status === 200) {
             if (route === 'login') {
-                localStorage.setItem('token', data.token || '');
-                localStorage.setItem('adminToken', data.adminToken || '');
-
                 const userType = data.admin ? UserType.ADMIN : UserType.USER;
                 setUser(userType); // Set the user type
 

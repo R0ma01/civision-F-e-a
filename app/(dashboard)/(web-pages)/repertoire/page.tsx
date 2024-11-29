@@ -21,6 +21,7 @@ import Button from '@/components/component/buttons/button';
 import { ButtonType } from '@/components/enums/button-type-enum';
 import { AddCircleSVG } from '@/components/component/svg-icons/svg-icons';
 
+import { getAuthSession } from '@/services/credentials-login';
 const DataCardDiv: React.FC<{
     children: React.ReactNode;
 }> = ({ children }) => {
@@ -43,7 +44,24 @@ function Repertoire() {
         mapType: state.mapType,
     }));
 
-    const { user, tutorials, updateCompletedTutorials } = useGlobalUserStore(
+    const [user, setUser] = useState(UserType.VISITOR);
+
+    useEffect(() => {
+        async function fectchSession() {
+            const session: any = await getAuthSession();
+
+            if (session && session.user && session.user.email) {
+                if (session.user.admin) {
+                    setUser(UserType.ADMIN);
+                } else {
+                    setUser(UserType.USER);
+                }
+            }
+        }
+        fectchSession();
+    }, []);
+
+    const { tutorials, updateCompletedTutorials } = useGlobalUserStore(
         (state: any) => ({
             user: state.user,
             tutorials: state.tutorials,

@@ -21,6 +21,7 @@ import { ButtonType } from '@/components/enums/button-type-enum';
 import Button from '@/components/component/buttons/button';
 import Image from 'next/image';
 
+import { getAuthSession } from '@/services/credentials-login';
 function Fournisseurs() {
     const lang: Language = useDataStore((state) => state.lang);
 
@@ -63,7 +64,23 @@ function Fournisseurs() {
         filterFournisseurData: state.filterFournisseurData,
     }));
 
-    const { user, tutorials, updateCompletedTutorials } = useGlobalUserStore(
+    const [user, setUser] = useState(UserType.VISITOR);
+
+    useEffect(() => {
+        async function fectchSession() {
+            const session: any = await getAuthSession();
+
+            if (session && session.user && session.user.email) {
+                if (session.user.admin) {
+                    setUser(UserType.ADMIN);
+                } else {
+                    setUser(UserType.USER);
+                }
+            }
+        }
+        fectchSession();
+    }, []);
+    const { tutorials, updateCompletedTutorials } = useGlobalUserStore(
         (state: any) => ({
             user: state.user,
             tutorials: state.tutorials,

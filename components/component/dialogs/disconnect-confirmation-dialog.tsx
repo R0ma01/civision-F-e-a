@@ -13,20 +13,15 @@ import {
 } from '@/constants/translations/page-prompts';
 import { Language } from '@/components/enums/language';
 import useDataStore from '@/reducer/dataStore';
+import { credentialsLogout } from '@/services/credentials-login';
 
 const DisconnectDialog: React.FC<DisconnectDialogProps> = ({ closeDialog }) => {
     const router = useRouter();
     const lang: Language = useDataStore((state) => state.lang);
 
-    const { setUser, setLoginTutorials } = useGlobalUserStore((state: any) => ({
-        setUser: state.setUser,
+    const { setLoginTutorials } = useGlobalUserStore((state: any) => ({
         setLoginTutorials: state.setLoginTutorials,
     }));
-
-    function clearCookies() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('adminToken');
-    }
 
     function clearZustandStore() {
         // Replace 'zustand_store_key' with the actual key used by Zustand in localStorage
@@ -53,21 +48,15 @@ const DisconnectDialog: React.FC<DisconnectDialogProps> = ({ closeDialog }) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(`/api/auth/logout`, {});
+            // credentialsLogout
 
-            if (response.status === 200) {
-                clearCookies();
-                clearZustandStore();
-                router.push(PagePaths.HOME);
-                setUser(UserType.VISITOR);
-                setLoginTutorials([]);
+            await credentialsLogout();
 
-                closeDialog();
-            } else {
-                console.error('Failed to log out');
-            }
-        } catch (error) {
-            console.error('Error logging out:', error);
+            clearZustandStore();
+            router.push(PagePaths.HOME);
+            setLoginTutorials([]);
+        } catch (e: any) {
+            console.log(e);
         } finally {
             router.push(PagePaths.HOME);
             closeDialog();

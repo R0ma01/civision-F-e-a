@@ -21,6 +21,7 @@ import { ButtonType } from '@/components/enums/button-type-enum';
 import { BackArrowSVG } from '@/components/component/svg-icons/svg-icons';
 import { PagePaths } from '@/components/enums/page-paths-enum';
 import Link from 'next/link';
+import { getAuthSession } from '@/services/credentials-login';
 
 function PageContentComponent() {
     const { resetFilters } = useGlobalFilterStore((state) => ({
@@ -46,9 +47,25 @@ function PageContentComponent() {
         },
     );
 
-    const { user, tutorials, updateCompletedTutorials } = useGlobalUserStore(
+    const [user, setUser] = useState(UserType.VISITOR);
+
+    useEffect(() => {
+        async function fectchSession() {
+            const session: any = await getAuthSession();
+
+            if (session && session.user && session.user.email) {
+                if (session.user.admin) {
+                    setUser(UserType.ADMIN);
+                } else {
+                    setUser(UserType.USER);
+                }
+            }
+        }
+        fectchSession();
+    }, []);
+
+    const { tutorials, updateCompletedTutorials } = useGlobalUserStore(
         (state: any) => ({
-            user: state.user,
             tutorials: state.tutorials,
             updateCompletedTutorials: state.updateCompletedTutorials,
         }),

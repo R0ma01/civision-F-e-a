@@ -16,7 +16,7 @@ import useDataStore from '@/reducer/dataStore';
 import useGlobalUserStore from '@/stores/global-user-store';
 import ThematiquePageTutorial from '@/components/component/tutorials/thematique-page-tutorial';
 import { TutorialPages, UserType } from '@/components/enums/user-type-enum';
-
+import { getAuthSession } from '@/services/credentials-login';
 export default function Thematiques() {
     const lang: Language = useDataStore((state) => state.lang);
 
@@ -37,9 +37,25 @@ export default function Thematiques() {
             fetchPageData: state.fetchPageData,
         };
     });
-    const { user, tutorials, updateCompletedTutorials } = useGlobalUserStore(
+
+    const [user, setUser] = useState(UserType.VISITOR);
+
+    useEffect(() => {
+        async function fectchSession() {
+            const session: any = await getAuthSession();
+
+            if (session && session.user && session.user.email) {
+                if (session.user.admin) {
+                    setUser(UserType.ADMIN);
+                } else {
+                    setUser(UserType.USER);
+                }
+            }
+        }
+        fectchSession();
+    }, []);
+    const { tutorials, updateCompletedTutorials } = useGlobalUserStore(
         (state: any) => ({
-            user: state.user,
             tutorials: state.tutorials,
             updateCompletedTutorials: state.updateCompletedTutorials,
         }),

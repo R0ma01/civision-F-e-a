@@ -15,10 +15,6 @@ const useGlobalUserStore = create(
     devtools(
         persist(
             (set) => ({
-                user: UserType.VISITOR,
-                setUser: (user: UserType) => {
-                    set({ user });
-                },
                 tutorials: [],
                 setLoginTutorials: async (tutorials: boolean[]) => {
                     set({ tutorials });

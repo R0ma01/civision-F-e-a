@@ -2,8 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PagePaths } from '@/components/enums/page-paths-enum';
-import { useState } from 'react';
-import { UserType } from '@/components/enums/user-type-enum';
+import { useState, useEffect } from 'react';
 import DisconnectDialog from '@/components/component/dialogs/disconnect-confirmation-dialog';
 import SideBarItem from './SidebarItem';
 import fullLogoFAE from '@/public/images/fea-full-logo.png';
@@ -22,9 +21,10 @@ import {
     ChercheurSVG,
     FournisseurSVG,
 } from '@/components/component/svg-icons/svg-icons';
-
+import { getAuthSession } from '@/services/credentials-login';
 //import { useUser } from '@/context/user-context'; // Adjust the path as necessary
-import useGlobalUserStore from '@/stores/global-user-store';
+
+import { UserType } from '@/components/enums/user-type-enum';
 
 enum hoverColor {
     green = 'green',
@@ -36,10 +36,25 @@ enum hoverColor {
 const Sidebar: React.FC = () => {
     const lang: Language = useDataStore((state) => state.lang);
 
-    const { user, setUser } = useGlobalUserStore((state: any) => ({
-        user: state.user,
-        setUser: state.setUser,
-    }));
+    const [user, setUser] = useState(UserType.VISITOR);
+
+    useEffect(() => {
+        async function fectchSession() {
+            const session: any = await getAuthSession();
+            console.log('hello');
+            console.log(session);
+
+            if (session && session.user && session.user.email) {
+                if (session.user.admin) {
+                    setUser(UserType.ADMIN);
+                } else {
+                    setUser(UserType.USER);
+                }
+            }
+        }
+        fectchSession();
+    }, []);
+
     const [isDisconnectDialogOpen, setIsDisconnectDialogOpen] = useState(false);
 
     const openDisconnectDialog = (e: any) => {
