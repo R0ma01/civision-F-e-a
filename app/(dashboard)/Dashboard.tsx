@@ -42,17 +42,15 @@ const Dashboard = ({ children }: DashboardProps) => {
         <>
             <MobileWarningPopup />
             <div className="relative h-screen overflow-hidden">
-                <>
-                    <div className="relative w-full h-full">
-                        <div className="fixed top-0 left-0 w-full h-full">
-                            <Carte />
-                        </div>
-                        <div className="flex h-full absolute top-0">
-                            {!path.startsWith('/login') && <Sidebar />}
-                            {children}
-                        </div>
+                <div className="relative w-full h-full">
+                    <div className="fixed top-0 left-0 w-full h-full">
+                        {!path.startsWith('/login') && <Carte />}
                     </div>
-                </>
+                    <div className="flex h-full absolute top-0">
+                        {!path.startsWith('/login') && <Sidebar />}
+                        {children}
+                    </div>
+                </div>
             </div>
         </>
     );
