@@ -91,7 +91,16 @@ export default function APropos() {
                                 </a>
                             </p>
                             <div className="w-full flex items-center justify-center mt-2">
-                                <button className="bg-[#9BD5D6] text-white p-2 rounded-md w-fit">
+                                <button
+                                    className="bg-[#9BD5D6] text-white p-2 rounded-md w-fit"
+                                    onClick={() =>
+                                        window.open(
+                                            'https://famillesenaffaires.hec.ca/',
+                                            '_blank',
+                                        )
+                                    }
+                                    title="redirect:https://famillesenaffaires.hec.ca/"
+                                >
                                     Visitez notre site web
                                 </button>
                             </div>
@@ -119,7 +128,16 @@ export default function APropos() {
                             </p>
 
                             <div className="w-full flex items-center justify-center mt-2">
-                                <button className="bg-[#00AEC7] text-white p-2 rounded-md">
+                                <button
+                                    className="bg-[#00AEC7] text-white p-2 rounded-md"
+                                    onClick={() =>
+                                        window.open(
+                                            'https://lasphere.hec.ca/',
+                                            '_blank',
+                                        )
+                                    }
+                                    title="redirect:https://lasphere.hec.ca/"
+                                >
                                     Visitez notre site web
                                 </button>
                             </div>
@@ -199,9 +217,9 @@ export default function APropos() {
                     ></Image>
                 </div>
             </section>
-            <footer>
+            {/* <footer>
                 <p>&copy; 2024 Familles en affaires. Tous droits réservés.</p>
-            </footer>
+            </footer> */}
         </PageContentContainer>
     );
 }
