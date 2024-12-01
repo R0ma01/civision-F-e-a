@@ -2,6 +2,7 @@
 import { signIn, signOut } from '@/auth';
 import { auth } from '@/auth';
 export async function credentialsSignIn(credentials) {
+    console.log(credentials);
     await signIn('credentials', {
         ...credentials,
         redirectTo: '/thematiques',

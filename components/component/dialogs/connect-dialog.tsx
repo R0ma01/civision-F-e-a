@@ -58,6 +58,7 @@ const ConnectDialog: React.FC<ConnectDialogProps> = ({
     ) => {
         setSubmitting(true);
         try {
+            console.log('hello');
             await credentialsSignIn({
                 email: values.email,
                 password: values.password,

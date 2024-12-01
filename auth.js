@@ -31,6 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         async signIn({ credentials, user }) {
             let response;
+            console.log('hello');
             try {
                 response = await axios.post(`${serverURL}/api/auth/login`, {
                     credentials,
