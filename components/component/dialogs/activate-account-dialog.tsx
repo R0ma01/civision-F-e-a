@@ -35,11 +35,6 @@ const ActivateAccountDialog: React.FC<ActivateAccountProps> = ({ token }) => {
             () => {},
             setStatus,
             lang,
-            null,
-            PagePaths.LOGIN,
-            router,
-            setUser,
-            updateCompletedTutorials,
         );
     };
 
