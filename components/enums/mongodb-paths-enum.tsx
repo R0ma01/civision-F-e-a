@@ -6,6 +6,7 @@ export enum MongoDBPaths {
     FOURNISSEURS = 'fournisseurs-v1',
     DATABASE = 'familles-en-affaires',
     REGISTRE_QC = 'registraireQC',
+    EXTRA_COMPANIES = 'entreprises_ajoutees',
     VOLETA_2022 = 'VoletA_2022',
     VOLETB_2022 = 'VoletB_2022',
 }

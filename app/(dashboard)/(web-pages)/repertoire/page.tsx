@@ -20,6 +20,7 @@ import { AddEntrepriseDialog } from '@/components/component/dialogs/add-entrepri
 import Button from '@/components/component/buttons/button';
 import { ButtonType } from '@/components/enums/button-type-enum';
 import { AddCircleSVG } from '@/components/component/svg-icons/svg-icons';
+import axios from 'axios';
 
 import { getAuthSession } from '@/services/credentials-login';
 const DataCardDiv: React.FC<{
@@ -178,8 +179,17 @@ function Repertoire() {
                     closeDialog={() => {
                         setIsDialogOpen(false);
                     }}
-                    handleSubmit={(values) => {
+                    handleSubmit={async (values) => {
                         console.log(values);
+
+                        try {
+                            const response = await axios.post(
+                                '/api/repertoire/addEntreprise',
+                                { company: values },
+                            );
+                        } catch (e: any) {
+                            console.log(e);
+                        }
                     }}
                 ></AddEntrepriseDialog>
             )}
