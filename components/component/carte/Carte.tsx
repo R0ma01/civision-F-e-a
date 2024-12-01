@@ -23,6 +23,7 @@ import {
 
 import { MapRegions } from '@/components/enums/map-regions';
 import MrcGrid from './GridMrcs';
+import MuniGrid from './GridMuni';
 
 export default function Carte() {
     // global variables
@@ -279,7 +280,6 @@ export default function Carte() {
                             filterRepertoireData();
                         }}
                     ></RegionGrid>
-
                     <MrcGrid
                         map={map}
                         mapGrid={mapGrid}
@@ -291,6 +291,20 @@ export default function Carte() {
                             filterRepertoireData();
                         }}
                     ></MrcGrid>
+                    <MuniGrid
+                        map={map}
+                        mapGrid={mapGrid}
+                        filterFunction={(mrc_id: number) => {
+                            if (mrc_id !== 0) {
+                                setFilter(
+                                    RepertoireDataFields.MUNIC_IDU,
+                                    mrc_id,
+                                );
+                            }
+
+                            filterRepertoireData();
+                        }}
+                    ></MuniGrid>
                 </>
             )}
             {mapType == MapType.FOURNISSEURS && (

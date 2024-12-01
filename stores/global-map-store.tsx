@@ -15,8 +15,8 @@ interface GlobalMapStoreProps {
     setMapPoint: (point: MapClusterPointData) => void;
     legend: boolean;
     toggleLegend: () => void;
-    mapGrid: boolean;
-    toggleMapGrid: () => void;
+    mapGrid: string;
+    toggleMapGrid: (newGrid: string) => void;
 }
 
 const useMapStore = create<GlobalMapStoreProps>((set) => ({
@@ -61,9 +61,9 @@ const useMapStore = create<GlobalMapStoreProps>((set) => ({
     toggleLegend: () => {
         set((state) => ({ legend: !state.legend }));
     },
-    mapGrid: false,
-    toggleMapGrid: () => {
-        set((state) => ({ mapGrid: !state.mapGrid }));
+    mapGrid: 'muni',
+    toggleMapGrid: (newGrid: string) => {
+        set((state) => ({ mapGrid: newGrid }));
     },
 }));
 

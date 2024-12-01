@@ -4,6 +4,7 @@ import { MongoDBPaths } from '@/components/enums/mongodb-paths-enum';
 import { EntreprisePointData } from '@/components/interface/point-data';
 import { ObjectId } from 'mongodb';
 import traductionCAE from '@/services/cae_to_name.json';
+import traductionSCIAN from '@/services/SCIAN_to_text.json';
 
 export async function GET(request: Request) {
     try {
@@ -35,6 +36,7 @@ export async function GET(request: Request) {
                     ADR_DOMCL_LIGN2_ADR: 1,
                     ADR_DOMCL_LIGN4_ADR: 1,
                     NB_EMPLO: 1,
+                    SCIAN: 1,
                 },
             },
         );
@@ -53,6 +55,24 @@ export async function GET(request: Request) {
                 ? traductionCAE[CAE_CODE as keyof typeof traductionCAE]
                 : 'default value'; // Handle invalid keys
 
+        const scianKey: string = document.SCIAN;
+        let secteur2: string =
+            traductionSCIAN[scianKey as keyof typeof traductionSCIAN];
+
+        if (!secteur2) {
+            const ApplicableSCIANS = Object.keys(traductionSCIAN).filter(
+                (key: string) => {
+                    return key.toString().includes(scianKey.toString());
+                },
+            );
+
+            secteur2 = '';
+            ApplicableSCIANS.map((key) => {
+                secteur2 +=
+                    traductionSCIAN[key as keyof typeof traductionSCIAN] + ', ';
+            });
+        }
+
         // Transform the document to PointData format
         const entreprise: EntreprisePointData = {
             _id: document._id.toString(),
@@ -60,7 +80,8 @@ export async function GET(request: Request) {
             nom: document.NOM_ASSUJ[0] || 'Non Disponible',
             adresse:
                 `${document.ADR_DOMCL_LIGN1_ADR || ''} ${document.ADR_DOMCL_LIGN2_ADR || ''} ${document.ADR_DOMCL_LIGN4_ADR || ''}`.trim(),
-            secteur_activite: CAE_translation || 'Non Disponible',
+            //secteur_activite: CAE_translation || 'Non Disponible',
+            secteur_activite: secteur2 || 'Non Disponible',
             taille_entreprise: document.NB_EMPLO
                 ? `${document.NB_EMPLO} employés`
                 : 'Non Disponible',

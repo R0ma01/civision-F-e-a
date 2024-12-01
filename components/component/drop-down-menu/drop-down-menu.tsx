@@ -78,6 +78,7 @@ const Dropdown = ({
         } else {
             setDisplayText(SharedPromptsTranslations.all[lang]);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -89,6 +90,7 @@ const Dropdown = ({
         } else {
             setDisplayText(displayValue(inputValue, lang, dataField)); // This line is incorrect.
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [lang]);
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -98,6 +100,7 @@ const Dropdown = ({
     useEffect(() => {
         setSelectedValue(inputValue);
         setDisplayText(displayValue(inputValue, lang, dataField));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputValue]);
 
     const toggleDropdown = (e: React.MouseEvent) => {
@@ -168,9 +171,9 @@ const Dropdown = ({
             {dropdownOpen && (
                 <div
                     ref={dropdownRef}
-                    className={`absolute mt-1 p-1 bg-white border border-gray-300 dark:bg-gray-700 rounded-lg shadow-lg z-10  ${color ? 'w-10' : 'w-52'}`}
+                    className={`absolute mt-1 p-1 bg-white border max-h-64 f-fit border-gray-300 dark:bg-gray-700 rounded-lg shadow-lg z-10  ${color ? 'w-10' : 'w-52'} overflow-hidden`}
                 >
-                    <ul className="max-h-64 rounded-lg overflow-y-auto dark:bg-gray-700">
+                    <ul className="rounded-lg dark:bg-gray-700">
                         {options.map((option: any) => {
                             if (!color) {
                                 return (

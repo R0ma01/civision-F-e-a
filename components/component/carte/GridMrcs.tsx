@@ -5,7 +5,7 @@ import useGlobalFilterStore from '@/stores/global-filter-store';
 
 interface ChloroplethProps {
     map: any;
-    mapGrid: boolean;
+    mapGrid: string;
     filterFunction: (mrc_idu: number) => void;
 }
 
@@ -51,7 +51,7 @@ const MrcGrid: React.FC<ChloroplethProps> = ({
 
         const handleMapLoad = () => {
             // Check if the source already exists
-            if (mapGrid) {
+            if (mapGrid === 'mrc') {
                 if (!map.getSource('gridMrc-source')) {
                     // Add GeoJSON source
                     map.addSource('gridMrc-source', {

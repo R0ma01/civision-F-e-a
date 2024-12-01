@@ -39,6 +39,8 @@ const MapMenu: React.FC<MapManuProps> = ({ className }) => {
         }
     };
 
+    const gridNames = ['reg', 'mrc', 'muni'];
+
     return (
         <>
             <div
@@ -77,9 +79,9 @@ const MapMenu: React.FC<MapManuProps> = ({ className }) => {
                         toggleLegend();
                     }}
                     scaleOnHover={false}
-                    className={`p-1 pl-2 hover:scale-110 group ${legend ? 'bg-logo-dark-blue' : ''}`}
+                    className={`pt-1 pl-1 hover:scale-110 group ${legend ? 'bg-logo-dark-blue' : ''}`}
                 >
-                    <LegendSVG className="group-hover:fill-black" />
+                    <LegendSVG fill={legend ? '#fff' : '#5f6368'} />
                 </Button>
                 {mapType === MapType.REPERTOIRE && (
                     <Button
@@ -87,16 +89,27 @@ const MapMenu: React.FC<MapManuProps> = ({ className }) => {
                         buttonType={ButtonType.ICON}
                         onClick={(e) => {
                             e.stopPropagation();
-                            toggleMapGrid();
+                            const index = gridNames.findIndex(
+                                (key) => key === mapGrid,
+                            );
+                            switch (index) {
+                                case gridNames.length - 1:
+                                    toggleMapGrid(gridNames[0]);
+                                    break;
+
+                                default:
+                                    toggleMapGrid(gridNames[index + 1]);
+                                    break;
+                            }
                             resetFilters();
                         }}
                         scaleOnHover={false}
-                        className={`p-1 hover:scale-110 group ${mapGrid ? 'bg-logo-dark-blue' : ''}`}
+                        className={`hover:scale-110 group border-logo-dark-blue h-6 w-8`}
                     >
                         <p
-                            className={`text-black text-[8px] text-center ${mapGrid ? 'text-white' : ''}`}
+                            className={`text-[8px] text-logo-dark-blue uppercase`}
                         >
-                            {mapGrid ? 'MRC' : 'REG'}
+                            {mapGrid}
                         </p>
                     </Button>
                 )}

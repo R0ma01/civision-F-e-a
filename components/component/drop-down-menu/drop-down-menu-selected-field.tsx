@@ -124,13 +124,17 @@ const DropdownSelect = ({
                     className={`absolute mt-1 p-1 bg-white border border-gray-300 rounded-lg 
                         shadow-lg z-10 w-48`}
                 >
-                    <ul className="max-h-60 rounded-lg overflow-y-aut">
+                    <ul className="max-h-60 rounded-lg overflow-y-auto overflow-x-hidden">
                         {options.map((option: any) => {
                             const isSelected = selectedValue.includes(option);
                             return (
                                 <li
                                     key={option as unknown as string}
-                                    className={`text-xs text-wrap w-48 m-1 h-fit hover:border-2 cursor-pointer transition-colors ${isSelected ? 'text-teal-300' : 'text-black'}`}
+                                    className={`w-[98%] px-2 text-gray-700 cursor-pointer transition-colors text-wrap text-[10px] h-6 m-0.5 text-left flex items-center rounded-lg ${
+                                        isSelected
+                                            ? 'bg-logo-turquoise'
+                                            : 'bg-gray-100 hover:bg-gray-300'
+                                    }`}
                                     onClick={() => handleSelection(option)}
                                 >
                                     {displayValue(option, lang, dataField)}

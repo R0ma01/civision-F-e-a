@@ -171,6 +171,7 @@ export enum RepertoireDataFields {
     NB_EMPLO = 'NB_EMPLO',
     MRC_IDU = 'MRC_IDU',
     REG_IDU = 'REG_IDU',
+    MUNIC_IDU = 'MUNIC_IDU',
 }
 
 export enum StudyOrigin {

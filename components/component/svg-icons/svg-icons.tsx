@@ -433,7 +433,13 @@ export const FactorySVG = ({ className }: { className?: string }) => {
     );
 };
 
-export const LegendSVG = ({ className }: { className?: string }) => {
+export const LegendSVG = ({
+    className,
+    fill = '#5f6368',
+}: {
+    className?: string;
+    fill?: string;
+}) => {
     return (
         <svg
             className={className}
@@ -441,19 +447,19 @@ export const LegendSVG = ({ className }: { className?: string }) => {
             height="24px"
             viewBox="0 -960 960 960"
             width="24px"
-            fill="#5f6368"
+            fill={fill}
         >
             {/* Circle with line */}
-            <circle cx="160" cy="-780" r="80" fill="#5f6368" />
+            <circle cx="160" cy="-780" r="80" fill={fill} />
             <path d="M255 -760 h460 v-40 H300 v40 Z" />{' '}
             {/* Line shortened by 5px on both ends */}
             {/* Larger Triangle with line */}
-            <path d="M100 -520 L160 -620 L220 -520 Z" fill="#5f6368" />{' '}
+            <path d="M100 -520 L160 -620 L220 -520 Z" fill={fill} />{' '}
             {/* Larger triangle */}
             <path d="M255 -560 h460 v-40 H300 v40 Z" />{' '}
             {/* Line shortened by 5px on both ends */}
             {/* Square with dashed line (moved down by 5px) */}
-            <rect x="120" y="-420" width="130" height="130" fill="#5f6368" />
+            <rect x="120" y="-420" width="130" height="130" fill={fill} />
             <path
                 d="M255 -340 h460 v-40 H300 v40 Z"
                 strokeDasharray="10,10"
