@@ -8,13 +8,11 @@ interface FormButtonProps {
 }
 
 const FormButton: React.FC<FormButtonProps> = ({ text, isSubmitting }) => {
-    const submittedCSS = isSubmitting ? 'scale-100' : 'scale-105';
-
     return (
         <Button
             type="submit"
             buttonType={isSubmitting ? ButtonType.LOADING : ButtonType.CONFIRM}
-            disabled={isSubmitting}
+            pending={isSubmitting}
         >
             {text}
             {!isSubmitting && (

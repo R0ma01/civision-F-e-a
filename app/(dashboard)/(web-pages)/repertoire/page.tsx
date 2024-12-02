@@ -183,12 +183,20 @@ function Repertoire() {
                         console.log(values);
 
                         try {
-                            const response = await axios.post(
+                            const response: any = await axios.post(
                                 '/api/repertoire/addEntreprise',
                                 { company: values },
                             );
+
+                            console.log(response);
+                            if (response.state === 200) {
+                                return true;
+                            } else {
+                                return false;
+                            }
                         } catch (e: any) {
                             console.log(e);
+                            return false;
                         }
                     }}
                 ></AddEntrepriseDialog>

@@ -7,11 +7,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
     className?: string;
     scaleOnHover?: boolean;
+    pending?: boolean;
 }
 
 const dettermineColor = (buttonType: ButtonType, pending: boolean): string => {
     if (pending) {
-        return 'bg-gray-400 border-gray-400 cursor-not-allowed';
+        buttonType = ButtonType.LOADING;
     }
     switch (buttonType) {
         case ButtonType.CANCEL:
@@ -24,7 +25,7 @@ const dettermineColor = (buttonType: ButtonType, pending: boolean): string => {
         case ButtonType.ICON_ROUNDED:
             return 'border rounded-lg p-1';
         case ButtonType.LOADING:
-            return 'bg-gray-400 border-gray-400 cursor-not-allowed py-2 px-4 ';
+            return 'bg-gray-400 border-gray-400 cursor-not-allowed py-2 px-4';
         default:
             return 'bg-logo-dark-blue py-2 px-4 ';
     }
@@ -35,9 +36,9 @@ const Button: React.FC<ButtonProps> = ({
     className = '',
     children,
     scaleOnHover = true,
+    pending = false,
     ...props
 }) => {
-    const { pending } = useFormStatus();
     const colorScheme = dettermineColor(buttonType, pending);
     const pulseAnimation =
         buttonType === ButtonType.PULSE && !pending ? 'animate-pulse' : '';
@@ -48,11 +49,24 @@ const Button: React.FC<ButtonProps> = ({
           : '';
     return (
         <button
-            className={`text-white font-semibold border rounded transition-transform duration-300 transform-gpu ${pulseAnimation} ${pendingScale} ${colorScheme} ${className}`}
+            className={`text-white font-semibold h-fit border rounded transition-transform relative duration-300 transform-gpu ${pulseAnimation} ${pendingScale} ${colorScheme} ${className}`}
             {...props}
             disabled={pending}
         >
-            {pending ? 'Loading...' : children}
+            {
+                <div className={pending ? 'opacity-0' : 'opacity-100'}>
+                    {children}
+                </div>
+            }
+            {pending && (
+                <span
+                    className={
+                        'absolute inset-0 flex items-center justify-center text-center font-bold'
+                    }
+                >
+                    Loading...
+                </span>
+            )}
         </button>
     );
 };

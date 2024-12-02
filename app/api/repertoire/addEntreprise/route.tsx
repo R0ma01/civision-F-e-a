@@ -15,30 +15,57 @@ export async function POST(req: Request) {
         console.log(company);
 
         if (!company) {
-            return NextResponse.json('No company Attached');
+            return NextResponse.json('No company Attached', { status: 204 });
         }
+        const coords = [company.LONG, company.LAT];
 
         const exists = await collection.findOne({ NEQ: company.NEQ });
 
         if (exists) {
-            return NextResponse.json('Company already exists');
+            return NextResponse.json('Company Already exists', { status: 409 });
         }
-        // Get the documents and count them
 
-        console.log('hello');
+        console.log(coords);
 
-        const adaptedCompany = {};
-
-        const response = await axios.post(serverURL + '/api/get-idus', {
+        const response = await axios.post(serverURL + 'api/get-idus', {
             realm: 'canada',
-            coordinates: [company.LONG, company.LAT],
+            coordinates: coords,
         });
 
         console.log(response);
 
+        if (response.status === 200) {
+            delete company.LAT;
+            delete company.LONG;
+
+            company.COORD = coords;
+
+            company.AD_IDU = response.data.AD_IDU;
+            company.MRC_IDU = response.data.MRC_IDU;
+            company.MUNIC_IDU = response.data.MUNIC_IDU;
+        } else {
+            return NextResponse.json('Failed to convert geometries', {
+                status: 400,
+            });
+        }
+
+        console.log(company);
+
+        const added = await collection.insertOne({ ...company });
+
+        console.log(added);
+
+        if (added.insertedId) {
+            return NextResponse.json(
+                { entreprise: { _id: added.insertedId, ...company } },
+                {
+                    status: 200,
+                },
+            );
+        }
         // Add Cache-Control headers to prevent caching
 
-        return NextResponse.json('SDomething');
+        return NextResponse.json('Document not Added', { status: 400 });
     } catch (e: any) {
         console.error(e.message);
 
