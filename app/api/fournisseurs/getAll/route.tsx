@@ -9,7 +9,7 @@ export async function GET(req: Request) {
     console.log('Dynamic get for fournisseurs');
     try {
         const db = (await connectToDatabaseStudy()).db;
-        const collection = db.collection(MongoDBPaths.FOURNISSEURS);
+        const collection = db.collection(MongoDBPaths.FOURNISSEURS2);
         const url = new URL(req.url!);
         let filters = url.searchParams.get('filters');
         if (!filters) {

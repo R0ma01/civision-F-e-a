@@ -20,7 +20,8 @@ import { TutorialPages, UserType } from '@/components/enums/user-type-enum';
 import { ButtonType } from '@/components/enums/button-type-enum';
 import Button from '@/components/component/buttons/button';
 import Image from 'next/image';
-
+import { AddManyFournisseursDialog } from '@/components/component/dialogs/add-many-entreprise-dialog';
+import axios from 'axios';
 import { getAuthSession } from '@/services/credentials-login';
 function Fournisseurs() {
     const lang: Language = useDataStore((state) => state.lang);
@@ -118,6 +119,8 @@ function Fournisseurs() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mapType, setMapStyle]);
 
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
     return (
         <>
             <PageContentContainer
@@ -144,7 +147,7 @@ function Fournisseurs() {
                 >
                     {FournisseurPromptsTranslations.subscribe[lang]}
                 </Button>
-
+                {/* 
                 {isEditDialogOpen && currentFournisseur && (
                     <EditFournisseurDialog
                         closeDialog={closeEditDialog}
@@ -154,7 +157,7 @@ function Fournisseurs() {
                         }}
                         fournisseur={currentFournisseur}
                     />
-                )}
+                )} */}
                 {isDeleteDialogOpen && currentFournisseur && (
                     <DeleteItemDialog
                         closeDialog={closeDeleteDialog}
@@ -162,6 +165,7 @@ function Fournisseurs() {
                         deleteItem={currentFournisseur}
                     />
                 )}
+
                 <Image
                     src="/images/ORIA.png"
                     width={150}
@@ -170,6 +174,20 @@ function Fournisseurs() {
                     className="absolute bottom-0 left-12"
                 />
             </PageContentContainer>
+            {isEditDialogOpen && (
+                <AddManyFournisseursDialog
+                    closeDialog={() => {
+                        closeEditDialog();
+                    }}
+                    handleSubmit={async (fournisseurs) => {
+                        console.log(fournisseurs);
+
+                        await axios.post('/api/fournisseurs/addMany', {
+                            fournisseurs,
+                        });
+                    }}
+                ></AddManyFournisseursDialog>
+            )}
         </>
     );
 }

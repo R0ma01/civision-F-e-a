@@ -5,7 +5,7 @@ import { MongoDBPaths } from '@/components/enums/mongodb-paths-enum';
 export async function POST(req: Request) {
     try {
         const db = (await connectToDatabaseStudy()).db;
-        const collection = db.collection(MongoDBPaths.FOURNISSEURS);
+        const collection = db.collection(MongoDBPaths.FOURNISSEURS2);
         const body = await req.json(); // Parse the request body as JSON
 
         // Insert the object received in the request body

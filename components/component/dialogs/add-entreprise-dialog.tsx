@@ -272,14 +272,6 @@ export function AddEntrepriseDialog({
                                     }
                                 </Button>
                             </div>
-                            <div className="absolute right-2">
-                                <Button
-                                    onClick={closeDialog}
-                                    buttonType={ButtonType.CANCEL}
-                                >
-                                    ✕
-                                </Button>
-                            </div>
                         </Form>
                     )}
                 </Formik>{' '}

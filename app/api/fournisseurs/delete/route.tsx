@@ -6,7 +6,7 @@ import { MongoDBPaths } from '@/components/enums/mongodb-paths-enum';
 export async function DELETE(req: Request) {
     try {
         const db = (await connectToDatabaseStudy()).db;
-        const collection = db.collection(MongoDBPaths.FOURNISSEURS);
+        const collection = db.collection(MongoDBPaths.FOURNISSEURS2);
         const url = new URL(req.url!);
         const id = url.searchParams.get('_id');
 

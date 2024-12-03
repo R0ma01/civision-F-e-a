@@ -4,6 +4,7 @@ export enum MongoDBPaths {
     COLLECTION_PAGES_TABS = 'pages-information-v2.3',
     COLLECTION_USERS = 'users_v2',
     FOURNISSEURS = 'fournisseurs-v1',
+    FOURNISSEURS2 = 'fournisseurs-v2',
     DATABASE = 'familles-en-affaires',
     REGISTRE_QC = 'registraireQC',
     EXTRA_COMPANIES = 'entreprises_ajoutees',

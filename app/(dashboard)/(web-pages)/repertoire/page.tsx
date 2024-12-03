@@ -17,12 +17,13 @@ import {
 } from '@/components/component/svg-icons/svg-icons';
 import { GraphDataHttpRequestService } from '@/services/data-http-request-service';
 import { AddEntrepriseDialog } from '@/components/component/dialogs/add-entreprise-dialog';
+
 import Button from '@/components/component/buttons/button';
 import { ButtonType } from '@/components/enums/button-type-enum';
 import { AddCircleSVG } from '@/components/component/svg-icons/svg-icons';
 import axios from 'axios';
-
 import { getAuthSession } from '@/services/credentials-login';
+
 const DataCardDiv: React.FC<{
     children: React.ReactNode;
 }> = ({ children }) => {
@@ -90,7 +91,6 @@ function Repertoire() {
         null,
     );
     const [loading, setLoading] = useState<boolean>(false);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
@@ -167,40 +167,14 @@ function Repertoire() {
                     <Button
                         buttonType={ButtonType.ICON}
                         onClick={() => {
-                            setIsDialogOpen(true);
+                            // setIsDialogOpen(true);
                         }}
                     >
                         <AddCircleSVG></AddCircleSVG>
                     </Button>
                 </DataCard>
             </div>
-            {isDialogOpen && (
-                <AddEntrepriseDialog
-                    closeDialog={() => {
-                        setIsDialogOpen(false);
-                    }}
-                    handleSubmit={async (values) => {
-                        console.log(values);
 
-                        try {
-                            const response: any = await axios.post(
-                                '/api/repertoire/addEntreprise',
-                                { company: values },
-                            );
-
-                            console.log(response);
-                            if (response.state === 200) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        } catch (e: any) {
-                            console.log(e);
-                            return false;
-                        }
-                    }}
-                ></AddEntrepriseDialog>
-            )}
             <Button
                 buttonType={ButtonType.CONFIRM}
                 onClick={() =>

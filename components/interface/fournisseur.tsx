@@ -12,6 +12,7 @@ export interface Fournisseur {
         firstName: string;
         email: string;
         cellPhone: number;
+        website: string;
         company: string;
         title: string;
         linkedIn: string;

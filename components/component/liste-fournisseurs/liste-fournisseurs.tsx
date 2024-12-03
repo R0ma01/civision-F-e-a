@@ -134,6 +134,7 @@ export default function ListeFournisseurs({
     };
 
     function filterSearchParams() {
+        console.log(fournisseurData);
         const newData = fournisseurData.filter(filterPredicate);
 
         setFournisseurs(sortAlphabetically(newData));
@@ -149,33 +150,36 @@ export default function ListeFournisseurs({
     }
 
     function populateTable() {
-        return fournisseurs.map((fournisseur, index) => {
-            if (fournisseur.visible)
-                return (
-                    <FournisseurListElement
-                        key={index}
-                        fournisseur={fournisseur}
-                        index={index}
-                        admin={admin}
-                        onClickEdit={openEditDialog}
-                        onClickDelete={openDeleteDialog}
-                        onClickVisible={toggleFournisseurVisibility}
-                    ></FournisseurListElement>
-                );
+        console.log(fournisseurs);
+        if (fournisseurs.length > 0) {
+            return fournisseurs.map((fournisseur, index) => {
+                if (fournisseur.visible)
+                    return (
+                        <FournisseurListElement
+                            key={index}
+                            fournisseur={fournisseur}
+                            index={index}
+                            admin={admin}
+                            onClickEdit={openEditDialog}
+                            onClickDelete={openDeleteDialog}
+                            onClickVisible={toggleFournisseurVisibility}
+                        ></FournisseurListElement>
+                    );
 
-            if (admin)
-                return (
-                    <FournisseurListElement
-                        key={index}
-                        fournisseur={fournisseur}
-                        index={index}
-                        admin={admin}
-                        onClickEdit={openEditDialog}
-                        onClickDelete={openDeleteDialog}
-                        onClickVisible={toggleFournisseurVisibility}
-                    ></FournisseurListElement>
-                );
-        });
+                if (admin)
+                    return (
+                        <FournisseurListElement
+                            key={index}
+                            fournisseur={fournisseur}
+                            index={index}
+                            admin={admin}
+                            onClickEdit={openEditDialog}
+                            onClickDelete={openDeleteDialog}
+                            onClickVisible={toggleFournisseurVisibility}
+                        ></FournisseurListElement>
+                    );
+            });
+        }
     }
 
     return (
