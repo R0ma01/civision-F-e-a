@@ -119,7 +119,7 @@ function Fournisseurs() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mapType, setMapStyle]);
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 
     return (
         <>
@@ -130,6 +130,9 @@ function Fournisseurs() {
                 <ListeFournisseurs
                     admin={user === UserType.ADMIN}
                     openEditDialog={openEditDialog}
+                    openAddDialog={() => {
+                        setIsAddDialogOpen(true);
+                    }}
                     openDeleteDialog={openDeleteDialog}
                     toggleFournisseurVisibility={toggleFournisseurVisibility}
                 ></ListeFournisseurs>
@@ -147,7 +150,7 @@ function Fournisseurs() {
                 >
                     {FournisseurPromptsTranslations.subscribe[lang]}
                 </Button>
-                {/* 
+
                 {isEditDialogOpen && currentFournisseur && (
                     <EditFournisseurDialog
                         closeDialog={closeEditDialog}
@@ -157,7 +160,7 @@ function Fournisseurs() {
                         }}
                         fournisseur={currentFournisseur}
                     />
-                )} */}
+                )}
                 {isDeleteDialogOpen && currentFournisseur && (
                     <DeleteItemDialog
                         closeDialog={closeDeleteDialog}
@@ -174,14 +177,12 @@ function Fournisseurs() {
                     className="absolute bottom-0 left-12"
                 />
             </PageContentContainer>
-            {isEditDialogOpen && (
+            {isAddDialogOpen && (
                 <AddManyFournisseursDialog
                     closeDialog={() => {
-                        closeEditDialog();
+                        setIsAddDialogOpen(false);
                     }}
                     handleSubmit={async (fournisseurs) => {
-                        console.log(fournisseurs);
-
                         await axios.post('/api/fournisseurs/addMany', {
                             fournisseurs,
                         });

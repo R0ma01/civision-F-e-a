@@ -128,6 +128,7 @@ export function EditFournisseurDialog({
         secteurs_geographiques: secteursOptions,
         services_offerts: servicesOptions,
         visible: fournisseur.visible || false,
+        website: fournisseur.contact.website || '',
     };
 
     function handleSubmit(values: any) {
@@ -141,6 +142,7 @@ export function EditFournisseurDialog({
                 company: values.compagnie,
                 title: values.titre,
                 linkedIn: values.profil_linkedin,
+                website: values.website || '',
             },
             secteurs_geographique: secteursOptions,
             services_offerts: servicesOptions,

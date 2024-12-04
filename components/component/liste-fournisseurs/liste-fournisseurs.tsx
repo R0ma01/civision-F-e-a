@@ -31,6 +31,7 @@ import useDataStore from '@/reducer/dataStore';
 interface ListeFournisseurProps {
     admin?: boolean;
     openEditDialog?: any;
+    openAddDialog?: any;
     openDeleteDialog?: any;
     toggleFournisseurVisibility?: any;
 }
@@ -52,6 +53,7 @@ const emptyFournisseur = {
 export default function ListeFournisseurs({
     admin = false,
     openEditDialog = () => {},
+    openAddDialog = () => {},
     openDeleteDialog = () => {},
     toggleFournisseurVisibility = () => {},
 }: ListeFournisseurProps) {
@@ -256,11 +258,7 @@ export default function ListeFournisseurs({
                     {admin && (
                         <Button
                             buttonType={ButtonType.ICON}
-                            onClick={() =>
-                                openEditDialog(
-                                    emptyFournisseur as unknown as Fournisseur,
-                                )
-                            }
+                            onClick={() => openAddDialog()}
                         >
                             <AddCircleSVG></AddCircleSVG>
                         </Button>
