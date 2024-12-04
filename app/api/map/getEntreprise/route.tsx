@@ -31,10 +31,9 @@ export async function GET(request: Request) {
                     COORD: 1,
                     NOM_ASSUJ: 1,
                     COD_ACT_ECON_CAE: 1,
-                    DESC_ACT_ECON_ASSUJ: 1,
-                    ADR_DOMCL_LIGN1_ADR: 1,
-                    ADR_DOMCL_LIGN2_ADR: 1,
-                    ADR_DOMCL_LIGN4_ADR: 1,
+                    ADR: 1,
+                    NOM_ETAB: 1,
+                    COD_POSTAL: 1,
                     NB_EMPLO: 1,
                     SCIAN: 1,
                 },
@@ -73,15 +72,18 @@ export async function GET(request: Request) {
             });
         }
 
+        const secteur = secteur2 || CAE_translation;
+
+        console.log(document.NOM_ETAB);
+
         // Transform the document to PointData format
         const entreprise: EntreprisePointData = {
             _id: document._id.toString(),
             coords: document.COORD,
-            nom: document.NOM_ASSUJ[0] || 'Non Disponible',
-            adresse:
-                `${document.ADR_DOMCL_LIGN1_ADR || ''} ${document.ADR_DOMCL_LIGN2_ADR || ''} ${document.ADR_DOMCL_LIGN4_ADR || ''}`.trim(),
+            nom: document.NOM_ETAB || document.NOM_ASSUJ[0] || 'Non Disponible',
+            adresse: `${document.ADR}, ${document.COD_POSTAL}`,
             //secteur_activite: CAE_translation || 'Non Disponible',
-            secteur_activite: secteur2 || 'Non Disponible',
+            secteur_activite: secteur || 'Non Disponible',
             taille_entreprise: document.NB_EMPLO
                 ? `${document.NB_EMPLO} employés`
                 : 'Non Disponible',

@@ -40,7 +40,7 @@ const DataCardDiv: React.FC<{
 
 function Repertoire() {
     const lang: Language = useDataStore((state) => state.lang);
-
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { mapType, setMapStyle } = useMapStore((state) => ({
         setMapStyle: state.setMapStyle,
         mapType: state.mapType,
@@ -167,7 +167,7 @@ function Repertoire() {
                     <Button
                         buttonType={ButtonType.ICON}
                         onClick={() => {
-                            // setIsDialogOpen(true);
+                            setIsDialogOpen(true);
                         }}
                     >
                         <AddCircleSVG></AddCircleSVG>
@@ -175,6 +175,16 @@ function Repertoire() {
                 </DataCard>
             </div>
 
+            {isDialogOpen && (
+                <AddEntrepriseDialog
+                    closeDialog={() => {
+                        setIsDialogOpen(false);
+                    }}
+                    handleSubmit={() => {
+                        setIsDialogOpen(false);
+                    }}
+                ></AddEntrepriseDialog>
+            )}
             <Button
                 buttonType={ButtonType.CONFIRM}
                 onClick={() =>

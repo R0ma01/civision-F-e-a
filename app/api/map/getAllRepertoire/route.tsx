@@ -34,6 +34,7 @@ export async function GET(req: Request) {
                 {
                     projection: {
                         COORD: 1,
+                        NOM_ETAB: 1,
                         NOM_ASSUJ: 1,
                     },
                 },
@@ -50,7 +51,7 @@ export async function GET(req: Request) {
         const newResult: MapClusterPointData[] = result.map((item: any) => {
             return {
                 _id: item._id,
-                nom: item.NOM_ASSUJ[0],
+                nom: item.NOM_ETAB || item.NOM_ASSUJ[0],
                 coords: item.COORD,
             };
         });

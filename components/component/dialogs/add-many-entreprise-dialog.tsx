@@ -17,29 +17,15 @@ import {
     ServiceOffert,
 } from '@/components/enums/fournisseur-filter-enum';
 
-function createEntrepriseSchema(requiered: string) {
-    return object().shape({
-        NEQ: string().required(requiered),
-        DAT_IMMAT: date().required(requiered),
-        COD_ACT_ECON_CAE: string().required(requiered),
-        DAT_CONSTI: string().required(requiered),
-        ADR_DOMCL_LIGN1_ADR: string().required(requiered),
-        ADR_DOMCL_LIGN2_ADR: string().required(requiered),
-        ADR_DOMCL_LIGN4_ADR: string().required(requiered),
-        NB_EMPLO: string().required(requiered),
-        NOM_ASSUJ: string().required(requiered),
-        LONG: string().required(requiered),
-        LAT: string().required(requiered),
-    });
-}
-
 interface AddEntrepriseDialogProps {
     closeDialog: () => void;
+
     handleSubmit: (values: any) => any;
 }
 
 export function AddManyFournisseursDialog({
     closeDialog,
+
     handleSubmit,
 }: AddEntrepriseDialogProps) {
     const [file, setFile] = useState<any>([]);
