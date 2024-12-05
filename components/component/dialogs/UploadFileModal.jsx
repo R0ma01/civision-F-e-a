@@ -77,7 +77,7 @@ const UploadFileModal = ({ handleStartUpload }) => {
     // ==========================
 
     return (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mt-4">
             <div
                 className="relative border-dashed border-2 border-gray-300 rounded-md text-black"
                 onDrop={handleDrop}

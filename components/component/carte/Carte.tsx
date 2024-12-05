@@ -24,6 +24,7 @@ import {
 import { MapRegions } from '@/components/enums/map-regions';
 import MrcGrid from './GridMrcs';
 import MuniGrid from './GridMuni';
+import { SecteursGeographiques } from '@/components/enums/fournisseur-filter-enum';
 
 export default function Carte() {
     // global variables
@@ -382,6 +383,51 @@ export default function Carte() {
     );
 }
 
+// function convertFournisseurData(
+//     fournisseurs: Fournisseur[],
+//     matchStage: Record<any, any>,
+//     admin: boolean,
+// ) {
+//     const regions: string[] = matchStage['secteurs_geographique']?.$in || [];
+
+//     const mapRegions = MapRegions.get(MapType.FOURNISSEURS);
+
+//     const sectorCount: Record<string, { region: string; count: number }> = {};
+//     Array.from(
+//         mapRegions?.entries() || [], // Use entries() from the map
+//     ).map(([key, regionName]) => {
+//         sectorCount[regionName] = {
+//             region: regionName,
+//             count: 0, // Ensure key is treated as a string
+//         };
+//     });
+
+//     fournisseurs.map((fournisseur) => {
+//         if (fournisseur.visible || admin) {
+//             fournisseur.secteurs_geographique.forEach((secteur) => {
+//                 const mapSecteur = mapRegions?.get(secteur);
+
+//                 if (mapSecteur) {
+//                     if (regions.length === 0 || regions.includes(mapSecteur)) {
+//                         const previousSect = sectorCount[mapSecteur];
+//                         sectorCount[mapSecteur] = {
+//                             region: previousSect.region,
+//                             count: previousSect.count + 1,
+//                         };
+//                     }
+//                 }
+//             });
+//         }
+//     });
+
+//     const result = Object.values(sectorCount).map((entry) => {
+//         return entry;
+//     });
+
+//     return result;
+//     // Convert the secteurCount object into an array of { secteur_geographique, count }
+// }
+
 function convertFournisseurData(
     fournisseurs: Fournisseur[],
     matchStage: Record<any, any>,
@@ -403,26 +449,38 @@ function convertFournisseurData(
 
     fournisseurs.map((fournisseur) => {
         if (fournisseur.visible || admin) {
-            fournisseur.secteurs_geographique.forEach((secteur) => {
-                const mapSecteur = mapRegions?.get(secteur);
+            if (
+                fournisseur.secteurs_geographique.includes(
+                    SecteursGeographiques.TOUS_QUEBEC,
+                )
+            ) {
+                Object.keys(sectorCount).forEach((key) => {
+                    sectorCount[key].count += 1;
+                });
+            } else {
+                fournisseur.secteurs_geographique.forEach((secteur) => {
+                    const mapSecteur = mapRegions?.get(secteur);
 
-                if (mapSecteur) {
-                    if (regions.length === 0 || regions.includes(mapSecteur)) {
-                        const previousSect = sectorCount[mapSecteur];
-                        sectorCount[mapSecteur] = {
-                            region: previousSect.region,
-                            count: previousSect.count + 1,
-                        };
+                    if (mapSecteur) {
+                        if (
+                            regions.length === 0 ||
+                            regions.includes(mapSecteur)
+                        ) {
+                            const previousSect = sectorCount[mapSecteur];
+                            sectorCount[mapSecteur] = {
+                                region: previousSect.region,
+                                count: previousSect.count + 1,
+                            };
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     });
 
     const result = Object.values(sectorCount).map((entry) => {
         return entry;
     });
-
+    console.log(result);
     return result;
-    // Convert the secteurCount object into an array of { secteur_geographique, count }
 }

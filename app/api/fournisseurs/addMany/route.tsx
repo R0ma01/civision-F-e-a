@@ -8,7 +8,7 @@ export async function POST(req: Request) {
         const db = (await connectToDatabaseStudy()).db;
         const collection = db.collection(MongoDBPaths.FOURNISSEURS2);
         const { fournisseurs } = await req.json(); // Parse the request body as JSON (expected to be an array)
-
+        console.log(fournisseurs);
         if (!Array.isArray(fournisseurs)) {
             return NextResponse.json(
                 { error: 'Invalid data format. Expected an array.' },

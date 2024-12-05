@@ -51,7 +51,7 @@ export const MapRegions = new Map<MapType, Map<string | number, string>>([
         new Map<string, string>([
             [SecteursGeographiques.ABITIBI, 'Abitibi-Temiscamingue'],
             [SecteursGeographiques.BAS_ST_LAURENT, 'Bas-Saint-Laurent'],
-            [SecteursGeographiques.SAGUENEY, 'Saguenay–Lac-Saint-Jean'],
+            [SecteursGeographiques.SAGUENEY, 'Saguenay-Lac-Saint-Jean'],
             [SecteursGeographiques.CAPITALE_NATIONALE, 'Capitale-Nationale'],
             [SecteursGeographiques.MAURICIE, 'Mauricie'],
             [SecteursGeographiques.ESTRIE, 'Estrie'],
