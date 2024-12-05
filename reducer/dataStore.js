@@ -2,6 +2,9 @@ import { create } from "zustand";
 import entreprises_data from "@/geojson/entreprises-familiales-v1.6-archive.json";
 
 const useDataStore = create((set) => ({
+
+  tempClusterData: [],
+  setTempClusterData: (data) => set((state) => ({ tempClusterData: data })),
   
   // state for the language (currently only used for authentification)
   lang: "FR",
