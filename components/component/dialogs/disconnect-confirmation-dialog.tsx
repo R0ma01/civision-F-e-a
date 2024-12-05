@@ -52,6 +52,8 @@ const DisconnectDialog: React.FC<DisconnectDialogProps> = ({ closeDialog }) => {
 
             await credentialsLogout();
 
+            console.log('hello');
+
             clearZustandStore();
             router.push(PagePaths.HOME);
             setLoginTutorials([]);

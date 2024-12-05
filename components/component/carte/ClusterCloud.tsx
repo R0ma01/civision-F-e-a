@@ -178,10 +178,12 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
     }, [map, clusterGeoJson, data]);
 
     useEffect(() => {
-        if (!map || !clusterGeoJson) return;
+        if (!map || !clusterGeoJson || !data) return;
         const convertedData = convertClusterData(data);
 
         setClusterGeoJson(convertedData);
+
+        if (!map) return;
 
         if (map.getSource('cluster-source')) {
             (map.getSource('cluster-source') as mapboxgl.GeoJSONSource).setData(
