@@ -13,19 +13,13 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
     const [clusterGeoJson, setClusterGeoJson] = useState<any>(null);
 
     useEffect(() => {
-        if (!map || !data) return;
-
+        if (!map || !clusterGeoJson) return;
         const convertedData = convertClusterData(data);
 
         setClusterGeoJson(convertedData);
 
         if (!map) return;
         if (!clusterGeoJson) return;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data, map]);
-
-    useEffect(() => {
-        if (!map || !clusterGeoJson) return;
         function handleMapLoad() {
             if (!map) return;
             if (!clusterGeoJson) return;
@@ -188,7 +182,7 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
                 map.off('load', handleMapLoad);
             }
         };
-    }, [map, clusterGeoJson]);
+    }, [map, clusterGeoJson, data]);
 
     useEffect(() => {
         if (!map || !clusterGeoJson) return;
