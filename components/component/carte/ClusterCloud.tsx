@@ -133,14 +133,7 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
 
                 new mapboxgl.Popup()
                     .setLngLat(coordinates)
-                    .setHTML(
-                        `
-                        <strong>${point.nom}</strong><br>
-                        Secteur d'activité: ${point.secteur_activite}<br>
-                        Taille Entreprise: ${point.taille_entreprise}<br>
-                        Adresse: ${point.adresse}<br>
-                    `,
-                    )
+                    .setHTML(popUpHTML(point))
                     .addTo(map);
             });
 
@@ -224,4 +217,24 @@ function convertClusterData(compagnies: MapClusterPointData[]) {
         type: 'FeatureCollection',
         features: features,
     };
+}
+
+function popUpHTML(content: any) {
+    return `
+        <div class="flex flex-col">
+            <p class="px-3 py-2 border border-none rounded-full bg-logo-green text-white text-center font-bold">
+                ${content.properties.nom}
+            </p>
+            <p class="font-bold text-logo-dark-blue">
+                Secteur d&lsquo;activité:
+            </p>
+            <p>${content.properties.secteur_activite}</p>
+            <p class="font-bold text-logo-dark-blue">
+                Taille de l&lsquo;entreprise:
+            </p>
+            <p>${content.properties.taille_entreprise}</p>
+            <p class="font-bold text-logo-dark-blue">Adresse: </p>
+            <p>${content.properties.adresse}</p>
+        </div>
+    `;
 }

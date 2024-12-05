@@ -30,7 +30,7 @@ export default function Logo() {
                 <ClippedCapsule2 planeConstant={1.6} position={[1, 8, 3]} />{' '}
                 <Sphere1 position={[1.5, 3.6, 3]} />{' '}
                 <Sphere2 position={[0, 7.5, 3]} />
-                <NewFEALogo></NewFEALogo>
+                {/* <NewFEALogo></NewFEALogo> */}
                 <SphereRotatingLogo />{' '}
                 <AccumulativeShadows
                     temporal
