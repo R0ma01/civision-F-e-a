@@ -19,19 +19,22 @@ export async function POST(req: Request) {
                     .find(
                         {
                             NEQ: company.NEQ,
-                            // NOM_ETAB: company.NOM_ETAB,
-                            // SCIAN: company.SCIAN,
                         },
                         {
                             projection: {
+                                _id: 0,
                                 NEQ: 1,
                                 NOM_ASSUJ: 1,
                                 COD_ACT_ECON_CAE: 1,
                                 ADR: 1,
+                                COORD: 1,
                                 NOM_ETAB: 1,
                                 COD_POSTAL: 1,
                                 NB_EMPLO: 1,
                                 SCIAN: 1,
+                                REG_IDU: 1,
+                                MRC_IDU: 1,
+                                MUNIC_IDU: 1,
                             },
                         },
                     )

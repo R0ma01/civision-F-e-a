@@ -180,8 +180,17 @@ function Repertoire() {
                     closeDialog={() => {
                         setIsDialogOpen(false);
                     }}
-                    handleSubmit={() => {
-                        setIsDialogOpen(false);
+                    handleSubmit={async (companies: any) => {
+                        try {
+                            const response = await axios.post(
+                                '/api/repertoire/addEntreprise',
+                                { companies },
+                            );
+
+                            return response.data?.insertedIds || 0;
+                        } catch (e) {
+                            return 0;
+                        }
                     }}
                 ></AddEntrepriseDialog>
             )}
