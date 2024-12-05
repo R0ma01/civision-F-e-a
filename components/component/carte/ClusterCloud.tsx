@@ -11,31 +11,27 @@ interface ClusterCloudProps {
 }
 
 const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
-
-
     function handleMapLoad(convertedData: any) {
-
         if (!map) return;
 
         try {
             if (
                 typeof map.getSource === 'function' &&
-            map?.getSource('cluster-source')
-        ) {
-            if (map.getLayer('clusters')) {
-                map.removeLayer('clusters');
-            }
-            if (map.getLayer('cluster-count')) {
-                map.removeLayer('cluster-count');
-            }
-            if (map.getLayer('unclustered-point')) {
-                map.removeLayer('unclustered-point');
-            }
+                map?.getSource('cluster-source')
+            ) {
+                if (map.getLayer('clusters')) {
+                    map.removeLayer('clusters');
+                }
+                if (map.getLayer('cluster-count')) {
+                    map.removeLayer('cluster-count');
+                }
+                if (map.getLayer('unclustered-point')) {
+                    map.removeLayer('unclustered-point');
+                }
                 map.removeSource('cluster-source');
             }
         } catch (error) {
             console.error(error);
-            
         }
 
         // Add source for clusters
@@ -89,10 +85,7 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
             filter: ['has', 'point_count'],
             layout: {
                 'text-field': '{point_count_abbreviated}',
-                'text-font': [
-                    'DIN Offc Pro Medium',
-                    'Arial Unicode MS Bold',
-                ],
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
                 'text-size': 12,
             },
             paint: {
@@ -133,10 +126,21 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
                 .setLngLat(coordinates)
                 .setHTML(
                     `
-                    <strong>${point.nom}</strong><br>
-                    Secteur d'activité: ${point.secteur_activite}<br>
-                    Taille Entreprise: ${point.taille_entreprise}<br>
-                    Adresse: ${point.adresse}<br>
+                    <div class="flex flex-col">
+            <p class="px-3 py-2 border border-none rounded-full bg-logo-green text-white text-center font-bold">
+                ${point.nom}
+            </p>
+            <p class="font-bold text-logo-dark-blue">
+                Secteur d&lsquo;activité:
+            </p>
+            <p>${point.secteur_activite}</p>
+            <p class="font-bold text-logo-dark-blue">
+                Taille de l&lsquo;entreprise:
+            </p>
+            <p>${point.taille_entreprise}</p>
+            <p class="font-bold text-logo-dark-blue">Adresse: </p>
+            <p>${point.adresse}</p>
+        </div>
                 `,
                 )
                 .addTo(map);
@@ -148,16 +152,17 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
                 layers: ['clusters'],
             });
             const clusterId = features[0].properties.cluster_id;
-            (
-                map.getSource('cluster-source') as any
-            ).getClusterExpansionZoom(clusterId, (err: any, zoom: any) => {
-                if (err) return;
+            (map.getSource('cluster-source') as any).getClusterExpansionZoom(
+                clusterId,
+                (err: any, zoom: any) => {
+                    if (err) return;
 
-                map.easeTo({
-                    center: features[0].geometry.coordinates,
-                    zoom: zoom,
-                });
-            });
+                    map.easeTo({
+                        center: features[0].geometry.coordinates,
+                        zoom: zoom,
+                    });
+                },
+            );
         });
 
         // Change cursor when hovering over clusters
@@ -176,7 +181,11 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
 
         return () => {
             if (map) {
-                const layers = ['clusters', 'cluster-count', 'unclustered-point'];
+                const layers = [
+                    'clusters',
+                    'cluster-count',
+                    'unclustered-point',
+                ];
                 layers.forEach((layer) => {
                     if (map.getLayer(layer)) {
                         map.removeLayer(layer);
@@ -186,11 +195,9 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
                 if (map.getSource('cluster-source')) {
                     map.removeSource('cluster-source');
                 }
- 
             }
         };
     }, [data]);
-
 
     return null;
 };

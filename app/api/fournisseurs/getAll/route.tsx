@@ -21,6 +21,17 @@ export async function GET(req: Request) {
 
         const filtersObj: Record<string, any> = JSON.parse(filters);
 
+        console.log(filtersObj);
+
+        if (filtersObj['secteurs_geographique']) {
+            if (filtersObj['secteurs_geographique'][['$in' as any]]) {
+                filtersObj['secteurs_geographique']['$in'].push(
+                    'Tout le Québec',
+                );
+            }
+        }
+        console.log(filtersObj);
+
         if (!filtersObj) {
             return NextResponse.json(
                 { error: 'Format of filters param is wrong' },
@@ -39,7 +50,7 @@ export async function GET(req: Request) {
                 { status: 404 },
             );
         }
-        console.log(result);
+        // console.log(result);
         const response = NextResponse.json({
             message: 'Documents found successfully',
             pages: result,
