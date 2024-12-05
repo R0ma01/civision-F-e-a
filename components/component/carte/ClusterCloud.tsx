@@ -13,11 +13,20 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
     const [clusterGeoJson, setClusterGeoJson] = useState<any>(null);
 
     useEffect(() => {
-        if (!map || !data.length) return;
-        function handleMapLoad() {
-            const convertedData = convertClusterData(data);
-            setClusterGeoJson(convertedData);
+        if (!map || !data) return;
 
+        const convertedData = convertClusterData(data);
+
+        setClusterGeoJson(convertedData);
+
+        if (!map) return;
+        if (!clusterGeoJson) return;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, map]);
+
+    useEffect(() => {
+        if (!map || !clusterGeoJson) return;
+        function handleMapLoad() {
             if (!map) return;
             if (!clusterGeoJson) return;
 
@@ -179,17 +188,28 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
                 map.off('load', handleMapLoad);
             }
         };
-    }, [data, map, clusterGeoJson]);
+    }, [map, clusterGeoJson]);
 
+    useEffect(() => {
+        if (!map || !clusterGeoJson) return;
+
+        if (map.getSource('cluster-source')) {
+            (map.getSource('cluster-source') as mapboxgl.GeoJSONSource).setData(
+                clusterGeoJson,
+            );
+        }
+    }, [map, clusterGeoJson]);
     return null;
 };
 
 export default ClusterCloud;
 
 function convertClusterData(compagnies: MapClusterPointData[]) {
+    let i = 0;
     const features = compagnies
         .map((compagnie: MapClusterPointData) => {
             if (compagnie.coords && compagnie.nom) {
+                i++;
                 return {
                     type: 'Feature',
                     geometry: {

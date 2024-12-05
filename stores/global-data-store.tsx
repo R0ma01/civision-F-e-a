@@ -56,7 +56,7 @@ const useGlobalDataStore = create((set, get) => ({
                 await GraphDataHttpRequestService.getAllRepertoireData(
                     matchStage,
                 );
-
+            console.log(responseRepertoire);
             set({
                 repertoireData: responseRepertoire,
                 loading: false,
