@@ -16,7 +16,7 @@ import {
     FactorySVG,
 } from '@/components/component/svg-icons/svg-icons';
 import { GraphDataHttpRequestService } from '@/services/data-http-request-service';
-import { AddEntrepriseDialog } from '@/components/component/dialogs/add-entreprise-dialog';
+import { AddEntrepriseDialog } from '@/components/component/dialogs/add-many-entreprises-dialog';
 
 import Button from '@/components/component/buttons/button';
 import { ButtonType } from '@/components/enums/button-type-enum';

@@ -49,24 +49,26 @@ const Button: React.FC<ButtonProps> = ({
           : '';
     return (
         <button
-            className={`text-white font-semibold h-fit border rounded transition-transform relative duration-300 transform-gpu ${pulseAnimation} ${pendingScale} ${colorScheme} ${className}`}
+            className={`text-white font-semibold h-fit border rounded transition-transform  duration-300 transform-gpu ${pulseAnimation} ${pendingScale} ${colorScheme} ${className}`}
             {...props}
             disabled={pending}
         >
-            {
-                <div className={pending ? 'opacity-0' : 'opacity-100'}>
-                    {children}
-                </div>
-            }
-            {pending && (
-                <span
-                    className={
-                        'absolute inset-0 flex items-center justify-center text-center font-bold'
-                    }
-                >
-                    Loading...
-                </span>
-            )}
+            <div className="relative">
+                {
+                    <div className={pending ? 'opacity-0' : 'opacity-100'}>
+                        {children}
+                    </div>
+                }
+                {pending && (
+                    <span
+                        className={
+                            'absolute inset-0 flex items-center justify-center text-center font-bold'
+                        }
+                    >
+                        Loading...
+                    </span>
+                )}
+            </div>
         </button>
     );
 };

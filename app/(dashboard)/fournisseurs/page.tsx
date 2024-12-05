@@ -20,7 +20,7 @@ import { TutorialPages, UserType } from '@/components/enums/user-type-enum';
 import { ButtonType } from '@/components/enums/button-type-enum';
 import Button from '@/components/component/buttons/button';
 import Image from 'next/image';
-import { AddManyFournisseursDialog } from '@/components/component/dialogs/add-many-entreprise-dialog';
+import { AddManyFournisseursDialog } from '@/components/component/dialogs/add-many-fournisseurs-dialog';
 import axios from 'axios';
 import { getAuthSession } from '@/services/credentials-login';
 function Fournisseurs() {

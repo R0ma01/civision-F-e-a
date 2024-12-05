@@ -1,6 +1,6 @@
 'use client';
 
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import React, { useState, useEffect, useRef } from 'react';
 import Button from '@/components/component/buttons/button';
 import { ButtonType } from '@/components/enums/button-type-enum';
@@ -14,8 +14,8 @@ import {
     FournisseurPromptsTranslations,
     SharedPromptsTranslations,
 } from '@/constants/translations/page-prompts';
+import { string, number, object, ref, boolean } from 'yup';
 
-import DropdownSelect from '@/components/component/drop-down-menu/drop-down-menu-selected-field';
 import { Language } from '@/components/enums/language';
 import { TableauxTraductionsMainDataFields } from '@/services/translations';
 
@@ -23,6 +23,7 @@ interface EditFournisseurDialogProps {
     closeDialog: (e: any) => void;
     submitDialog: (fournisseur: Fournisseur) => void;
     fournisseur: Fournisseur;
+    dialogRef?: any;
 }
 
 export function EditFournisseurDialog({
@@ -30,23 +31,66 @@ export function EditFournisseurDialog({
     submitDialog,
     fournisseur,
 }: EditFournisseurDialogProps) {
+    const dialogRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const handleEsc = (event: KeyboardEvent) => {
+            if (event.keyCode === 27) {
+                closeDialog(event);
+            }
+        };
+
+        const handleClickOutside = (event: MouseEvent) => {
+            const target = event.target as Node;
+
+            if (dialogRef.current && !dialogRef.current.contains(target)) {
+                closeDialog(event);
+            }
+        };
+
+        window.addEventListener('keydown', handleEsc);
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            window.removeEventListener('keydown', handleEsc);
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [closeDialog]);
+    return (
+        <div className="fixed z-40 h-screen left-[40px] top-0 backdrop-blur-md flex items-center justify-center w-screen overflow-hidden">
+            <div
+                ref={dialogRef}
+                className="bg-white dark:bg-[#262626] p-6 rounded-lg w-[80%] shadow-2xl h-fit flex flex-row justify-evenly"
+            >
+                <EditFournisseurContent
+                    closeDialog={closeDialog}
+                    submitDialog={submitDialog}
+                    fournisseur={fournisseur}
+                ></EditFournisseurContent>
+            </div>
+        </div>
+    );
+}
+
+interface EditFournisseurContentProps {
+    closeDialog?: (e: any) => void;
+    submitDialog: (fournisseur: Fournisseur) => void;
+    fournisseur: Fournisseur;
+    submitMany?: boolean;
+}
+
+export function EditFournisseurContent({
+    closeDialog,
+    submitDialog,
+    fournisseur,
+    submitMany,
+}: EditFournisseurContentProps) {
     const lang: Language = useDataStore((state) => state.lang);
     const [secteursOptions, setSecteursOptions] = useState<
         SecteursGeographiques[]
-    >(fournisseur.secteurs_geographique);
+    >(fournisseur.secteurs_geographique || []);
     const [servicesOptions, setServicesOptions] = useState<ServiceOffert[]>(
-        fournisseur.services_offerts,
+        fournisseur.services_offerts || [],
     );
-    const [isSecteurDropdownVisible, setSecteurDropdownVisible] =
-        useState(false);
-    const [isServiceDropdownVisible, setServiceDropdownVisible] =
-        useState(false);
-
-    const dialogRef = useRef<HTMLDivElement>(null);
-    const secteurDropdownRef = useRef<HTMLDivElement>(null);
-    const serviceDropdownRef = useRef<HTMLDivElement>(null);
-    const secteurButtonRef = useRef<HTMLButtonElement>(null);
-    const serviceButtonRef = useRef<HTMLButtonElement>(null);
 
     const handleServiceEdit = (service: ServiceOffert) => {
         if (!servicesOptions.includes(service)) {
@@ -71,64 +115,18 @@ export function EditFournisseurDialog({
         }
     };
 
-    useEffect(() => {
-        const handleEsc = (event: KeyboardEvent) => {
-            if (event.keyCode === 27) {
-                closeDialog(event);
-            }
-        };
-
-        const handleClickOutside = (event: MouseEvent) => {
-            const target = event.target as Node;
-            if (
-                secteurDropdownRef.current &&
-                !secteurDropdownRef.current.contains(target) &&
-                secteurButtonRef.current &&
-                !secteurButtonRef.current.contains(event.target as Node)
-            ) {
-                setSecteurDropdownVisible(false);
-            }
-            if (
-                serviceDropdownRef.current &&
-                !serviceDropdownRef.current.contains(target) &&
-                serviceButtonRef.current &&
-                !serviceButtonRef.current.contains(event.target as Node)
-            ) {
-                setServiceDropdownVisible(false);
-            }
-
-            if (
-                dialogRef.current &&
-                !dialogRef.current.contains(target) &&
-                !(
-                    secteurDropdownRef.current?.contains(target) ||
-                    serviceDropdownRef.current?.contains(target)
-                )
-            ) {
-                closeDialog(event);
-            }
-        };
-
-        window.addEventListener('keydown', handleEsc);
-        document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            window.removeEventListener('keydown', handleEsc);
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [closeDialog]);
-
     const initialFournisseurValues = {
-        firstName: fournisseur.contact.firstName || '',
-        lastName: fournisseur.contact.lastName || '',
-        compagnie: fournisseur.contact.company || '',
-        courriel: fournisseur.contact.email || '',
-        telephone: fournisseur.contact.cellPhone || '',
-        titre: fournisseur.contact.title || '',
+        firstName: fournisseur.contact?.firstName || '',
+        lastName: fournisseur.contact?.lastName || '',
+        compagnie: fournisseur.contact?.company || '',
+        courriel: fournisseur.contact?.email || '',
+        telephone: fournisseur.contact?.cellPhone || '',
+        titre: fournisseur.contact?.title || '',
         secteurs_geographiques: secteursOptions,
         services_offerts: servicesOptions,
         visible: fournisseur.visible || false,
-        website: fournisseur.contact.website || '',
+        website: fournisseur.contact?.website || '',
+        linkedIn: fournisseur.contact?.linkedIn || '',
     };
 
     function handleSubmit(values: any) {
@@ -141,7 +139,7 @@ export function EditFournisseurDialog({
                 cellPhone: values.telephone,
                 company: values.compagnie,
                 title: values.titre,
-                linkedIn: values.profil_linkedin,
+                linkedIn: values.linkedIn || '',
                 website: values.website || '',
             },
             secteurs_geographique: secteursOptions,
@@ -181,21 +179,44 @@ export function EditFournisseurDialog({
     }
 
     return (
-        <div className="fixed z-40 h-screen left-[40px] top-0 backdrop-blur-md flex items-center justify-center w-screen overflow-hidden">
-            <div
-                ref={dialogRef}
-                className="bg-white dark:bg-[#262626] p-6 rounded-lg shadow-2xl w-[80%] h-fit relative space-y-8 flex flex-row justify-evenly"
+        <div className={'w-full flex items-center justify-center'}>
+            <Formik
+                initialValues={initialFournisseurValues}
+                onSubmit={(values: any) => {
+                    handleSubmit(values);
+                }}
+                validationSchema={object().shape({
+                    lastName: string().required('aaaaaaaaaaa'),
+                    firstName: string().required('aaaaaaaa'),
+                    courriel: string().email('aaaaaaaaa').required('aaaaaaaa'),
+                    telephone: number().required('aaaaaaaaaaaa'),
+                    compagnie: string().required('aaaaaaa'),
+                    titre: string().required('aaaaaa'),
+                    linkedIn: string().url(),
+                    website: string().url(),
+                })}
             >
-                <Formik
-                    initialValues={initialFournisseurValues}
-                    onSubmit={(values) => {
-                        handleSubmit(values);
-                    }}
-                >
-                    {({ isSubmitting }) => (
+                {({ isSubmitting, values }) => {
+                    let isComplete = true;
+                    const keys = Object.keys(values);
+
+                    keys.map((key: any) => {
+                        if (values[key] === '') {
+                            isComplete = false;
+                        }
+                    });
+                    if (secteursOptions.length === 0) {
+                        isComplete = false;
+                    }
+
+                    if (servicesOptions.length === 0) {
+                        isComplete = false;
+                    }
+
+                    return (
                         <Form className="space-y-4 flex flex-col items-center w-[90%]">
                             <div className="flex gap-4 w-full">
-                                <Field
+                                <CustomFormInput
                                     name="firstName"
                                     className="input-field w-full p-2 dark:bg-gray-500 dark:text-white border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
                                     placeholder={
@@ -203,25 +224,28 @@ export function EditFournisseurDialog({
                                             lang
                                         ]
                                     }
+                                    type={'text'}
                                 />
-                                <Field
+                                <CustomFormInput
                                     name="lastName"
                                     className="input-field w-full p-2 dark:bg-gray-500 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
                                     placeholder={
                                         FournisseurPromptsTranslations.nom[lang]
                                     }
+                                    type={'text'}
                                 />
                             </div>
                             <div className="flex gap-4 w-full">
-                                <Field
+                                <CustomFormInput
                                     name="compagnie"
                                     className="input-field w-full p-2 dark:bg-gray-500 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
                                     placeholder={
                                         FournisseurPromptsTranslations
                                             .entreprise[lang]
                                     }
+                                    type={'text'}
                                 />
-                                <Field
+                                <CustomFormInput
                                     name="titre"
                                     className="input-field w-full p-2 dark:bg-gray-500 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
                                     placeholder={
@@ -233,24 +257,34 @@ export function EditFournisseurDialog({
                                 />
                             </div>
                             <div className="flex gap-4 w-full">
-                                <Field
+                                <CustomFormInput
                                     name="courriel"
-                                    className="w-[50%] input-field dark:bg-gray-500 p-2 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
+                                    className="input-field dark:bg-gray-500 p-2 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
                                     placeholder="Courriel"
-                                    type={
-                                        FournisseurPromptsTranslations.courriel[
-                                            lang
-                                        ]
-                                    }
+                                    type={'email'}
                                 />
-                                <Field
+                                <CustomFormInput
                                     name="telephone"
-                                    className="input-field dark:bg-gray-500 w-[50%] p-2 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
+                                    className="input-field dark:bg-gray-500 p-2 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
                                     placeholder={
                                         FournisseurPromptsTranslations
                                             .telephone[lang]
                                     }
-                                    type="tel"
+                                    type="phone"
+                                />
+                            </div>{' '}
+                            <div className="flex gap-4 w-full">
+                                <CustomFormInput
+                                    name="website"
+                                    className="input-field dark:bg-gray-500 p-2 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
+                                    placeholder="Website"
+                                    type={'text'}
+                                />
+                                <CustomFormInput
+                                    name="linkedIn"
+                                    className="input-field dark:bg-gray-500 p-2 border dark:text-white border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none"
+                                    placeholder={'linkedin'}
+                                    type={'text'}
                                 />
                             </div>
                             <div className="w-[100%] flex flex-row gap-4">
@@ -272,7 +306,11 @@ export function EditFournisseurDialog({
                                                         key={
                                                             option as unknown as string
                                                         }
-                                                        className={`w-fit m-1 h-fit hover:border-2 cursor-pointer transition-colors ${isSelected ? 'text-teal-300' : 'text-black dark:text-white'}`}
+                                                        className={`w-[98%] px-2 text-gray-700 cursor-pointer transition-colors text-wrap text-[10px] h-6 m-0.5 text-left flex items-center rounded-lg ${
+                                                            isSelected
+                                                                ? 'bg-logo-turquoise'
+                                                                : ' dark:text-white hover:bg-gray-300 hover:dark:text-gray-800'
+                                                        }`}
                                                         onClick={() =>
                                                             handleSecteurEdit(
                                                                 option,
@@ -305,7 +343,11 @@ export function EditFournisseurDialog({
                                                         key={
                                                             option as unknown as string
                                                         }
-                                                        className={`w-fit m-1 h-fit hover:border-2 cursor-pointer transition-colors ${isSelected ? 'text-teal-300' : 'text-black dark:text-white'}`}
+                                                        className={`w-[98%] px-2 text-gray-700 cursor-pointer transition-colors text-wrap text-[10px] h-6 m-0.5 text-left flex items-center rounded-lg ${
+                                                            isSelected
+                                                                ? 'bg-logo-turquoise'
+                                                                : 'dark:text-white hover:bg-gray-300'
+                                                        }`}
                                                         onClick={() =>
                                                             handleServiceEdit(
                                                                 option,
@@ -323,66 +365,80 @@ export function EditFournisseurDialog({
                                     </ul>
                                 </div>
                             </div>
-
                             <div className="flex justify-evenly flex-row w-[50%]">
-                                <Button
-                                    onClick={closeDialog}
-                                    buttonType={ButtonType.CANCEL}
-                                >
-                                    <p>
-                                        {SharedPromptsTranslations.cancel[
-                                            lang
-                                        ].toString()}
-                                    </p>
-                                </Button>
-                                <Button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    buttonType={ButtonType.CONFIRM}
-                                >
-                                    <p>
-                                        {' '}
-                                        {SharedPromptsTranslations.save[
-                                            lang
-                                        ].toString()}
-                                    </p>
-                                </Button>
+                                {closeDialog && (
+                                    <Button
+                                        onClick={closeDialog}
+                                        buttonType={ButtonType.CANCEL}
+                                    >
+                                        <p>
+                                            {SharedPromptsTranslations.cancel[
+                                                lang
+                                            ].toString()}
+                                        </p>
+                                    </Button>
+                                )}
+                                {isComplete && (
+                                    <Button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className={
+                                            submitMany
+                                                ? 'absolute top-3 right-20'
+                                                : ''
+                                        }
+                                        buttonType={
+                                            submitMany
+                                                ? ButtonType.LAMBDA
+                                                : ButtonType.CONFIRM
+                                        }
+                                    >
+                                        <p>
+                                            {' '}
+                                            {!submitMany
+                                                ? SharedPromptsTranslations.save[
+                                                      lang
+                                                  ].toString()
+                                                : 'Soumettre'}
+                                        </p>
+                                    </Button>
+                                )}
                             </div>
                         </Form>
-                    )}
-                </Formik>
-            </div>
+                    );
+                }}
+            </Formik>
         </div>
     );
 }
 
-const DropDownSelector = React.forwardRef(
-    (
-        {
-            values,
-            select,
-        }: {
-            values: (SecteursGeographiques | ServiceOffert)[];
-            select: (value: string) => void;
-        },
-        ref: React.Ref<HTMLDivElement>,
-    ) => {
-        return (
-            <div
-                ref={ref}
-                className="bg-white dark:bg-gray-800 shadow-md p-2 rounded-lg space-y-2 absolute z-50 w-64"
-            >
-                {values.map((value: string) => (
-                    <div
-                        key={value}
-                        className="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer"
-                        onClick={() => select(value)}
-                    >
-                        {value}
-                    </div>
-                ))}
-            </div>
-        );
-    },
-);
-DropDownSelector.displayName = 'DropDownSelector';
+function CustomFormInput({
+    name,
+    placeholder = '',
+    type,
+    className = '',
+    disabled = false,
+}: {
+    name: any;
+    placeholder: any;
+    type: any;
+    className?: any;
+    disabled?: any;
+}) {
+    return (
+        <div className={`flex flex-col w-full`}>
+            <Field
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                disabled={disabled}
+                className={`${className}`}
+            />
+            <ErrorMessage
+                name={name}
+                component="div"
+                className="text-red-500 text-[8px] font-medium w-full"
+            />
+        </div>
+    );
+}
