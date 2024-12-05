@@ -13,14 +13,12 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
     const [clusterGeoJson, setClusterGeoJson] = useState<any>(null);
 
     useEffect(() => {
-        if (!map || !data) return;
-        const convertedData = convertClusterData(data);
-
-        setClusterGeoJson(convertedData);
-
-        if (!map) return;
-        if (!clusterGeoJson) return;
+        if (!map || !data.length) return;
         function handleMapLoad() {
+            const convertedData = convertClusterData(data);
+            console.log(convertedData.features.length);
+            setClusterGeoJson(convertedData);
+
             if (!map) return;
             if (!clusterGeoJson) return;
 
@@ -133,7 +131,14 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
 
                 new mapboxgl.Popup()
                     .setLngLat(coordinates)
-                    .setHTML(popUpHTML(point))
+                    .setHTML(
+                        `
+                        <strong>${point.nom}</strong><br>
+                        Secteur d'activité: ${point.secteur_activite}<br>
+                        Taille Entreprise: ${point.taille_entreprise}<br>
+                        Adresse: ${point.adresse}<br>
+                    `,
+                    )
                     .addTo(map);
             });
 
@@ -175,33 +180,17 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
                 map.off('load', handleMapLoad);
             }
         };
-    }, [map, clusterGeoJson, data]);
+    }, [data, map, clusterGeoJson]);
 
-    useEffect(() => {
-        if (!map || !clusterGeoJson || !data) return;
-        const convertedData = convertClusterData(data);
-
-        setClusterGeoJson(convertedData);
-
-        if (!map) return;
-
-        if (map.getSource('cluster-source')) {
-            (map.getSource('cluster-source') as mapboxgl.GeoJSONSource).setData(
-                clusterGeoJson,
-            );
-        }
-    }, [map, clusterGeoJson, data]);
     return null;
 };
 
 export default ClusterCloud;
 
 function convertClusterData(compagnies: MapClusterPointData[]) {
-    let i = 0;
     const features = compagnies
         .map((compagnie: MapClusterPointData) => {
             if (compagnie.coords && compagnie.nom) {
-                i++;
                 return {
                     type: 'Feature',
                     geometry: {
@@ -222,24 +211,4 @@ function convertClusterData(compagnies: MapClusterPointData[]) {
         type: 'FeatureCollection',
         features: features,
     };
-}
-
-function popUpHTML(content: any) {
-    return `
-        <div class="flex flex-col">
-            <p class="px-3 py-2 border border-none rounded-full bg-logo-green text-white text-center font-bold">
-                ${content.properties.nom}
-            </p>
-            <p class="font-bold text-logo-dark-blue">
-                Secteur d&lsquo;activité:
-            </p>
-            <p>${content.properties.secteur_activite}</p>
-            <p class="font-bold text-logo-dark-blue">
-                Taille de l&lsquo;entreprise:
-            </p>
-            <p>${content.properties.taille_entreprise}</p>
-            <p class="font-bold text-logo-dark-blue">Adresse: </p>
-            <p>${content.properties.adresse}</p>
-        </div>
-    `;
 }
