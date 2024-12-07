@@ -92,7 +92,7 @@ const EditDataCard: React.FC<EditDataCardProps> = ({
                         buttonType={ButtonType.ICON_ROUNDED}
                         className="absolute -top-2 -right-2 hover:scale-125 bg-logo-dark-blue border-white"
                     >
-                        <p className="text-white text-sm px-1">X</p>
+                        <p className="text-white text-sm px-1">✕</p>
 
                         {/* <TrashSVG className="fill-white w-4 h-4"></TrashSVG> */}
                     </Button>
@@ -155,6 +155,7 @@ const EditDataCard: React.FC<EditDataCardProps> = ({
                                                             {...provided.dragHandleProps}
                                                         >
                                                             <EditGraphCard
+                                                                lang={langEdit}
                                                                 graph={graph}
                                                                 graphIndex={
                                                                     graphIndex

@@ -146,7 +146,7 @@ export function EditTabContainer({
                                     className={`hover:scale-125 ${isActive ? 'text-white' : 'text-black'} font-bold`}
                                     onClick={deleteTab}
                                 >
-                                    X
+                                    ✕
                                 </p>
                                 {tabs.length !== index + 1 && (
                                     <div

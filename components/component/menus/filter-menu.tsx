@@ -192,7 +192,7 @@ const FilterMenu: React.FC<FilterMenuProps> = ({
                 </Button>
             </div>
             <div
-                className={`fixed top-5 right-0 h-fit w-64 bg-white p-4 transform ${isOpen ? 'translate-x-0' : 'translate-x-64'} transition-transform duration-300 ease-in-out`}
+                className={`z-10 fixed top-5 right-0 h-fit w-64 bg-white p-4 transform ${isOpen ? 'translate-x-0' : 'translate-x-64'} transition-transform duration-300 ease-in-out`}
             >
                 <div className="relative">
                     <h2 className="text-2xl font-bold">

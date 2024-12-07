@@ -288,8 +288,8 @@ const StaticDropdown: React.FC<StaticDropdownProps> = ({
     };
 
     return (
-        <div className="w-[500px] h-[405px] flex items-center justify-center px-4">
-            <div className="w-[480px] h-80 overflow-y-auto px-4">
+        <div className="w-[300px] h-[90%] flex items-center justify-center px-2 gap-4">
+            <div className="w-[300px] h-[90%] overflow-y-auto pr-1">
                 {renderItems(dropdownStructure)}
             </div>
         </div>

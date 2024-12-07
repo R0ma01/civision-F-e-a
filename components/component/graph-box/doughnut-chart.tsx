@@ -69,7 +69,6 @@ const Doughnut: React.FC<DoughnutChartProps> = ({
         }
     }, [chartContent.data]);
 
-    const width = size === ChartSize.SMALL ? size : size + 100;
     const CustomTooltip = ({ active, payload }: any) => {
         if (active && payload && payload.length) {
             const customLabel = GraphTextService.getFieldLabel(
@@ -91,7 +90,7 @@ const Doughnut: React.FC<DoughnutChartProps> = ({
 
     return (
         <div className="dark:text-white">
-            <ResponsiveContainer height={size} width={width}>
+            <ResponsiveContainer height={size} width={size}>
                 <PieChart>
                     <Pie
                         data={chartData}

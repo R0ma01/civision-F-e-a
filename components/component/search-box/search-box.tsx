@@ -123,7 +123,7 @@ function SearchBox() {
     bg-opacity-0 saturate-100 border rounded-xl border-transparent 
     py-3 px-3 pointer-events-auto"
         >
-            <h2 className="text-smaller md:text-small dark:text-white text-black py-4">
+            <h2 className="text-smaller md:text-small dark:text-white text-black py-4 font-semibold">
                 {RepertoirePromptsTranslations.search_box_title[lang]}
             </h2>
 

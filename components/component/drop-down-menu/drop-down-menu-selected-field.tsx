@@ -130,7 +130,7 @@ const DropdownSelect = ({
                             return (
                                 <li
                                     key={option as unknown as string}
-                                    className={`w-[98%] px-2 text-gray-700 cursor-pointer transition-colors text-wrap text-[10px] h-6 m-0.5 text-left flex items-center rounded-lg ${
+                                    className={`w-[98%] px-2 text-gray-700 cursor-pointer transition-colors text-wrap text-[10px] h-fit m-0.5 text-left py-1 flex items-center rounded-lg ${
                                         isSelected
                                             ? 'bg-logo-turquoise'
                                             : 'bg-gray-100 hover:bg-gray-300'

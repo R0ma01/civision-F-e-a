@@ -3,7 +3,7 @@ import { DataCardType } from '@/components/enums/data-card-type-enum';
 import DataCardContent from '@/components/interface/data-card-content';
 import GraphBox from '@/components/component/graph-box/graph-box';
 import SearchBox from '@/components/component/search-box/search-box';
-
+import { ChartSize } from '@/components/enums/chart-size-enum';
 import ListeFournisseurs from '@/components/component/liste-fournisseurs/liste-fournisseurs';
 import StaticDropdown from '../drop-down-menu/chercheur-drop-down';
 import { UserType } from '@/components/enums/user-type-enum';
@@ -17,6 +17,7 @@ interface DataCardProps {
     content: DataCardContent;
     year: StudyYears;
     admin?: boolean;
+    size?: ChartSize;
     children?: React.ReactNode;
 }
 
@@ -25,6 +26,7 @@ const DataCard: React.FC<DataCardProps> = ({
     className,
     year,
     admin = false,
+    size = ChartSize.LARGE,
     children = <></>,
 }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -33,12 +35,30 @@ const DataCard: React.FC<DataCardProps> = ({
     const DataCardDiv: React.FC<{
         children: React.ReactNode;
         title: string;
-    }> = ({ children, title }) => {
+        width?: number;
+        className?: string;
+    }> = ({ children, title, width = ChartSize.LARGE, className = '' }) => {
+        const sizing = () => {
+            switch (width) {
+                case ChartSize.SMALL:
+                    return 'w-[200px]';
+
+                case ChartSize.MEDIUM:
+                    return 'w-[300px]';
+
+                case ChartSize.LARGE:
+                    return 'w-[500px]';
+
+                default:
+                    return 'w-[300px]';
+            }
+        };
+
         return (
             <div
-                className={`w-[550px] bg-[#f5ebe0] dark:bg-[#363636] dark:bg-opacity-50 dark:text-white backdrop-filter
+                className={`${sizing()} bg-[#f5ebe0] dark:bg-[#363636] dark:bg-opacity-50 dark:text-white backdrop-filter
                      backdrop-blur bg-opacity-50 saturate-100 backdrop-contrast-100 rounded-xl shadow-3xl py-2 pointer-events-auto
-                     flex flex-col items-center h-auto space-y-1 ${className} min-h-12`}
+                     flex flex-col items-center h-auto ${className} min-h-12`}
             >
                 <button
                     onClick={() => setIsCollapsed((prev) => !prev)}
@@ -55,7 +75,7 @@ const DataCard: React.FC<DataCardProps> = ({
                     )}
                 </button>
                 <span
-                    className={`text-md font-bold text-md text-center w-[80%]`}
+                    className={`text-md font-bold text-md text-center w-[80%] mr-5`}
                 >
                     {title}
                 </span>
@@ -86,9 +106,13 @@ const DataCard: React.FC<DataCardProps> = ({
 
         case DataCardType.SIMPLE_GRAPH:
             return (
-                <DataCardDiv title={content.title[lang]}>
-                    <div className="pt-5">
-                        <GraphBox content={content.graphData[0]} year={year} />
+                <DataCardDiv title={content.title[lang]} width={size}>
+                    <div className="pt-1 w-full flex justify-center ">
+                        <GraphBox
+                            content={content.graphData[0]}
+                            year={year}
+                            chartSize={size}
+                        />
                     </div>
                     <DescriptionComponent>
                         {content.description[lang]}
@@ -99,10 +123,15 @@ const DataCard: React.FC<DataCardProps> = ({
 
         case DataCardType.MULTIPLE_GRAPH:
             return (
-                <DataCardDiv title={content.title[lang]}>
-                    <div className="gap-2 pt-5">
+                <DataCardDiv title={content.title[lang]} width={size}>
+                    <div className="gap-2 pt-1">
                         {content.graphData?.map((graph, index) => (
-                            <GraphBox key={index} content={graph} year={year} />
+                            <GraphBox
+                                key={index}
+                                content={graph}
+                                year={year}
+                                chartSize={size}
+                            />
                         ))}
                     </div>
                     <DescriptionComponent>
@@ -122,12 +151,13 @@ const DataCard: React.FC<DataCardProps> = ({
 
         case DataCardType.SOLO_GRAPH:
             return (
-                <DataCardDiv title={content.title[lang]}>
-                    <div className="pt-5">
+                <DataCardDiv title={content.title[lang]} width={size}>
+                    <div className="pt-1">
                         {content.graphData !== undefined && (
                             <GraphBox
                                 content={content.graphData[0]}
                                 year={year}
+                                chartSize={size}
                             />
                         )}
                     </div>
@@ -137,7 +167,11 @@ const DataCard: React.FC<DataCardProps> = ({
 
         case DataCardType.CHERCHEUR_DROPDOWN:
             return (
-                <DataCardDiv title={content.title[lang]}>
+                <DataCardDiv
+                    title={content.title[lang]}
+                    width={300}
+                    className={className}
+                >
                     <StaticDropdown
                         onClick={content.chercheurDropdownOnCLick}
                     />

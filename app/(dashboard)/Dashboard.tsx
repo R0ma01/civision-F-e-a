@@ -41,7 +41,7 @@ const Dashboard = ({ children }: DashboardProps) => {
     return (
         <>
             <MobileWarningPopup />
-            <div className="relative h-screen overflow-hidden">
+            <div className="relative h-screen overflow-hidden font-sans">
                 <div className="relative w-full h-full">
                     <div className="fixed top-0 left-0 w-full h-full">
                         {!path.startsWith('/login') &&

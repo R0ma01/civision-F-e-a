@@ -27,16 +27,18 @@ interface GraphBoxProps {
     chartSize?: ChartSize;
 }
 
-const GraphBox: React.FC<GraphBoxProps> = ({ content, chartSize, year }) => {
+const GraphBox: React.FC<GraphBoxProps> = ({
+    content,
+    chartSize = ChartSize.MEDIUM,
+    year,
+}) => {
     const [chartContent, setChartContent] = useState<ChartContent | null>(null);
     const matchStage = useGlobalFilterStore((state) => state.matchStage);
     const setFilter = useGlobalFilterStore((state) => state.setFilter);
     const getFilter = useGlobalFilterStore((state) => state.getFilter);
     const [loading, setLoading] = useState<boolean>(false);
     const [frozen, setFrozen] = useState<boolean>(false);
-    const [size, setChartSize] = useState<ChartSize>(
-        chartSize ? chartSize : ChartSize.MEDIUM,
-    );
+
     const lang = useDataStore((state) => state.lang);
     const { filterStudyData, filterIndexeAData, filterIndexeBData } =
         useGlobalDataStore((state: any) => ({
@@ -182,16 +184,6 @@ const GraphBox: React.FC<GraphBoxProps> = ({ content, chartSize, year }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [content, chartData, matchStage]);
 
-    useEffect(() => {
-        if (!chartSize) {
-            if (chartData) {
-                setChartSize(ChartSize.LARGE);
-            } else {
-                setChartSize(ChartSize.MEDIUM);
-            }
-        }
-    }, [chartData, chartSize]);
-
     if (!chartContent) {
         return (
             <div className="py-8 px-8 pointer-events-auto">
@@ -203,87 +195,54 @@ const GraphBox: React.FC<GraphBoxProps> = ({ content, chartSize, year }) => {
     switch (content.graphType) {
         case GraphBoxType.DOUBLE_HORIZONTAL_BARCHART:
             return (
-                <>
+                <div
+                    className={`flex justify-center items-center w-[${chartSize}px]`}
+                >
                     <DoubleHorizontalChart
                         chartContent={chartContent}
-                        chartSize={size}
+                        chartSize={chartSize}
                     />{' '}
-                    {/* {size !== ChartSize.SMALL && (
-                        <p className="text-red-600 text-left">
-                            *les {nanData.value} valeurs de {nanData.name} ne
-                            sont pas prises en compte ici
-                        </p>
-                    )} */}
-                </>
+                </div>
             );
         case GraphBoxType.DOUGHNUT:
             return (
-                <>
-                    <div>
-                        <Doughnut
-                            chartContent={chartContent}
-                            chartSize={size}
-                            filterData={filterNewData}
-                        />{' '}
-                    </div>
-                    {/* {size !== ChartSize.SMALL && (
-                        <p className="text-red-600 text-left">
-                            *les {nanData.value} valeurs de {nanData.name} ne
-                            sont pas prises en compte ici
-                        </p>
-                    )} */}
-                </>
+                <div className={`flex justify-center items-center`}>
+                    <Doughnut
+                        chartContent={chartContent}
+                        chartSize={chartSize}
+                        filterData={filterNewData}
+                    />{' '}
+                </div>
             );
         case GraphBoxType.HORIZONTAL_BARCHART:
             return (
-                <div className="w-full overflow-auto bg-orange-200">
+                <div className={`flex justify-center items-center`}>
                     <HorizontalBarChart
                         chartContent={chartContent}
-                        chartSize={size}
+                        chartSize={chartSize}
                         filterData={filterNewData}
                     />
-                    {/* {size !== ChartSize.SMALL && (
-                        <p className="text-red-600 text-left">
-                            *les {nanData.value} valeurs de {nanData.name} ne
-                            sont pas prises en compte ici
-                        </p>
-                    )} */}
                 </div>
             );
         case GraphBoxType.VERTICAL_BARCHART:
             return (
-                <div className="w-[520px] overflow-auto flex justify-center">
+                <div className={`flex justify-center items-center `}>
                     <VerticalBarChart
                         chartContent={chartContent}
-                        chartSize={size}
+                        chartSize={chartSize}
                         filterData={filterNewData}
                     />
-                    {/* {size !== ChartSize.SMALL && (
-                        <p className="text-red-600 text-left">
-                            *les {nanData.value} valeurs de {nanData.name} ne
-                            sont pas prises en compte ici
-                        </p>
-                    )} */}
                 </div>
             );
         case GraphBoxType.STACKED_BARCHART:
             return (
-                <>
-                    <div>
-                        {' '}
-                        <StackedBarChart
-                            chartContent={chartContent}
-                            chartSize={size}
-                        />
-                    </div>
-
-                    {/* {size !== ChartSize.SMALL && (
-                        <p className="text-red-600 text-left">
-                            *les {nanData.value} valeurs de {nanData.name} ne
-                            sont pas prises en compte ici
-                        </p>
-                    )} */}
-                </>
+                <div className={`flex justify-center items-center `}>
+                    {' '}
+                    <StackedBarChart
+                        chartContent={chartContent}
+                        chartSize={chartSize}
+                    />
+                </div>
             );
         default:
             return (

@@ -179,7 +179,7 @@ const Dropdown = ({
                                 return (
                                     <li
                                         key={option as unknown as string}
-                                        className="w-48 pl-1 text-gray-700 hover:bg-gray-100 cursor-pointer transition-colors text-wrap text-xs dark:text-white dark:hover:bg-black"
+                                        className="w-48 pl-1 text-gray-700 hover:bg-gray-100 cursor-pointer transition-colors text-wrap text-xs dark:text-white dark:hover:bg-black overflow-hidden text-ellipsis whitespace-nowrap"
                                         onClick={() => handleSelection(option)}
                                     >
                                         {displayValue(option, lang, dataField)}

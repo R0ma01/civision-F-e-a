@@ -6,6 +6,7 @@ export enum PagePaths {
     A_PROPOS = '/a-propos',
     HOME = '/',
     ADMIN = '/admin',
+    SIGNUP = '/signup',
     NONE = '#',
     LOGIN = '/login',
 }

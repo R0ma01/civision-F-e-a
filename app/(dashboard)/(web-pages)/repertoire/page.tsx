@@ -29,7 +29,7 @@ const DataCardDiv: React.FC<{
 }> = ({ children }) => {
     return (
         <div
-            className={`w-[270px] h-[130px] bg-[#f5ebe0] dark:bg-[#363636] dark:bg-opacity-50 dark:text-white backdrop-filter
+            className={`w-[270px] max-w-[270px] h-[130px] bg-[#f5ebe0] dark:bg-[#363636] dark:bg-opacity-50 dark:text-white backdrop-filter
                  backdrop-blur bg-opacity-50 saturate-100 backdrop-contrast-100 rounded-xl shadow-3xl pointer-events-auto
                  flex flex-col items-center`}
         >
@@ -136,7 +136,7 @@ function Repertoire() {
                 <div className="flex flex-row gap-4 w-full">
                     <DataCardDiv>
                         <div className="w-full relative">
-                            <h1 className="w-full text-sm absolute top-2 left-5">
+                            <h1 className="w-full text-sm absolute top-2 px-5 whitespace-nowrap text-wrap font-semi-bold">
                                 {
                                     RepertoirePromptsTranslations.div1_sentence[
                                         lang

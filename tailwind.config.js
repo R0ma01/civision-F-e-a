@@ -44,6 +44,9 @@ module.exports = {
             boxShadow: {
                 r: '5px 0 15px rgba(0, 0, 0, 0.3)',
             },
+            fontFamily: {
+                sans: ['Arial', 'sans-serif'],
+            },
         },
     },
     plugins: [],

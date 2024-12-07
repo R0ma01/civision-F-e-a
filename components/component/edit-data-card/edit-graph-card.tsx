@@ -14,6 +14,8 @@ import {
     IndexeDataFieldsB,
     StudyYears,
 } from '@/components/enums/data-types-enum';
+import { TableauxTraductionsGraphiques } from '@/services/translations';
+
 function options(tabType: StudyOrigin) {
     switch (tabType) {
         case StudyOrigin.ALBUM_FAMILLE: {
@@ -52,6 +54,7 @@ interface GraphCardProps {
         yValue?: boolean,
     ) => void;
     handleGraphDelete: (e: any, cardIndex: number, graphIndex: number) => void;
+    lang: string;
 }
 
 const EditGraphCard: React.FC<GraphCardProps> = ({
@@ -61,7 +64,9 @@ const EditGraphCard: React.FC<GraphCardProps> = ({
     tabType,
     handleGraphDataChange,
     handleGraphDelete,
+    lang,
 }) => {
+    const traductions: any = TableauxTraductionsGraphiques;
     return (
         <div className="bg-[#CFCFCF] dark:bg-gray-900 p-4 rounded-lg shadow-md relative w-fit h-[200px] border border-logo-dark-blue">
             <Button
@@ -72,7 +77,7 @@ const EditGraphCard: React.FC<GraphCardProps> = ({
                 className="absolute -top-2 -right-2 hover:scale-125 bg-logo-dark-blue"
             >
                 {/* <TrashSVG className="fill-white w-4 h-4"></TrashSVG> */}
-                <p className="text-white text-sm px-1">X</p>
+                <p className="text-white text-sm px-1">✕</p>
             </Button>
 
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 justify-center space-x-2">
@@ -92,6 +97,12 @@ const EditGraphCard: React.FC<GraphCardProps> = ({
                                     value,
                                 )
                             }
+                            displayValue={(field: any) => {
+                                const translation =
+                                    traductions.get(field)[lang];
+
+                                return translation ?? field;
+                            }}
                         />
                     </div>
 

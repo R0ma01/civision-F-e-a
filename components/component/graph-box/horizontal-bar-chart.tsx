@@ -35,7 +35,6 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
         (ChartData | ChartDataMultipleFileds)[] | undefined
     >(undefined);
 
-    const [size, setSize] = useState<ChartSize>(chartSize);
     const [yAxisWidth, setYAxisWidth] = useState<number>(40);
 
     const [language, setLanguage] = useState<Language>(Language.FR);
@@ -50,8 +49,8 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
     // Calculate dynamic height based on the number of data points
     const calculateHeight = () => {
         const dataLength = chartContent.data.length;
-        const baseHeight = size === ChartSize.SMALL ? 150 : 300;
-        return size === ChartSize.SMALL
+        const baseHeight = chartSize === ChartSize.SMALL ? 150 : 300;
+        return chartSize === ChartSize.SMALL
             ? baseHeight
             : Math.max(baseHeight, dataLength * 40);
     };
@@ -61,10 +60,10 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
             setChartData(chartContent.data);
 
             // Calculate the longest label's width and set the Y-axis width
-            const calculatedWidth = size / 3;
+            const calculatedWidth = chartSize / 3;
             setYAxisWidth(calculatedWidth);
         }
-    }, [chartContent.data, chartContent.donnees, size]);
+    }, [chartContent.data, chartContent.donnees, chartSize]);
 
     const CustomTooltip = ({ active, payload }: any) => {
         if (active && payload && payload.length) {
@@ -86,19 +85,19 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
     };
 
     return (
-        <div className="dark:text-white text-wrap">
-            <ResponsiveContainer width="100%" height={calculateHeight()}>
+        <div className={`dark:text-white text-wrap `}>
+            <ResponsiveContainer width={chartSize} height={calculateHeight()}>
                 <BarChart layout="vertical" data={chartData}>
                     <XAxis
                         type="number"
-                        fontSize={size === ChartSize.SMALL ? 6 : 10}
+                        fontSize={chartSize === ChartSize.SMALL ? 6 : 10}
                         stroke="currentColor"
                     />
                     <YAxis
                         dataKey="name"
                         type="category"
                         width={yAxisWidth}
-                        fontSize={size === ChartSize.SMALL ? 6 : 10}
+                        fontSize={chartSize === ChartSize.SMALL ? 6 : 10}
                         stroke="currentColor"
                         tickFormatter={(value: any, index: number) =>
                             GraphTextService.getFieldLabel(
@@ -112,9 +111,9 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
                     <Bar
                         dataKey="value"
                         barSize={
-                            size === ChartSize.SMALL
+                            chartSize === ChartSize.SMALL
                                 ? 10
-                                : size === ChartSize.MEDIUM
+                                : chartSize === ChartSize.MEDIUM
                                   ? 15
                                   : 20
                         }

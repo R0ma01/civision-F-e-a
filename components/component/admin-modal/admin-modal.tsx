@@ -109,7 +109,7 @@ export function AdminModal({
             years: [StudyYears.YEAR_2023],
             description: { FR: '', EN: '' },
             cards: [],
-            visible: false,
+            visible: true,
         });
 
         updatedPage.tabs = updatedTabs;
@@ -190,7 +190,7 @@ export function AdminModal({
                     className="ml-2 mb-1"
                 ></LanguageEditToggle>
                 <form className="w-full h-full flex flex-col overflow-auto">
-                    <div className="flex-col flex w-[80%] mb-3 m-1 ml-2 gap-1">
+                    <div className="flex-col flex w-[75%] mb-3 m-1 ml-2 gap-1">
                         <input
                             type="text"
                             placeholder="titre"
@@ -229,7 +229,7 @@ export function AdminModal({
                     onClick={closeDialog}
                     className="absolute top-2 right-2 border bg-logo-dark-blue px-3"
                 >
-                    X
+                    ✕
                 </Button>
                 <Button
                     onClick={handleSubmit}

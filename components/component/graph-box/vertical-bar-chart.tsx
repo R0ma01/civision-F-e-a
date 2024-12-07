@@ -35,7 +35,6 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
         (ChartData | ChartDataMultipleFileds)[] | undefined
     >(undefined);
 
-    const [size, setSize] = useState<ChartSize>(chartSize);
     const [xAxisHeight, setXAxisHeight] = useState<number>(40);
 
     const { lang } = useDataStore((state) => ({
@@ -45,8 +44,8 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
     // Calculate dynamic width based on the number of data points
     const calculateWidth = () => {
         const dataLength = chartContent.data.length;
-        const baseWidth = size === ChartSize.SMALL ? 200 : 400;
-        return size === ChartSize.SMALL
+        const baseWidth = chartSize;
+        return chartSize === ChartSize.SMALL
             ? baseWidth
             : Math.max(baseWidth, dataLength * 60);
     };
@@ -56,10 +55,10 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
             setChartData(chartContent.data);
 
             // Calculate the longest label's height and set the X-axis height
-            const calculatedHeight = size / 3;
+            const calculatedHeight = chartSize / 3;
             setXAxisHeight(calculatedHeight);
         }
-    }, [chartContent.data, chartContent.donnees, size]);
+    }, [chartContent.data, chartContent.donnees, chartSize]);
 
     const CustomTooltip = ({ active, payload }: any) => {
         if (active && payload && payload.length) {
@@ -81,18 +80,24 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
     };
 
     return (
-        <div className="dark:text-white text-wrap">
+        <div className="dark:text-white text-wrap w-fit">
             <ResponsiveContainer
-                width={calculateWidth()}
-                height={size - 20}
+                width={chartSize}
+                height={chartSize}
                 className="flex justify-center items-center"
             >
                 <BarChart data={chartData}>
                     <XAxis
                         dataKey="name"
                         type="category"
-                        height={50}
-                        fontSize={size === ChartSize.SMALL ? 6 : 10}
+                        height={
+                            chartSize === ChartSize.SMALL
+                                ? 20
+                                : chartSize === ChartSize.MEDIUM
+                                  ? 30
+                                  : 50
+                        }
+                        fontSize={chartSize === ChartSize.SMALL ? 6 : 10}
                         stroke="currentColor"
                         tickFormatter={(value: any, index: number) =>
                             GraphTextService.getFieldLabel(
@@ -104,19 +109,21 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
                     />
                     <YAxis
                         type="number"
-                        fontSize={size === ChartSize.SMALL ? 6 : 10}
+                        fontSize={chartSize === ChartSize.SMALL ? 6 : 10}
                         stroke="currentColor"
                     />
                     <Tooltip content={<CustomTooltip />} />
                     <Bar
                         dataKey="value"
                         barSize={
-                            size === ChartSize.SMALL
+                            chartSize === ChartSize.SMALL
                                 ? 10
-                                : size === ChartSize.MEDIUM
+                                : chartSize === ChartSize.MEDIUM
                                   ? 15
                                   : chartData && chartData.length > 8
-                                    ? Math.round(size - 100 / chartData?.length)
+                                    ? Math.round(
+                                          chartSize - 100 / chartData?.length,
+                                      )
                                     : 20
                         }
                     >

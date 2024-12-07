@@ -129,7 +129,7 @@ export function FilterList({ className = '' }: FilterListProps) {
                     }}
                     className="hover:scale-125 bg-logo-dark-blue h-fit w-fit border-white cursor-pointer rounded-full flex items-center justify-center"
                 >
-                    <p className="text-white text-[6px] px-[5px] py-[3px]">X</p>
+                    <p className="text-white text-[6px] px-[5px] py-[3px]">✕</p>
                 </div>
             </div>
         );

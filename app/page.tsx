@@ -30,44 +30,30 @@ const LandingPage = () => {
                     </div>
                     {/* Content Overlay */}
                     <div className="absolute top-8 left-10 z-10 p-4">
-                        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-7 text-[#262626]">
+                        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-3 pl-3 text-[#262626]">
                             Découvrez les{' '}
                         </h1>
                         <div className="flex items-center">
-                            <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-7 text-[#262626]">
+                            <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-3 pl-3 text-[#262626]">
                                 entreprises familiales
                                 <Image
                                     src={Sun}
                                     alt="Soleil"
-                                    className="w-4 h-auto inline-block ml-2 -mt-2"
+                                    className="w-4 h-auto inline-block -mt-8"
                                 />
                             </h1>
                         </div>
-                        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-4 text-[#262626]">
+                        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold pl-3 text-[#262626]">
                             du Québec
                         </h1>
 
                         <Image
                             src={Underline}
                             alt="Underline"
-                            className="w-48 h-auto mt-0 ml-2 invert"
+                            className="w-48 h-auto mt-0 ml-[75px] invert"
                         />
 
-                        <div className="flex mt-5 ml-8">
-                            <div className="w-[50%] pr-2 flex items-center">
-                                <Link href={PagePaths.THEMATIQUES}>
-                                    <Button buttonType={ButtonType.PULSE}>
-                                        <span className="text-xs md:text-md lg:text-lg text-[#000000] transition-duration-300">
-                                            <span className="mr-1">
-                                                {' '}
-                                                Explorez &#8594;
-                                            </span>
-                                        </span>
-                                    </Button>
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="text-xs md:text-sm lg:text-sm mt-12 ml-1 flex flex-col">
+                        <div className="text-xs md:text-sm lg:text-sm mt-6 mb-2 ml-1 flex flex-col">
                             <div className="w-[400px] md:w-[550px] lg:w-[700px] mb-2">
                                 <h4>
                                     <strong>Bienvenue</strong> sur la nouvelle
@@ -101,42 +87,60 @@ const LandingPage = () => {
                                 </h4>
                             </div>
                         </div>
+                        <div className="flex flex-col justify-normal mt-2">
+                            <div className="w-full pr-2 flex flex-col items-start justify-start gap-2">
+                                <p>
+                                    Créez-vous un compte pour accéder à toute la
+                                    plateforme
+                                </p>
+                                <Link href={PagePaths.SIGNUP}>
+                                    <Button buttonType={ButtonType.PULSE}>
+                                        <span className="text-xs md:text-md lg:text-lg text-[#000000] transition-duration-300">
+                                            <span className="text-center">
+                                                INSCRIPTION
+                                            </span>
+                                        </span>
+                                    </Button>
+                                </Link>
+                                <p>Ou explorez gratuitement</p>
+
+                                <Link href={PagePaths.THEMATIQUES}>
+                                    <Button buttonType={ButtonType.PULSE}>
+                                        <span className="text-xs md:text-md lg:text-lg text-[#000000] transition-duration-300">
+                                            <span className="text-center">
+                                                EXPLORER
+                                            </span>
+                                        </span>
+                                    </Button>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                     <div className="absolute w-screen flex-row justify-evenly bottom-4 lg:flex md:flex hidden">
-                        <Image
+                        <img
                             src="/images/fea-full-logo.png"
                             alt="logo-FEA"
                             className="w-auto h-12"
-                            width={100}
-                            height={100}
                         />
-                        <Image
+                        <img
                             src="/images/Logos-civision.png"
                             alt="logo-Civision"
                             className="w-auto h-12"
-                            width={100}
-                            height={100}
                         />
-                        <Image
+                        <img
                             src="/images/logo-meie.jpg"
                             className="w-auto h-12"
                             alt="logo-MEIE"
-                            width={100}
-                            height={100}
                         />
-                        <Image
+                        <img
                             src="/images/la_sphere.png"
                             className="w-auto h-12"
                             alt="logo-laSphere"
-                            width={100}
-                            height={100}
                         />{' '}
-                        <Image
+                        <img
                             src="/images/ORIA_NV.png"
                             className="w-auto h-12"
                             alt="logo-ORIA"
-                            width={100}
-                            height={100}
                         />
                     </div>
                 </div>

@@ -23,7 +23,7 @@ export default function RootLayout({ children }: RootProps) {
                 <meta name="description" content="Propulsé par CIVISION" />
                 <title>Familles en affaires</title>
             </head>
-            <body className={inter.className + 'text-black'}>
+            <body className={inter.className + 'text-black font-sans'}>
                 <ThemeProvider attribute="class">{children}</ThemeProvider>
             </body>
         </html>

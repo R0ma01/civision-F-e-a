@@ -11,6 +11,8 @@ import { ChercheurDropdownItem } from '@/components/interface/chercheur-drop-dow
 import { MapType } from '@/components/enums/map-type-enum';
 import { Language } from '@/components/enums/language';
 import { RecherchePromptsTranslations } from '@/constants/translations/page-prompts';
+import StaticDropdown from '@/components/component/drop-down-menu/chercheur-drop-down';
+
 import useDataStore from '@/reducer/dataStore';
 
 export default function RechercheAcademique() {
@@ -65,15 +67,20 @@ export default function RechercheAcademique() {
 
     return (
         <PageContentContainer
-            className="overflow-y-auto pb-10 pl-[30px] w-full"
+            className="overflow-y-hidden pb-10 relative w-full h-[100vh]"
             filterMenu={true}
         >
-            <div className="flex flex-col gap-4 w-full mt-12">
-                <DataCardContainer
-                    cards={[firstItem, ...Array.from(cards.values())]}
-                    className="flex-wrap w-full z-10"
-                    year={2022}
-                />
+            <div className="absolute top-0 left-0 max-h-[100%] overflow-y-scroll bg-[#f5ebe0] dark:bg-[#363636]">
+                <StaticDropdown onClick={showGraph} />
+            </div>
+            <div className="flex flex-row w-full h-screen pl-[320px] pr-[70px] py-5">
+                <div className="flex flex-col overflow-y-scroll scroll-hide">
+                    <DataCardContainer
+                        cards={[...Array.from(cards.values())]}
+                        className="flex-wrap z-10 gap-2 justify-center"
+                        year={2022}
+                    />
+                </div>
             </div>
         </PageContentContainer>
     );

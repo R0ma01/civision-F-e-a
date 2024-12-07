@@ -3806,14 +3806,15 @@ const keyValuePairsGraphs: [string, { FR: string; EN: string }][] = [
     [
         GraphBoxType.VERTICAL_BARCHART,
         {
-            FR: 'Barres Horizontales',
+            FR: 'Barres Verticales',
+
             EN: 'Vertical Bars',
         },
     ],
     [
         GraphBoxType.HORIZONTAL_BARCHART,
         {
-            FR: 'Barres Verticales',
+            FR: 'Barres Horizontales',
             EN: 'Horizontal Bars',
         },
     ],
