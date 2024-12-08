@@ -467,9 +467,9 @@ function convertFournisseurData(
                     if (
                         regions.includes(
                             mapRegions
-                                .entries()
+                                ?.entries()
                                 .toArray()
-                                .find((entry) => entry[1] === key)[0],
+                                .find((entry: any) => entry[1] === key)[0],
                         ) ||
                         regions.length === 0
                     ) {
