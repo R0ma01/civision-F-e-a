@@ -449,6 +449,7 @@ function convertFournisseurData(
 
     const sectorCount: Record<string, { region: string; count: number }> = {};
 
+    // Initialize sectorCount
     Array.from(mapRegions.entries()).forEach(([key, regionName]) => {
         sectorCount[regionName] = {
             region: regionName,
@@ -456,7 +457,8 @@ function convertFournisseurData(
         };
     });
 
-    fournisseurs.map((fournisseur) => {
+    // Process fournisseurs
+    fournisseurs.forEach((fournisseur) => {
         if (fournisseur.visible || admin) {
             if (
                 fournisseur.secteurs_geographique.includes(
@@ -464,13 +466,16 @@ function convertFournisseurData(
                 )
             ) {
                 Object.keys(sectorCount).forEach((key) => {
-                    if (
-                        regions.includes(
-                            mapRegions
-                                ?.entries()
+                    const matchingEntry = Array.from(mapRegions.entries()).find(
+                        (entry) => entry[1] === key,
+                    );
 
-                                .find((entry: any) => entry[1] === key)[0],
-                        ) ||
+                    const regionKey = matchingEntry
+                        ? matchingEntry[0]
+                        : undefined;
+
+                    if (
+                        (regionKey && regions.includes(regionKey)) ||
                         regions.length === 0
                     ) {
                         sectorCount[key].count += 1;
@@ -478,7 +483,7 @@ function convertFournisseurData(
                 });
             } else {
                 fournisseur.secteurs_geographique.forEach((secteur) => {
-                    const mapSecteur = mapRegions?.get(secteur);
+                    const mapSecteur = mapRegions.get(secteur);
 
                     if (mapSecteur) {
                         if (
