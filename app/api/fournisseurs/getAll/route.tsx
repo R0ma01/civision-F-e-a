@@ -24,7 +24,7 @@ export async function GET(req: Request) {
         console.log(filtersObj);
 
         if (filtersObj['secteurs_geographique']) {
-            if (filtersObj['secteurs_geographique'][['$in' as any]]) {
+            if (filtersObj['secteurs_geographique']['$in']) {
                 filtersObj['secteurs_geographique']['$in'].push(
                     'Tout le Québec',
                 );
