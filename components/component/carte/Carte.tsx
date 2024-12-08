@@ -444,15 +444,15 @@ function convertFournisseurData(
 
     console.log(regions);
 
-    const mapRegions: any = MapRegions.get(MapType.FOURNISSEURS) || new Map();
+    const mapRegions: Map<any, string> =
+        MapRegions.get(MapType.FOURNISSEURS) || new Map();
 
     const sectorCount: Record<string, { region: string; count: number }> = {};
-    Array.from(
-        mapRegions?.entries() || [], // Use entries() from the map
-    ).map(([key, regionName]) => {
+
+    Array.from(mapRegions.entries()).forEach(([key, regionName]) => {
         sectorCount[regionName] = {
             region: regionName,
-            count: 0, // Ensure key is treated as a string
+            count: 0,
         };
     });
 
