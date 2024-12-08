@@ -4,7 +4,6 @@ import { ChartData, ChartDataMultipleFileds } from './chart-data';
 export interface ChartContent {
     donnees: AlbumDataFields[];
     data: (ChartData | ChartDataMultipleFileds)[];
-    matchFields: any;
     totalData: number;
     median?: number;
     midPoint?: number;
