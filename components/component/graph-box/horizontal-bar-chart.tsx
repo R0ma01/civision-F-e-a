@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     BarChart,
     Bar,
@@ -36,17 +36,17 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
     >(undefined);
 
     const [yAxisWidth, setYAxisWidth] = useState<number>(40);
-
     const [language, setLanguage] = useState<Language>(Language.FR);
     const { lang } = useDataStore((state) => ({
         lang: state.lang,
     }));
 
+    const [activeBar, setActiveBar] = useState<number | null>(null); // Track the active bar index
+
     useEffect(() => {
         setLanguage(lang);
     }, [lang]);
 
-    // Calculate dynamic height based on the number of data points
     const calculateHeight = () => {
         const dataLength = chartContent.data.length;
         const baseHeight = chartSize === ChartSize.SMALL ? 150 : 300;
@@ -58,8 +58,6 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
     useEffect(() => {
         if (chartContent.data?.length > 0) {
             setChartData(chartContent.data);
-
-            // Calculate the longest label's width and set the Y-axis width
             const calculatedWidth = chartSize / 3;
             setYAxisWidth(calculatedWidth);
         }
@@ -85,7 +83,7 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
     };
 
     return (
-        <div className={`dark:text-white text-wrap `}>
+        <div className="dark:text-white text-wrap">
             <ResponsiveContainer width={chartSize} height={calculateHeight()}>
                 <BarChart layout="vertical" data={chartData}>
                     <XAxis
@@ -99,7 +97,7 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
                         width={yAxisWidth}
                         fontSize={chartSize === ChartSize.SMALL ? 6 : 10}
                         stroke="currentColor"
-                        tickFormatter={(value: any, index: number) =>
+                        tickFormatter={(value: any) =>
                             GraphTextService.getFieldLabel(
                                 chartContent.donnees[0],
                                 value,
@@ -127,12 +125,23 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
                                             index % chartPalette.length
                                         ]
                                     }
-                                    onClick={() =>
+                                    onClick={() => {
+                                        console.log('ghello');
+                                        setActiveBar(
+                                            activeBar === index ? null : index,
+                                        );
                                         filterData(
                                             chartContent.donnees[0],
                                             entry,
-                                        )
-                                    }
+                                        );
+                                    }}
+                                    style={{
+                                        transform:
+                                            activeBar === index
+                                                ? 'scale(1.6)'
+                                                : 'scale(1)',
+                                        transition: 'transform 0.3s ease',
+                                    }}
                                 />
                             ))}
                     </Bar>

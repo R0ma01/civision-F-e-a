@@ -41,8 +41,6 @@ const Sidebar: React.FC = () => {
     useEffect(() => {
         async function fectchSession() {
             const session: any = await getAuthSession();
-            console.log('hello');
-            console.log(session);
 
             if (session && session.user && session.user.email) {
                 if (session.user.admin) {
@@ -70,7 +68,7 @@ const Sidebar: React.FC = () => {
         <>
             <div
                 id="side-bar"
-                className={`overflow-hidden group bg-gradient-to-b from-custom-grey to-white justify-between
+                className={`overflow-hidden group bg-white dark:bg-[#363636] justify-between
         flex-col flex h-full flex-shrink-0 z-50 transition-all ease-in-out duration-500 transform absolute w-10 hover:w-[230px] hover:shadow-r`}
             >
                 <Link
@@ -100,7 +98,7 @@ const Sidebar: React.FC = () => {
                         hoverColor={hoverColor.green}
                         active={user !== UserType.VISITOR}
                     >
-                        <HomeSVG className="w-6 h-6" />
+                        <HomeSVG className="w-6 h-6 dark:fill-white" />
                         <span className="ml-5 hidden group-hover:block ease-in-out duration-300 transition-all">
                             {SideBarPromptsTranslations.repertoire[lang]}
                         </span>
@@ -110,7 +108,7 @@ const Sidebar: React.FC = () => {
                         pagePath={PagePaths.FOURNISSEURS}
                         hoverColor={hoverColor.green}
                     >
-                        <FournisseurSVG className="w-6 h-6 fill-black" />
+                        <FournisseurSVG className="w-6 h-6 fill-black dark:fill-white" />
                         <span className="ml-5 hidden group-hover:block ease-in-out duration-300 transition-all">
                             {SideBarPromptsTranslations.suppliers[lang]}
                         </span>
@@ -120,7 +118,7 @@ const Sidebar: React.FC = () => {
                         pagePath={PagePaths.THEMATIQUES}
                         hoverColor={hoverColor.green}
                     >
-                        <StatsSVG className="w-6 h-6" />
+                        <StatsSVG className="w-6 h-6 dark:fill-white" />
                         <span className="ml-5 hidden group-hover:block ease-in-out duration-300 transition-all">
                             {SideBarPromptsTranslations.thematiques[lang]}
                         </span>
@@ -131,7 +129,7 @@ const Sidebar: React.FC = () => {
                         hoverColor={hoverColor.green}
                         active={user !== UserType.VISITOR}
                     >
-                        <ChercheurSVG className="w-6 h-6" />
+                        <ChercheurSVG className="w-6 h-6 dark:fill-white" />
                         <span className="ml-5 hidden group-hover:block ease-in-out duration-300 transition-all">
                             {SideBarPromptsTranslations.acad_search[lang]}
                         </span>
@@ -143,7 +141,7 @@ const Sidebar: React.FC = () => {
                             hoverColor={hoverColor.green}
                             active={user === UserType.ADMIN}
                         >
-                            <AdminSVG className="w-6 h-6" />
+                            <AdminSVG className="w-6 h-6 dark:fill-white" />
                             <span className="ml-5 hidden group-hover:block duration-300 transition-all">
                                 {SideBarPromptsTranslations.admin[lang]}
                             </span>
@@ -155,7 +153,7 @@ const Sidebar: React.FC = () => {
                         pagePath={PagePaths.A_PROPOS}
                         hoverColor={hoverColor.green}
                     >
-                        <InfoSVG className="w-6 h-6" />
+                        <InfoSVG className="w-6 h-6 dark:fill-white" />
                         <span className="ml-5 hidden group-hover:block duration-300 transition-all">
                             {SideBarPromptsTranslations.a_propos[lang]}
                         </span>
@@ -166,7 +164,7 @@ const Sidebar: React.FC = () => {
                             pagePath={PagePaths.LOGIN}
                             hoverColor={hoverColor.blue}
                         >
-                            <LoginSVG className="w-6 h-6" />
+                            <LoginSVG className="w-6 h-6 dark:fill-white" />
                             <span className="ml-5 hidden group-hover:block duration-300 transition-all">
                                 {SideBarPromptsTranslations.connexion[lang]}
                             </span>
@@ -178,7 +176,7 @@ const Sidebar: React.FC = () => {
                             hoverColor={hoverColor.red}
                             onClick={openDisconnectDialog}
                         >
-                            <LogoutSVG className="w-6 h-6" />
+                            <LogoutSVG className="w-6 h-6 dark:fill-white" />
                             <span className="ml-5 hidden group-hover:block duration-300 transition-all">
                                 {SideBarPromptsTranslations.deconnexion[lang]}
                             </span>

@@ -4,6 +4,7 @@ import { MapClusterPointData } from '@/components/interface/point-data';
 import { GraphDataHttpRequestService } from '@/services/data-http-request-service';
 import mapboxgl from 'mapbox-gl';
 import useDataStore from '@/reducer/dataStore';
+import { Point } from '@react-three/drei';
 
 interface ClusterCloudProps {
     data: any[]; // GeoJSON data for regions
@@ -126,21 +127,29 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
                 .setLngLat(coordinates)
                 .setHTML(
                     `
-                    <div class="flex flex-col">
-            <p class="px-3 py-2 border border-none rounded-full bg-logo-green text-white text-center font-bold">
-                ${point.nom}
-            </p>
-            <p class="font-bold text-logo-dark-blue">
-                Secteur d&lsquo;activité:
-            </p>
-            <p>${point.secteur_activite}</p>
-            <p class="font-bold text-logo-dark-blue">
-                Taille de l&lsquo;entreprise:
-            </p>
-            <p>${point.taille_entreprise}</p>
-            <p class="font-bold text-logo-dark-blue">Adresse: </p>
-            <p>${point.adresse}</p>
-        </div>
+                    <div class="flex flex-col justify-center bg-white pt-4">
+                        <div class="bg-logo-dark-blue p-[10px] w-full  absolute top-0 right-0 "></div>
+                        <p class="text-xl font-bold text-black mb-2 text-center w-full">
+                            ${point.nom}
+                        </p>
+                        <p class="text-gray-600 mb-4 w-full text-center">
+                            ${point.adresse}
+                        </p>
+                        <div class="border-t border-gray-300 pt-3">
+                            <p class="font-bold text-logo-dark-blue">
+                                Taille de l’entreprise:
+                            </p>
+                            <p class="text-gray-700 mb-4">
+                                ${point.taille_entreprise}
+                            </p>
+                            <p class="font-bold text-logo-dark-blue">
+                                Secteur d’activité:
+                            </p>
+                            <p class="text-gray-700">
+                                ${point.secteur_activite}
+                            </p>
+                        </div>
+                    </div>
                 `,
                 )
                 .addTo(map);

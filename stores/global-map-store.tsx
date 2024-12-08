@@ -61,7 +61,7 @@ const useMapStore = create<GlobalMapStoreProps>((set) => ({
     toggleLegend: () => {
         set((state) => ({ legend: !state.legend }));
     },
-    mapGrid: 'muni',
+    mapGrid: 'reg',
     toggleMapGrid: (newGrid: string) => {
         set((state) => ({ mapGrid: newGrid }));
     },

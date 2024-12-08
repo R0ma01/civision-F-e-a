@@ -6,9 +6,8 @@ import useMapStore from '@/stores/global-map-store';
 import { html_object_constants } from '@/constants/constants';
 
 const MapBox = () => {
-    const { mapType, setMap, point } = useMapStore((state) => {
+    const { setMap, point } = useMapStore((state) => {
         return {
-            mapType: state.mapType,
             setMap: state.setMap,
             point: state.point,
         };
@@ -55,7 +54,7 @@ const MapBox = () => {
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isDarkMode, mapType]);
+    }, [isDarkMode]);
 
     useEffect(() => {
         if (point && mapRef.current) {
@@ -84,20 +83,28 @@ export default MapBox;
 
 function popUpHTML(content: any) {
     return `
-        <div class="flex flex-col">
-            <p class="px-3 py-2 border border-none rounded-full bg-logo-green text-white text-center font-bold">
+        <div class="flex flex-col justify-center bg-white pt-4">
+            <div class="bg-logo-dark-blue p-[10px] w-full  absolute top-0 right-0 "></div>
+            <p class="text-xl font-bold text-black mb-2 text-center w-full">
                 ${content.properties.nom}
             </p>
-            <p class="font-bold text-logo-dark-blue">
-                Secteur d&lsquo;activité:
+            <p class="text-gray-600 mb-4 w-full text-center">
+                ${content.properties.adresse}
             </p>
-            <p>${content.properties.secteur_activite}</p>
-            <p class="font-bold text-logo-dark-blue">
-                Taille de l&lsquo;entreprise:
-            </p>
-            <p>${content.properties.taille_entreprise}</p>
-            <p class="font-bold text-logo-dark-blue">Adresse: </p>
-            <p>${content.properties.adresse}</p>
+            <div class="border-t border-gray-300 pt-3">
+                <p class="font-bold text-logo-dark-blue">
+                    Taille de l’entreprise:
+                </p>
+                <p class="text-gray-700 mb-4">
+                    ${content.properties.taille_entreprise}
+                </p>
+                <p class="font-bold text-logo-dark-blue">
+                    Secteur d’activité:
+                </p>
+                <p class="text-gray-700">
+                    ${content.properties.secteur_activite}
+                </p>
+            </div>
         </div>
     `;
 }

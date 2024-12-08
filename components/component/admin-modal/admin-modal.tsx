@@ -180,7 +180,7 @@ export function AdminModal({
         <div className="fixed z-40 h-[100%] backdrop-blur-md flex items-center justify-center w-full overflow-hidden">
             <div
                 ref={dialogRef}
-                className="bg-[#DFDFDF] dark:bg-[#262626] rounded-lg shadow-2xl w-[95%] h-[95%] relative p-2 overflow-hidden"
+                className="bg-[#F0F3F4] dark:bg-[#262626] rounded-lg shadow-2xl w-[95%] h-[95%] relative p-2 overflow-hidden"
             >
                 <LanguageEditToggle
                     handleLanguageChange={(lang: Language) => {

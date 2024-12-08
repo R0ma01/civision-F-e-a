@@ -180,6 +180,7 @@ export default function Carte() {
     ]);
 
     function filter(region: any, field: any, mapTypeInside: MapType) {
+        console.log(region);
         const filterKeys = MapRegions.get(mapTypeInside); // Get the map corresponding to the mapType
         if (!filterKeys) return;
 
@@ -236,7 +237,6 @@ export default function Carte() {
                         filterFunction={(region: any) => {
                             filter(
                                 region,
-
                                 AlbumDataFields.COORDONNES_REGION,
                                 mapType,
                             );
@@ -272,6 +272,7 @@ export default function Carte() {
                         map={map}
                         mapGrid={mapGrid}
                         filterFunction={(mrc_id: number) => {
+                            console.log(mrc_id);
                             if (mrc_id !== 0) {
                                 setFilter(
                                     RepertoireDataFields.REG_IDU,
@@ -282,10 +283,13 @@ export default function Carte() {
                             filterRepertoireData();
                         }}
                     ></RegionGrid>
+
                     <MrcGrid
                         map={map}
                         mapGrid={mapGrid}
                         filterFunction={(mrc_id: number) => {
+                            console.log(mrc_id);
+
                             if (mrc_id !== 0) {
                                 setFilter(RepertoireDataFields.MRC_IDU, mrc_id);
                             }
@@ -293,10 +297,13 @@ export default function Carte() {
                             filterRepertoireData();
                         }}
                     ></MrcGrid>
+
                     <MuniGrid
                         map={map}
                         mapGrid={mapGrid}
                         filterFunction={(mrc_id: number) => {
+                            console.log(mrc_id);
+
                             if (mrc_id !== 0) {
                                 setFilter(
                                     RepertoireDataFields.MUNIC_IDU,
@@ -460,7 +467,7 @@ function convertFournisseurData(
                     if (
                         regions.includes(
                             mapRegions
-                                .entries()
+                                ?.entries()
                                 .find((entry) => entry[1] === key)[0],
                         ) ||
                         regions.length === 0
