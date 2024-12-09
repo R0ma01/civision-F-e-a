@@ -70,7 +70,7 @@ export default function RechercheAcademique() {
             className="overflow-y-hidden pb-10 relative w-full h-[100vh]"
             filterMenu={true}
         >
-            <div className="absolute top-0 left-0 max-h-[100%] overflow-y-scroll bg-[#f5ebe0] dark:bg-[#363636]">
+            <div className="absolute top-0 left-0 max-h-[100%] overflow-y-scroll bg-[#F0F3F4] dark:bg-[#363636]">
                 <StaticDropdown onClick={showGraph} />
             </div>
             <div className="flex flex-row w-full h-screen pl-[320px] pr-[70px] py-5">

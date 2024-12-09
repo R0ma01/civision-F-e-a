@@ -17,6 +17,7 @@ import {
 } from '@/components/component/svg-icons/svg-icons';
 import { GraphDataHttpRequestService } from '@/services/data-http-request-service';
 import { AddEntrepriseDialog } from '@/components/component/dialogs/add-many-entreprises-dialog';
+import SearchBox from '@/components/component/search-box/search-box';
 
 import Button from '@/components/component/buttons/button';
 import { ButtonType } from '@/components/enums/button-type-enum';
@@ -91,7 +92,6 @@ function Repertoire() {
         null,
     );
     const [loading, setLoading] = useState<boolean>(false);
-    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         async function fetchNombreEntreprises() {
@@ -130,49 +130,66 @@ function Repertoire() {
     return (
         <PageContentContainer
             filterMenu={true}
-            className="overflow-auto pb-10 pl-[30px] relative"
+            className="overflow-visible relative"
         >
-            <div className="flex flex-col space-y-4 max-w-[550px] mt-16">
-                <div className="flex flex-row gap-4 w-full">
-                    <DataCardDiv>
-                        <div className="w-full relative">
-                            <h1 className="w-full text-sm absolute top-2 px-5 whitespace-nowrap text-wrap font-semi-bold">
-                                {
-                                    RepertoirePromptsTranslations.div1_sentence[
-                                        lang
-                                    ]
-                                }
-                            </h1>
+            <div className="flex flex-col h-[100%] bg-[#F0F3F4] dark:bg-[#363636] items-center">
+                <div className="flex h-fit relative w-full pl-2">
+                    <div className="w-[240px] h-fit dark:text-white flex flex-col mt-2 ml-1 text-wrap whitespace-normal">
+                        <p className="text-xs font-bold">
+                            {RepertoirePromptsTranslations.div1_sentence[lang]}
+                        </p>
+                        <div className="w-[100px] h-[30px] flex flex-row gap-1">
                             {nombreEntreprises && (
                                 <>
-                                    <UpArrowSVG className="w-10 h-10 absolute top-14 left-4"></UpArrowSVG>
-                                    <p className="text-4xl absolute top-14 left-16">
+                                    <UpArrowSVG className="w-7 h-7 "></UpArrowSVG>
+                                    <p className="text-2xl ">
                                         {nombreEntreprises}
                                     </p>
                                 </>
                             )}
                             {!nombreEntreprises && (
-                                <div className="loader-circle-small absolute top-10 left-16"></div>
+                                <div className="loader-circle-small "></div>
                             )}
-                            <p className="text-xs absolute top-24 left-16">
-                                {
-                                    RepertoirePromptsTranslations
-                                        .div1_descriptive[lang]
-                                }
-                            </p>
                         </div>
-                    </DataCardDiv>
+                        <p className="text-xs ">
+                            {
+                                RepertoirePromptsTranslations.div1_descriptive[
+                                    lang
+                                ]
+                            }
+                        </p>
+                    </div>
+
+                    <Button
+                        buttonType={ButtonType.CONFIRM}
+                        onClick={() =>
+                            window.open(
+                                'https://forms.gle/AYNdESgqbf48U73P8',
+                                '_blank',
+                            )
+                        }
+                        className="w-[100px] text-xs absolute top-2 right-2"
+                        title="redirect:https://forms.gle/AYNdESgqbf48U73P8"
+                    >
+                        {RepertoirePromptsTranslations.subscribe[lang]}
+                    </Button>
                 </div>
-                <DataCard content={fetchedData.thirdField} year={2022}>
+                {user === UserType.ADMIN && (
                     <Button
                         buttonType={ButtonType.ICON}
                         onClick={() => {
                             setIsDialogOpen(true);
                         }}
+                        className="absolute bottom-2 w-[400px] flex justify-center"
                     >
-                        <AddCircleSVG></AddCircleSVG>
+                        <AddCircleSVG
+                            className={'fill-black dark:fill-white'}
+                        ></AddCircleSVG>
                     </Button>
-                </DataCard>
+                )}
+                <div className="h-[90%] mt-4">
+                    <SearchBox></SearchBox>
+                </div>
             </div>
 
             {isDialogOpen && (
@@ -194,16 +211,6 @@ function Repertoire() {
                     }}
                 ></AddEntrepriseDialog>
             )}
-            <Button
-                buttonType={ButtonType.CONFIRM}
-                onClick={() =>
-                    window.open('https://forms.gle/AYNdESgqbf48U73P8', '_blank')
-                }
-                className="m-3 self-center"
-                title="redirect:https://forms.gle/AYNdESgqbf48U73P8"
-            >
-                {RepertoirePromptsTranslations.subscribe[lang]}
-            </Button>
         </PageContentContainer>
     );
 }

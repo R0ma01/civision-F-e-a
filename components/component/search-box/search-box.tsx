@@ -119,11 +119,9 @@ function SearchBox() {
     return (
         <div
             id={html_object_constants.search_box_id}
-            className="flex flex-col pb-4 h-fit-content w-[500px] backdrop-filter 
-    bg-opacity-0 saturate-100 border rounded-xl border-transparent 
-    py-3 px-3 pointer-events-auto"
+            className="flex flex-col h-full w-[450px] backdrop-filter px-3 pointer-events-auto"
         >
-            <h2 className="text-smaller md:text-small dark:text-white text-black py-4 font-semibold">
+            <h2 className="text-smaller md:text-small dark:text-white text-black pb-2">
                 {RepertoirePromptsTranslations.search_box_title[lang]}
             </h2>
 
@@ -135,10 +133,7 @@ function SearchBox() {
                 className="mb-4 p-2 h-8 bg-transparent border border-logo-turquoise dark:border-logo-turquoise shadow-lg rounded cursor-pointer"
             />
 
-            <div
-                className="overflow-y-auto"
-                style={{ maxHeight: '240px' }} // Ensure this is correctly sized to allow overflow
-            >
+            <div className="overflow-y-auto max-h-[78%]">
                 {loading && (
                     <div className="w-full h-32 flex justify-center items-center">
                         <div className="loader-circle"></div>
