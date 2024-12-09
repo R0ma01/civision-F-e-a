@@ -436,12 +436,11 @@ function aglomerateData(
     possibleValues: any,
 ) {
     const returnMap = result;
-    console.log(result);
+
     let none = result.get('aucun').value || 0;
     none += result.get('AUCUN').value || 0;
     none += result.get('Aucun').value || 0;
 
-    console.log(none);
     returnMap.set('aucun', { name: 'aucun', value: none });
     returnMap.delete('Aucun');
     returnMap.delete('AUCUN');

@@ -32,6 +32,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({
     chartSize = ChartSize.MEDIUM,
     year,
 }) => {
+    console.log('i reload');
     const [chartContent, setChartContent] = useState<ChartContent | null>(null);
     const matchStage = useGlobalFilterStore((state) => state.matchStage);
     const setFilter = useGlobalFilterStore((state) => state.setFilter);
