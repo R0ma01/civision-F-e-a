@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabaseRepertoire } from '@/utils/mongodb';
+import {
+    connectToDatabaseRepertoire,
+    connectToDatabaseStudy,
+} from '@/utils/mongodb';
 import { MongoDBPaths } from '@/components/enums/mongodb-paths-enum';
 import { EntreprisePointData } from '@/components/interface/point-data';
 import { ObjectId } from 'mongodb';
@@ -22,8 +25,12 @@ export async function GET(request: Request) {
         const db = (await connectToDatabaseRepertoire()).db;
         const collection = db.collection(MongoDBPaths.REGISTRE_QC);
 
-        // Query the database for the document with the given ID
-        const document = await collection.findOne(
+        const extraDb = (await connectToDatabaseStudy()).db;
+        const collectionExtra = extraDb.collection(
+            MongoDBPaths.EXTRA_COMPANIES,
+        );
+
+        let document: any = await collectionExtra.findOne(
             { _id: new ObjectId(id) },
             {
                 projection: {
@@ -41,11 +48,32 @@ export async function GET(request: Request) {
         );
 
         if (!document) {
-            return NextResponse.json(
-                { error: 'Document not found' },
-                { status: 404 },
+            document = await collection.findOne(
+                { _id: new ObjectId(id) },
+                {
+                    projection: {
+                        _id: 1,
+                        COORD: 1,
+                        NOM_ASSUJ: 1,
+                        COD_ACT_ECON_CAE: 1,
+                        ADR: 1,
+                        NOM_ETAB: 1,
+                        COD_POSTAL: 1,
+                        NB_EMPLO: 1,
+                        SCIAN: 1,
+                    },
+                },
             );
+
+            if (!document) {
+                return NextResponse.json(
+                    { error: 'Document not found' },
+                    { status: 404 },
+                );
+            }
         }
+
+        // Query the database for the document with the given ID
 
         const CAE_CODE: string =
             document.COD_ACT_ECON_CAE as keyof typeof traductionCAE;

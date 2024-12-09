@@ -77,6 +77,10 @@ function generateAggregationQuery(
             resultMap = numberData(field, resultMap, possibleValues);
         }
 
+        if (needsAglomerationFiltering(field)) {
+            resultMap = aglomerateData(field, resultMap, possibleValues);
+        }
+
         // Ensure all possible values are in the result
         return possibleValues.map((value) => {
             return {
@@ -314,6 +318,10 @@ function needsNumberFiltering(donnes: string) {
     );
 }
 
+function needsAglomerationFiltering(donnes: string) {
+    return donnes === AlbumDataFields.NOMBRE_EMPLOYE;
+}
+
 function convertNumber(donnes: string, data: any, possibleValues: any) {
     if (donnes === AlbumDataFields.ANNEE_FONDATION) {
         if (data < 1900) {
@@ -418,6 +426,25 @@ function numberData(
             value: returnMap.get(conversion).value + item.value,
         });
     });
+
+    return returnMap;
+}
+
+function aglomerateData(
+    donnes: string,
+    result: Map<any, any>,
+    possibleValues: any,
+) {
+    const returnMap = result;
+    console.log(result);
+    let none = result.get('aucun').value || 0;
+    none += result.get('AUCUN').value || 0;
+    none += result.get('Aucun').value || 0;
+
+    console.log(none);
+    returnMap.set('aucun', { name: 'aucun', value: none });
+    returnMap.delete('Aucun');
+    returnMap.delete('AUCUN');
 
     return returnMap;
 }

@@ -173,7 +173,7 @@ const Dropdown = ({
                     ref={dropdownRef}
                     className={`absolute mt-1 p-1 bg-white border max-h-64 f-fit border-gray-300 dark:bg-gray-700 rounded-lg shadow-lg z-10  ${color ? 'w-10' : 'w-52'} overflow-hidden`}
                 >
-                    <ul className="rounded-lg dark:bg-gray-700">
+                    <ul className="rounded-lg dark:bg-gray-700 max-h-64 overflow-y-scroll">
                         {options.map((option: any) => {
                             if (!color) {
                                 return (

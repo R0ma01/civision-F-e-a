@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { value_constants } from '@/constants/constants';
+import { AlbumDataFields } from '@/components/enums/data-types-enum';
 
 interface GlobalState {
     matchStage: Record<string, any>;
@@ -32,32 +33,73 @@ const useGlobalFilterStore = create<GlobalState>((set, get) => ({
             }
         } else {
             const newContent = previousFilter[filterPath];
-            if (newContent) {
-                if (newContent.$in.includes(newValue)) {
-                    previousFilter[filterPath] = {
-                        $exists: true,
-                        $nin: [null, NaN],
-                        $in: newContent.$in.filter(
-                            (item: any) => item !== newValue,
-                        ),
-                    };
 
-                    if (previousFilter[filterPath].$in.length === 0) {
-                        delete previousFilter[filterPath];
+            if (filterPath === AlbumDataFields.NOMBRE_EMPLOYE) {
+                if (newContent) {
+                    if (newValue.toString().toUpperCase() === 'AUCUN') {
+                        if (newContent.$in.includes('aucun')) {
+                            previousFilter[filterPath] = {
+                                $exists: true,
+                                $nin: [null, NaN],
+                                $in: newContent.$in.filter(
+                                    (item: any) =>
+                                        item !== 'aucun' &&
+                                        item !== 'Aucun' &&
+                                        item !== 'AUCUN',
+                                ),
+                            };
+
+                            if (previousFilter[filterPath].$in.length === 0) {
+                                delete previousFilter[filterPath];
+                            }
+                        } else {
+                            previousFilter[filterPath] = {
+                                $exists: true,
+                                $nin: [null, NaN],
+                                $in: [
+                                    ...newContent.$in,
+                                    'aucun',
+                                    'Aucun',
+                                    'AUCUN',
+                                ],
+                            };
+                        }
                     }
                 } else {
                     previousFilter[filterPath] = {
                         $exists: true,
                         $nin: [null, NaN],
-                        $in: [...newContent.$in, newValue],
+                        $in: ['aucun', 'Aucun', 'AUCUN'],
                     };
                 }
             } else {
-                previousFilter[filterPath] = {
-                    $exists: true,
-                    $nin: [null, NaN],
-                    $in: [newValue],
-                };
+                if (newContent) {
+                    if (newContent.$in.includes(newValue)) {
+                        previousFilter[filterPath] = {
+                            $exists: true,
+                            $nin: [null, NaN],
+                            $in: newContent.$in.filter(
+                                (item: any) => item !== newValue,
+                            ),
+                        };
+
+                        if (previousFilter[filterPath].$in.length === 0) {
+                            delete previousFilter[filterPath];
+                        }
+                    } else {
+                        previousFilter[filterPath] = {
+                            $exists: true,
+                            $nin: [null, NaN],
+                            $in: [...newContent.$in, newValue],
+                        };
+                    }
+                } else {
+                    previousFilter[filterPath] = {
+                        $exists: true,
+                        $nin: [null, NaN],
+                        $in: [newValue],
+                    };
+                }
             }
         }
 

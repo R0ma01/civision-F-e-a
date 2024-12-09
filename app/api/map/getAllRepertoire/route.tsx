@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabaseRepertoire } from '@/utils/mongodb';
+import {
+    connectToDatabaseRepertoire,
+    connectToDatabaseStudy,
+} from '@/utils/mongodb';
 import { MongoDBPaths } from '@/components/enums/mongodb-paths-enum';
 import { MapClusterPointData } from '@/components/interface/point-data';
 
@@ -7,6 +10,10 @@ export async function GET(req: Request) {
     try {
         const db = (await connectToDatabaseRepertoire()).db;
         const collection = db.collection(MongoDBPaths.REGISTRE_QC);
+        const extraDb = (await connectToDatabaseStudy()).db;
+        const collectionExtra = extraDb.collection(
+            MongoDBPaths.EXTRA_COMPANIES,
+        );
         const url = new URL(req.url!);
         let filters = url.searchParams.get('filters');
         if (!filters) {
@@ -48,13 +55,40 @@ export async function GET(req: Request) {
             );
         }
 
-        const newResult: MapClusterPointData[] = result.map((item: any) => {
-            return {
-                _id: item._id,
-                nom: item.NOM_ETAB || item.NOM_ASSUJ[0],
-                coords: item.COORD,
-            };
-        });
+        let extras: any = await collectionExtra
+            .find(
+                {
+                    ...filtersObj, // Dynamic filters
+                    ENT_FAM: true, // Query based on the indexed field, not index name
+                },
+                {
+                    projection: {
+                        COORD: 1,
+                        NOM_ETAB: 1,
+                        NOM_ASSUJ: 1,
+                    },
+                },
+            )
+            .toArray();
+
+        if (!extras) {
+            return NextResponse.json(
+                { error: 'Document not found' },
+                { status: 404 },
+            );
+        }
+
+        const combinedResults = [...extras, ...result];
+
+        const newResult: MapClusterPointData[] = combinedResults.map(
+            (item: any) => {
+                return {
+                    _id: item._id,
+                    nom: item.NOM_ETAB || item.NOM_ASSUJ[0],
+                    coords: item.COORD,
+                };
+            },
+        );
 
         // Return a successful response
         const response = NextResponse.json({

@@ -27,7 +27,6 @@ const useGlobalDataStore = create((set, get) => ({
     },
 
     fetchStudyData: async (filters: CompanyInfo) => {
-        console.log('fetch study data');
         if ((get() as any).studyDataFetched) return;
 
         set({ loading: true, error: null });
@@ -56,7 +55,7 @@ const useGlobalDataStore = create((set, get) => ({
                 await GraphDataHttpRequestService.getAllRepertoireData(
                     matchStage,
                 );
-            console.log(responseRepertoire);
+
             set({
                 repertoireData: responseRepertoire,
                 loading: false,

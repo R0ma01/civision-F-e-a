@@ -1496,58 +1496,45 @@ const keyValuePairs: [string, dataInformations][] = [
                 EN: 'Number of employees',
             },
             dataLabels: {
+                aucun: {
+                    FR: 'Aucun',
+                    EN: 'None',
+                },
                 '1 à 5': {
                     FR: '1 à 5',
                     EN: '1 to 5',
-                },
-                aucun: {
-                    FR: 'aucun',
-                    EN: 'none',
-                },
-
-                '11 à 25': {
-                    FR: '11 à 25',
-                    EN: '11 to 25',
-                },
-                Aucun: {
-                    FR: 'aucun',
-                    EN: 'none',
-                },
-                '100 à 249': {
-                    FR: '100 à 249',
-                    EN: '100 to 249',
-                },
-                '500 a 749': {
-                    FR: '500 à 749',
-                    EN: '500 to 749',
-                },
-                inconnu: {
-                    FR: 'inconnu',
-                    EN: 'unknown',
-                },
-                AUCUN: {
-                    FR: 'aucun',
-                    EN: 'none',
-                },
-                '750 a 999': {
-                    FR: '750 à 999',
-                    EN: '750 to 999',
                 },
                 '6 à 10': {
                     FR: '6 à 10',
                     EN: '6 to 10',
                 },
+                '11 à 25': {
+                    FR: '11 à 25',
+                    EN: '11 to 25',
+                },
                 '26 à 49': {
                     FR: '26 à 49',
                     EN: '26 to 49',
+                },
+                '50 à 99': {
+                    FR: '50 à 99',
+                    EN: '50 to 99',
+                },
+                '100 à 249': {
+                    FR: '100 à 249',
+                    EN: '100 to 249',
                 },
                 '250 a 499': {
                     FR: '250 à 499',
                     EN: '250 to 499',
                 },
-                '50 à 99': {
-                    FR: '50 à 99',
-                    EN: '50 to 99',
+                '500 a 749': {
+                    FR: '500 à 749',
+                    EN: '500 to 749',
+                },
+                '750 a 999': {
+                    FR: '750 à 999',
+                    EN: '750 to 999',
                 },
                 '1000 a 2499': {
                     FR: '1000 à 2499',
@@ -1556,6 +1543,10 @@ const keyValuePairs: [string, dataInformations][] = [
                 '2500 a 4999': {
                     FR: '2500 à 4999',
                     EN: '2500 to 4999',
+                },
+                inconnu: {
+                    FR: 'inconnu',
+                    EN: 'unknown',
                 },
             },
         },
