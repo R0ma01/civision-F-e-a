@@ -46,6 +46,22 @@ const MapBox = () => {
             mapRef.current.on('load', () => {
                 setMap(mapRef.current);
             });
+        } else {
+            // Remove all sources if the map already exists
+            const existingSources = mapRef.current.getStyle().sources;
+            Object.keys(existingSources).forEach((sourceId) => {
+                if (mapRef.current?.getSource(sourceId)) {
+                    mapRef.current.removeSource(sourceId);
+                }
+            });
+
+            // Optionally, you can also remove all layers that depend on those sources
+            const layers = mapRef.current.getStyle().layers || [];
+            layers.forEach((layer: any) => {
+                if (mapRef.current?.getLayer(layer.id)) {
+                    mapRef.current.removeLayer(layer.id);
+                }
+            });
         }
 
         return () => {
