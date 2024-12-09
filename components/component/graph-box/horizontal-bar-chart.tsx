@@ -23,6 +23,7 @@ import useDataStore from '@/reducer/dataStore';
 interface SimpleHorizontalBarChartProps {
     chartContent: ChartContent;
     chartSize?: ChartSize;
+    filterRows: any;
     filterData?: (dataField: AlbumDataFields, entry: any) => void;
 }
 
@@ -30,6 +31,7 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
     chartContent,
     chartSize = ChartSize.SMALL,
     filterData = () => {},
+    filterRows,
 }) => {
     const [chartData, setChartData] = useState<
         (ChartData | ChartDataMultipleFileds)[] | undefined
@@ -74,7 +76,7 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
             return (
                 <div className="custom-tooltip bg-white p-2 shadow-lg rounded text-black max-w-[200px] text-wrap">
                     <p className="label font-bold text-black">{customLabel}</p>
-                    <p className="intro text-black">{`${payload[0].payload.value}`}</p>
+                    <p className="intro text-black">{`${((payload[0].payload.value / chartContent.totalData) * 100).toFixed(2)} %`}</p>
                 </div>
             );
         }
@@ -121,26 +123,22 @@ const HorizontalBarChart: React.FC<SimpleHorizontalBarChartProps> = ({
                                 <Cell
                                     key={`cell-${index}`}
                                     fill={
-                                        chartPalette[
-                                            index % chartPalette.length
-                                        ]
+                                        filterRows.length > 0
+                                            ? filterRows.includes(entry.name)
+                                                ? chartPalette[
+                                                      index %
+                                                          chartPalette.length
+                                                  ]
+                                                : '#000'
+                                            : chartPalette[
+                                                  index % chartPalette.length
+                                              ]
                                     }
                                     onClick={() => {
-                                        console.log('ghello');
-                                        setActiveBar(
-                                            activeBar === index ? null : index,
-                                        );
                                         filterData(
                                             chartContent.donnees[0],
                                             entry,
                                         );
-                                    }}
-                                    style={{
-                                        transform:
-                                            activeBar === index
-                                                ? 'scale(1.6)'
-                                                : 'scale(1)',
-                                        transition: 'transform 0.3s ease',
                                     }}
                                 />
                             ))}

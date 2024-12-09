@@ -23,14 +23,18 @@ interface DoughnutChartProps {
     chartContent: ChartContent;
     chartSize?: ChartSize;
     interactive?: boolean;
+    filterRows: any;
     filterData?: (dataField: AlbumDataFields, entry: any) => void;
 }
 
 const Doughnut: React.FC<DoughnutChartProps> = ({
     chartContent,
     chartSize = ChartSize.SMALL,
+    filterRows,
+
     filterData = (entry: any) => {},
 }) => {
+    console.log(filterRows);
     const [activeSlice, setActiveSlice] = useState<string | null>(null);
     const originalOrder = useRef<
         ChartData[] | ChartDataMultipleFileds[] | undefined
@@ -69,6 +73,10 @@ const Doughnut: React.FC<DoughnutChartProps> = ({
         }
     }, [chartContent.data]);
 
+    useEffect(() => {
+        console.log('doughnut-filter-rows-change');
+    }, [filterRows]);
+
     const CustomTooltip = ({ active, payload }: any) => {
         if (active && payload && payload.length) {
             const customLabel = GraphTextService.getFieldLabel(
@@ -80,7 +88,7 @@ const Doughnut: React.FC<DoughnutChartProps> = ({
             return (
                 <div className="custom-tooltip bg-white p-2 shadow-lg rounded text-black max-w-[200px] text-wrap">
                     <p className="label font-bold text-black">{customLabel}</p>
-                    <p className="intro text-black">{`${payload[0].value}`}</p>
+                    <p className="intro text-black">{`${((payload[0].value / chartContent.totalData) * 100).toFixed(2)} %`}</p>
                 </div>
             );
         }
@@ -108,9 +116,16 @@ const Doughnut: React.FC<DoughnutChartProps> = ({
                                 <Cell
                                     key={`cell-${index}`}
                                     fill={
-                                        chartPalette[
-                                            index % chartPalette.length
-                                        ]
+                                        filterRows.length > 0
+                                            ? filterRows.includes(entry.name)
+                                                ? chartPalette[
+                                                      index %
+                                                          chartPalette.length
+                                                  ]
+                                                : '#000'
+                                            : chartPalette[
+                                                  index % chartPalette.length
+                                              ]
                                     }
                                     onClick={() => {
                                         filterData(

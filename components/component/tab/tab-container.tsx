@@ -20,6 +20,7 @@ export function TabContainer({
     className,
     setMap = (temp) => {},
 }: TabProps) {
+    console.log('tab-container-reload');
     const [containerContent, setContainerContent] = useState<
         TabContent[] | undefined
     >(undefined);

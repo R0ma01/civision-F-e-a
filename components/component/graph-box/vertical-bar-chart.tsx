@@ -22,12 +22,14 @@ import useDataStore from '@/reducer/dataStore';
 
 interface VerticalBarChartProps {
     chartContent: ChartContent;
+    filterRows: any;
     chartSize?: ChartSize;
     filterData?: (dataField: AlbumDataFields, entry: any) => void;
 }
 
 const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
     chartContent,
+    filterRows,
     chartSize = ChartSize.SMALL,
     filterData = () => {},
 }) => {
@@ -71,7 +73,7 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
             return (
                 <div className="custom-tooltip bg-white p-2 shadow-lg rounded text-black max-w-[200px] text-wrap">
                     <p className="label font-bold text-black">{customLabel}</p>
-                    <p className="intro text-black">{`${payload[0].payload.value}`}</p>
+                    <p className="intro text-black">{`${((payload[0].payload.value / chartContent.totalData) * 100).toFixed(2)} %`}</p>
                 </div>
             );
         }
@@ -132,9 +134,16 @@ const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
                                 <Cell
                                     key={`cell-${index}`}
                                     fill={
-                                        chartPalette[
-                                            index % chartPalette.length
-                                        ]
+                                        filterRows.length > 0
+                                            ? filterRows.includes(entry.name)
+                                                ? chartPalette[
+                                                      index %
+                                                          chartPalette.length
+                                                  ]
+                                                : '#000'
+                                            : chartPalette[
+                                                  index % chartPalette.length
+                                              ]
                                     }
                                     onClick={() =>
                                         filterData(

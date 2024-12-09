@@ -21,11 +21,14 @@ import useDataStore from '@/reducer/dataStore';
 
 interface StackedBarChartProps {
     chartContent: ChartContent;
+    filterRows: any;
     chartSize?: ChartSize;
 }
 
 const StackedBarChart: React.FC<StackedBarChartProps> = ({
     chartContent,
+    filterRows,
+
     chartSize = ChartSize.SMALL,
 }) => {
     const [chartData, setChartData] = useState<
@@ -39,6 +42,7 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
         if (chartContent.data.length > 0) {
             // No transformation needed, we can directly use the data
             setChartData(chartContent.data);
+            console.log(chartContent.totalData);
         }
     }, [chartContent.data]);
 
@@ -70,7 +74,7 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
                         );
                         return (
                             <>
-                                <p className="intro text-black">{`${customLabel2} : ${item.value}`}</p>
+                                <p className="intro text-black">{`${customLabel2} : ${((item.value / chartContent.totalData) * 100).toFixed(2)} %`}</p>
                             </>
                         );
                     })}
@@ -111,9 +115,16 @@ const StackedBarChart: React.FC<StackedBarChartProps> = ({
                                     dataKey={key}
                                     stackId="a"
                                     fill={
-                                        chartPalette[
-                                            index % chartPalette.length
-                                        ]
+                                        filterRows.length > 0
+                                            ? filterRows.includes(key)
+                                                ? chartPalette[
+                                                      index %
+                                                          chartPalette.length
+                                                  ]
+                                                : '#000'
+                                            : chartPalette[
+                                                  index % chartPalette.length
+                                              ]
                                     }
                                 />
                             );

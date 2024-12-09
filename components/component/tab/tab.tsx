@@ -1,5 +1,5 @@
 import { TabContent, YearTab } from '@/components/interface/tab-content';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import DataCard from '../data-card/data-card';
 import useDataStore from '@/reducer/dataStore';
 import { Language } from '@/components/enums/language';
@@ -14,56 +14,48 @@ interface TabProps {
 //some comment
 export function Tab({ content, className }: TabProps) {
     const [tabContent, setTabContent] = useState<TabContent>(content);
-    const [currentYear, setCurrentYear] = useState<StudyYears | undefined>(
-        undefined,
-    );
+
     const lang: Language = useDataStore((state) => state.lang);
-    const { setYear } = useGlobalDataStore((state: any) => ({
+    const { year, setYear } = useGlobalDataStore((state: any) => ({
+        year: state.year,
         setYear: state.setYear,
     }));
 
     useEffect(() => {
         setTabContent(content);
         if (content.years[0]) {
-            setCurrentYear(content.years[0]);
             setYear(content.years[0]);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [content]);
 
-    useEffect(() => {
-        setYear(currentYear);
-    }, [currentYear, setYear]);
+    const memoizedDataCards = useMemo(() => {
+        return tabContent.cards.map((card, idx) => (
+            <DataCard key={idx} content={card} year={year} />
+        ));
+    }, [tabContent.cards, year]);
 
     return (
         <div
             className={`p-4 space-y-6 rounded-lg transition-all duration-300 ${className}`}
         >
-            {currentYear && (
+            {year && (
                 <>
                     <div className="flex flex-row justify-between w-[550px]">
                         <p className="text-base text-gray-600 dark:text-gray-300 w-[80%]">
                             {tabContent.description[lang]}
                         </p>
                         <Dropdown
-                            inputValue={currentYear}
+                            inputValue={year}
                             options={tabContent.years}
                             dataField={'none'}
                             onChange={(value: any) => {
-                                setCurrentYear(value);
+                                setYear(value);
                             }}
                         />
                     </div>
                     {/* Render Data Cards */}
-                    <div className="grid gap-4">
-                        {tabContent.cards.map((card, idx) => (
-                            <DataCard
-                                key={idx}
-                                content={card}
-                                year={currentYear}
-                            />
-                        ))}
-                    </div>
+                    <div className="grid gap-4">{memoizedDataCards}</div>
                 </>
             )}
         </div>

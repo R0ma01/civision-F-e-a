@@ -6,7 +6,7 @@ import { devtools, persist } from 'zustand/middleware';
 import { StudyYears } from '@/components/enums/data-types-enum';
 
 const useGlobalDataStore = create((set, get) => ({
-    year: undefined,
+    year: StudyYears.YEAR_2022,
     studyData: [],
     indexeAData: [],
     indexeBData: [],

@@ -32,7 +32,6 @@ const GraphBox: React.FC<GraphBoxProps> = ({
     chartSize = ChartSize.MEDIUM,
     year,
 }) => {
-    console.log('i reload');
     const [chartContent, setChartContent] = useState<ChartContent | null>(null);
     const matchStage = useGlobalFilterStore((state) => state.matchStage);
     const setFilter = useGlobalFilterStore((state) => state.setFilter);
@@ -76,10 +75,8 @@ const GraphBox: React.FC<GraphBoxProps> = ({
     const [chartData, setChartData] = useState<
         (ChartData | ChartDataMultipleFileds)[]
     >([]);
-
-    const [nanData, setNanData] = useState<ChartData | ChartDataMultipleFileds>(
-        { name: 'NaN', value: 0 },
-    );
+    const [totalData, setTotalData] = useState<number>(0);
+    const [filterRows, setFilterRows] = useState<any>([]);
 
     useEffect(() => {
         async function fetchMultiple(donnes: any[]) {
@@ -89,6 +86,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                 content.dataOrigin ?? StudyOrigin.ALBUM_FAMILLE,
                 year,
             );
+            console.log(result);
             const tempResult: ChartDataMultipleFileds[] = [
                 {
                     name: 'groupe1',
@@ -102,7 +100,8 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                 },
             ];
 
-            setChartData(result ? result : tempResult);
+            setChartData(result.data ? result.data : tempResult);
+            setTotalData(result.value ?? 2);
 
             setLoading(false);
         }
@@ -114,6 +113,13 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                 content.dataOrigin ?? StudyOrigin.ALBUM_FAMILLE,
                 year,
             );
+            console.log(result);
+            if (matchStage[donnes as unknown as string]) {
+                console.log(matchStage[donnes as unknown as string]['$in']);
+                setFilterRows(matchStage[donnes as unknown as string]['$in']);
+            } else {
+                setFilterRows([]);
+            }
 
             // const nanResult = result.findIndex(
             //     (item) => item.name.toString() === 'NaN',
@@ -133,8 +139,9 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                     value: 1,
                 },
             ];
-            setChartData(result ?? tempResult);
-
+            setChartData(result.data ?? tempResult);
+            console.log(result.value);
+            setTotalData(result.value ?? 2);
             setLoading(false);
         }
 
@@ -159,27 +166,14 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                 setFrozen(false);
                 return;
             }
-            switch (content.graphType) {
-                case GraphBoxType.HORIZONTAL_BARCHART:
 
-                case GraphBoxType.VERTICAL_BARCHART:
+            const tempChartData: ChartContent = {
+                donnees: content.donnes,
+                data: chartData,
+                totalData: totalData,
+            };
 
-                case GraphBoxType.DOUGHNUT:
-
-                case GraphBoxType.DOUBLE_HORIZONTAL_BARCHART:
-
-                case GraphBoxType.STACKED_BARCHART:
-
-                default:
-                    const tempChartData: ChartContent = {
-                        donnees: content.donnes,
-                        data: chartData,
-                        totalData: 1000,
-                    };
-
-                    setChartContent(tempChartData);
-                    break;
-            }
+            setChartContent(tempChartData);
         };
         filterChartData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -202,6 +196,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                     <DoubleHorizontalChart
                         chartContent={chartContent}
                         chartSize={chartSize}
+                        filterRows={filterRows}
                     />{' '}
                 </div>
             );
@@ -212,6 +207,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                         chartContent={chartContent}
                         chartSize={chartSize}
                         filterData={filterNewData}
+                        filterRows={filterRows}
                     />{' '}
                 </div>
             );
@@ -222,6 +218,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                         chartContent={chartContent}
                         chartSize={chartSize}
                         filterData={filterNewData}
+                        filterRows={filterRows}
                     />
                 </div>
             );
@@ -232,6 +229,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                         chartContent={chartContent}
                         chartSize={chartSize}
                         filterData={filterNewData}
+                        filterRows={filterRows}
                     />
                 </div>
             );
@@ -242,6 +240,7 @@ const GraphBox: React.FC<GraphBoxProps> = ({
                     <StackedBarChart
                         chartContent={chartContent}
                         chartSize={chartSize}
+                        filterRows={filterRows}
                     />
                 </div>
             );

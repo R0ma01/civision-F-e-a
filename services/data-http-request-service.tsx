@@ -125,7 +125,7 @@ async function getChartData(
     filters: Record<string, any>,
     dataOrigin: StudyOrigin,
     year: StudyYears,
-): Promise<ChartData[] | ChartDataMultipleFileds[]> {
+): Promise<{ data: ChartData[] | ChartDataMultipleFileds[]; value: number }> {
     try {
         let response = { data: { chartData: [] } };
 
@@ -154,15 +154,33 @@ async function getChartData(
                 },
             });
         }
+        let number = 0;
 
-        return response.data.chartData;
+        Object.values(response.data.chartData).forEach((item: any) => {
+            console.log('hi');
+            if (item.value !== undefined) {
+                // Process objects with a `value` key
+                number += item.value;
+            } else {
+                // Process objects without a `value` key (e.g., stacked data)
+
+                Object.keys(item).forEach((key: string) => {
+                    if (key !== 'name') {
+                        number += item[key];
+                    }
+                });
+                console.log(number);
+            }
+        });
+        console.log(number);
+        return { data: response.data.chartData, value: number };
     } catch (error: any) {
         console.error(
             'Error fetching chartData:',
             error.response?.data?.error || error.message,
         );
     }
-    return [];
+    return { data: [], value: 0 };
 }
 
 async function getEntrepriseInformation(

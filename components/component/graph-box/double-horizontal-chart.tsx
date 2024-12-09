@@ -20,6 +20,7 @@ import useDataStore from '@/reducer/dataStore';
 interface SimpleDoubleHorizontalBarChartProps {
     chartContent: ChartContent;
     chartSize?: ChartSize;
+    filterRows: any;
 }
 
 // Custom label component to handle long text
@@ -46,7 +47,7 @@ const CustomYAxisLabel = (props: any) => {
 
 const DoubleHorizontalBarChart: React.FC<
     SimpleDoubleHorizontalBarChartProps
-> = ({ chartContent, chartSize = ChartSize.SMALL }) => {
+> = ({ chartContent, chartSize = ChartSize.SMALL, filterRows }) => {
     const [chartData, setChartData] = useState<
         (ChartData | ChartDataMultipleFileds)[] | undefined
     >(undefined);
@@ -60,7 +61,7 @@ const DoubleHorizontalBarChart: React.FC<
             // Simply set the new data directly, discarding previous state
             setChartData(chartContent.data);
         }
-    }, [chartContent.data]);
+    }, [chartContent]);
 
     const CustomTooltip = ({ active, payload }: any) => {
         if (active && payload && payload.length) {
@@ -81,7 +82,9 @@ const DoubleHorizontalBarChart: React.FC<
                         );
                         return (
                             <>
-                                <p className="intro text-black">{`${customLabel2} : ${item.value}`}</p>
+                                <p className="intro text-black">
+                                    {`${customLabel2} : ${((item.value / chartContent.totalData) * 100).toFixed(2)} %`}
+                                </p>
                             </>
                         );
                     })}
@@ -118,9 +121,16 @@ const DoubleHorizontalBarChart: React.FC<
                                     key={key}
                                     dataKey={key}
                                     fill={
-                                        chartPalette[
-                                            index % chartPalette.length
-                                        ]
+                                        filterRows.length > 0
+                                            ? filterRows.includes(key)
+                                                ? chartPalette[
+                                                      index %
+                                                          chartPalette.length
+                                                  ]
+                                                : '#000'
+                                            : chartPalette[
+                                                  index % chartPalette.length
+                                              ]
                                     }
                                     barSize={chartSize / 20} // Adjust the bar size as needed
                                 />
