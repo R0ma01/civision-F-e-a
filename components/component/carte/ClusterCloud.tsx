@@ -3,15 +3,17 @@ import { clusterColors } from '@/constants/color-palet';
 import { MapClusterPointData } from '@/components/interface/point-data';
 import { GraphDataHttpRequestService } from '@/services/data-http-request-service';
 import mapboxgl from 'mapbox-gl';
+import { MapType } from '@/components/enums/map-type-enum';
 import useDataStore from '@/reducer/dataStore';
 import { Point } from '@react-three/drei';
 
 interface ClusterCloudProps {
     data: any[]; // GeoJSON data for regions
     map: any;
+    mapType: MapType;
 }
 
-const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
+const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map, mapType }) => {
     function handleMapLoad(convertedData: any) {
         if (!map) return;
 
@@ -206,7 +208,7 @@ const ClusterCloud: React.FC<ClusterCloudProps> = ({ data, map }) => {
                 }
             }
         };
-    }, [data]);
+    }, [data, mapType]);
 
     return null;
 };

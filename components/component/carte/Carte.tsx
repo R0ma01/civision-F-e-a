@@ -260,6 +260,7 @@ export default function Carte() {
                     <ClusterCloud
                         data={repertoireData}
                         map={map}
+                        mapType={mapType}
                     ></ClusterCloud>
 
                     <ColorLegend
