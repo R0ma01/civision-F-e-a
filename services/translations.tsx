@@ -3154,6 +3154,29 @@ const keyValuePairs: [string, dataInformations][] = [
     //     },
     // ],
     [
+        IndexeDataFieldsA.GENRE,
+        {
+            label: {
+                FR: 'Identité de genre',
+                EN: 'Gender identity',
+            },
+            dataLabels: {
+                0: {
+                    FR: 'Masculin',
+                    EN: 'Man',
+                },
+                1: {
+                    FR: 'Féminin',
+                    EN: 'Woman',
+                },
+                96: {
+                    FR: 'Autre identité de genre',
+                    EN: 'Other gender identity',
+                },
+            },
+        },
+    ],
+    [
         IndexeDataFieldsA.QE1x,
         {
             label: {
@@ -3891,8 +3914,8 @@ const keyValuePairsTabs: [string, TabsProps][] = [
         StudyOrigin.INDEX_VOLETA,
         {
             titre: {
-                FR: 'IÉQ: Intentions',
-                EN: 'IÉQ: Intensions',
+                FR: 'La Sphère: Intentions',
+                EN: 'La Sphère: Intensions',
             },
             acronym: {
                 FR: 'I',
@@ -3904,8 +3927,8 @@ const keyValuePairsTabs: [string, TabsProps][] = [
         StudyOrigin.INDEX_VOLETB,
         {
             titre: {
-                FR: 'IÉQ: Entrepreneur Familial',
-                EN: 'IÉQ: Family Entrepreneur',
+                FR: 'La Sphère: Entrepreneur Familial',
+                EN: 'La Sphère: Family Entrepreneur',
             },
             acronym: {
                 FR: 'EF',

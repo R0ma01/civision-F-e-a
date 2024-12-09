@@ -134,7 +134,7 @@ const LandingPage = () => {
                             className="w-auto h-12"
                         />
                         <img
-                            src="/images/la_sphere.png"
+                            src="/images/la_sphere_large.png"
                             className="w-auto h-12"
                             alt="logo-laSphere"
                         />{' '}

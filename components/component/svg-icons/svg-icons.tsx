@@ -469,7 +469,13 @@ export const LegendSVG = ({
     );
 };
 
-export const OpenArrowSVG = ({ className }: { className?: string }) => {
+export const OpenArrowSVG = ({
+    className,
+    fill,
+}: {
+    className?: string;
+    fill?: string;
+}) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -477,14 +483,20 @@ export const OpenArrowSVG = ({ className }: { className?: string }) => {
             height="24px"
             viewBox="0 -960 960 960"
             width="24px"
-            fill="#e8eaed"
+            fill={fill || '#e8eaed'}
         >
             <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
         </svg>
     );
 };
 
-export const CloseArrowSVG = ({ className }: { className?: string }) => {
+export const CloseArrowSVG = ({
+    className,
+    fill,
+}: {
+    className?: string;
+    fill?: string;
+}) => {
     return (
         <svg
             className={className}
@@ -492,7 +504,7 @@ export const CloseArrowSVG = ({ className }: { className?: string }) => {
             height="24px"
             viewBox="0 -960 960 960"
             width="24px"
-            fill="#e8eaed"
+            fill={fill || '#e8eaed'}
         >
             <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z" />
         </svg>

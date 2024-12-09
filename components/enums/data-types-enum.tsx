@@ -131,7 +131,7 @@ export enum IndexeDataFieldsB {
 }
 
 export enum IndexeDataFieldsA {
-    GENRE = IndexeDataFieldsB.GENRE,
+    GENRE = 'GENRE',
     AGE = IndexeDataFieldsB.AGE,
     AGER = IndexeDataFieldsB.AGER,
     Q0QC = IndexeDataFieldsB.Q0QC,

@@ -67,7 +67,6 @@ const ConnectDialog: React.FC<ConnectDialogProps> = ({
 
             const tutorials = await axios.get('/api/user/fetch-accesses');
 
-            console.log(tutorials);
             setLoginTutorials(tutorials.data.tutorials);
         } catch (error: any) {
             if ((error.stack.split(':')[0] = 'AccessDenied')) {

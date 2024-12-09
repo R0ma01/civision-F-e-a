@@ -10,6 +10,7 @@ import {
     CloseArrowSVG,
     OpenArrowSVG,
 } from '@/components/component/svg-icons/svg-icons';
+import { logoPalette } from '@/constants/color-palet';
 
 // Static dropdown structure
 const dropdownStructure: ChercheurDropdownSection[] = [
@@ -254,11 +255,15 @@ const StaticDropdown: React.FC<StaticDropdownProps> = ({
                             <span className="text-gray-500">
                                 {expandedSections.includes(item.label) ? (
                                     <div className="w-fit h-fit p-1">
-                                        <OpenArrowSVG></OpenArrowSVG>
+                                        <OpenArrowSVG
+                                            fill={logoPalette.logo_turquoise}
+                                        ></OpenArrowSVG>
                                     </div>
                                 ) : (
                                     <div className="w-fit h-fit p-1 ">
-                                        <CloseArrowSVG></CloseArrowSVG>
+                                        <CloseArrowSVG
+                                            fill={logoPalette.logo_turquoise}
+                                        ></CloseArrowSVG>
                                     </div>
                                 )}
                             </span>

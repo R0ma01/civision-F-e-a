@@ -7,7 +7,7 @@ import DisconnectDialog from '@/components/component/dialogs/disconnect-confirma
 import SideBarItem from './SidebarItem';
 import fullLogoFAE from '@/public/images/fea-full-logo.png';
 import logoFAE from '@/public/images/simple-logo-fae.png';
-import fullLogoSphere from '@/public/images/la_sphere.png';
+import fullLogoSphere from '@/public/images/la_sphere_large.png';
 import logoSphere from '@/public/images/la_sphere_simple.png';
 import { Language } from '@/components/enums/language';
 import { SideBarPromptsTranslations } from '@/constants/translations/page-prompts';
@@ -95,15 +95,15 @@ const Sidebar: React.FC = () => {
                     <Image
                         src={logoSphere}
                         alt="Logo Familles en Affaires"
-                        className={`max-w-[30px] min-w-[30px] absolute left-[5px] top-[70px] cursor-pointer`}
-                        width={30}
+                        className={`max-w-[29px] min-w-[29px] absolute left-[5px] top-[70px] cursor-pointer`}
+                        width={29}
                         height={80}
                     />
 
                     <Image
                         src={fullLogoSphere}
                         alt="Logo Familles en Affaires"
-                        className={`min-w-[224px] absolute -left-[7px] top-[58px] cursor-pointer transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`}
+                        className={`min-w-[220px] absolute left-[6px] top-[69px] cursor-pointer transition-all ease-in-out duration-300 opacity-0 group-hover:opacity-100`}
                         width={218}
                         height={80}
                     />
