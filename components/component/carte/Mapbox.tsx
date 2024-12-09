@@ -6,8 +6,9 @@ import useMapStore from '@/stores/global-map-store';
 import { html_object_constants } from '@/constants/constants';
 
 const MapBox = () => {
-    const { setMap, point } = useMapStore((state) => {
+    const { mapType, setMap, point } = useMapStore((state) => {
         return {
+            mapType: state.mapType,
             setMap: state.setMap,
             point: state.point,
         };
@@ -54,7 +55,7 @@ const MapBox = () => {
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isDarkMode]);
+    }, [isDarkMode, mapType]);
 
     useEffect(() => {
         if (point && mapRef.current) {
