@@ -3918,8 +3918,8 @@ const keyValuePairsTabs: [string, TabsProps][] = [
                 EN: 'La Sphère: Intensions',
             },
             acronym: {
-                FR: 'I',
-                EN: 'I',
+                FR: 'LS',
+                EN: 'TS',
             },
         },
     ],
@@ -3931,8 +3931,8 @@ const keyValuePairsTabs: [string, TabsProps][] = [
                 EN: 'La Sphère: Family Entrepreneur',
             },
             acronym: {
-                FR: 'EF',
-                EN: 'FE',
+                FR: 'LS',
+                EN: 'TS',
             },
         },
     ],

@@ -10,12 +10,7 @@ import {
 import {
     AddCircleSVG,
     EditSVG,
-    EmailSVG,
-    GlobeSVG,
     InvisibleSVG,
-    LinkedInSVG,
-    PhoneSVG,
-    ServiceSVG,
     TrashSVG,
     VisibleSVG,
     OpenArrowSVG,
@@ -193,7 +188,7 @@ export default function ListeFournisseurs({
             {/* Search and Filters */}
             <div className="flex flex-col w-full p-1">
                 <Image
-                    src="/images/ORIA_NV.png"
+                    src="/images/ORIA_Logo-Seul-Couleur-2024.png"
                     width={165}
                     height={100}
                     alt="logo-ORIA"
@@ -342,14 +337,12 @@ function FournisseurListElement({
                         fournisseur.contact.lastName}
                 </p>
             </div>
-            <Button
-                buttonType={ButtonType.ICON}
-                onClick={(e) => {
+            <div
+                onClick={(e: any) => {
                     handleButtonClick(e);
                     handleRowClick();
                 }}
                 className="absolute top-1.5 right-1 z-10"
-                scaleOnHover={false}
             >
                 {isOpen ? (
                     <div className="w-fit h-fit p-1 bg-logo-turquoise rounded-lg">
@@ -360,34 +353,31 @@ function FournisseurListElement({
                         <CloseArrowSVG className="w-4 h-4 fill-custom-grey group-hover:fill-white"></CloseArrowSVG>
                     </div>
                 )}
-            </Button>
+            </div>
             <div className="flex-row justify-evenly mb-4 hidden group-hover:flex absolute top-1.5 right-4 space-x-1 p-1 bg-logo-turquoise rounded-l-md pr-3">
                 {admin && (
-                    <Button
-                        buttonType={ButtonType.ICON}
-                        onClick={(e) => {
+                    <div
+                        onClick={(e: any) => {
                             handleButtonClick(e);
                             onClickEdit(fournisseur);
                         }}
                     >
                         <EditSVG className="hover:fill-white fill-custom-grey w-4 h-4"></EditSVG>
-                    </Button>
+                    </div>
                 )}
                 {admin && (
-                    <Button
-                        buttonType={ButtonType.ICON}
-                        onClick={(e) => {
+                    <div
+                        onClick={(e: any) => {
                             handleButtonClick(e);
                             onClickDelete(fournisseur);
                         }}
                     >
                         <TrashSVG className="hover:fill-white fill-custom-grey w-4 h-4"></TrashSVG>
-                    </Button>
+                    </div>
                 )}
                 {admin && (
-                    <Button
-                        buttonType={ButtonType.ICON}
-                        onClick={(e) => {
+                    <div
+                        onClick={(e: any) => {
                             handleButtonClick(e);
                             onClickVisible(fournisseur);
                         }}
@@ -397,7 +387,7 @@ function FournisseurListElement({
                         ) : (
                             <InvisibleSVG className=" hover:fill-white fill-custom-grey w-4 h-4"></InvisibleSVG>
                         )}
-                    </Button>
+                    </div>
                 )}
             </div>
             {/* Main Row */}

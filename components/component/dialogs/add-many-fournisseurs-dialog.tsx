@@ -121,9 +121,15 @@ export function AddManyFournisseursDialog({
                 <div className="absolute right-4 top-3 flex flex-row gap-3">
                     {' '}
                     <Button
-                        onClick={closeDialog}
-                        pending={isSubmitting}
                         buttonType={ButtonType.CANCEL}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('hiok');
+                            closeDialog();
+                        }}
+                        disabled={isSubmitting}
+                        className="text-black"
                     >
                         ✕
                     </Button>
@@ -145,19 +151,23 @@ export function AddManyFournisseursDialog({
                 {!isSingle && (
                     <>
                         <div className="flex flex-col gap-4 pt-1">
-                            <div
-                                className={`${file.length > 0 ? 'opacity-100' : 'translate-x-20 opacity-0'} h-fit w-fit transition-all duration-200 absolute top-3 right-20`}
-                            >
-                                <Button
-                                    pending={isSubmitting}
-                                    onClick={() => {
-                                        localHandleSubmit(file);
-                                    }}
+                            $
+                            {file.length > 0 && (
+                                <div
+                                    className={`${file.length > 0 ? 'opacity-100' : 'translate-x-20 opacity-0'} h-fit w-fit transition-all duration-200 absolute top-3 right-20`}
                                 >
-                                    Soumettre
-                                </Button>
-                            </div>
-
+                                    <Button
+                                        pending={isSubmitting}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            localHandleSubmit(file);
+                                        }}
+                                    >
+                                        Soumettre
+                                    </Button>
+                                </div>
+                            )}
                             <UploadFileModal
                                 handleStartUpload={async (
                                     fileName: any,

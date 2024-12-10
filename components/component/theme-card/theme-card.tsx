@@ -58,7 +58,7 @@ const ThemeCard: React.FC<ThemeCardProps> = ({
                 >
                     <div
                         key={index}
-                        className="group-hover:overflow-y-auto max-h-[250px] top-0"
+                        className="group-hover:overflow-y-auto max-h-[225px] top-0"
                     >
                         <TabNotches
                             tabs={localContent.tabs}
@@ -148,10 +148,15 @@ function TabNotches({ className, tabs, admin, index }: TabNotchesProps) {
                             style={{
                                 backgroundColor: color + 'AA',
                             }}
-                            className={`p-2 flex items-center bg-opacity-40 border-none rounded-l-full text-white w-9 h-7 overflow-hidden ${admin && !tab.visible ? 'opacity-35' : ''}`}
+                            className={`p-2 relative group-hover:w-48 transition-all duration-300 bg-opacity-40 border-none rounded-l-full text-white w-9 h-7 overflow-hidden ${admin && !tab.visible ? 'opacity-35' : ''}`}
                             title={title}
                         >
-                            <p className="text-xs">{acronym}</p>
+                            <p className="absolute top-1.5 left-2 text-xs opacity-100 group-hover:opacity-0 transition-all duration-300">
+                                {acronym}
+                            </p>
+                            <p className="absolute top-1.5 left-2 text-xs opacity-0 group-hover:opacity-100 transition-all duration-100 w-48">
+                                {title}
+                            </p>
                         </div>
                     )
                 );

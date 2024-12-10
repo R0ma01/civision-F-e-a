@@ -64,6 +64,26 @@ const useGlobalFilterStore = create<GlobalState>((set, get) => ({
                                 ],
                             };
                         }
+                    } else {
+                        if (newContent.$in.includes(newValue)) {
+                            previousFilter[filterPath] = {
+                                $exists: true,
+                                $nin: [null, NaN],
+                                $in: newContent.$in.filter(
+                                    (item: any) => item !== newValue,
+                                ),
+                            };
+
+                            if (previousFilter[filterPath].$in.length === 0) {
+                                delete previousFilter[filterPath];
+                            }
+                        } else {
+                            previousFilter[filterPath] = {
+                                $exists: true,
+                                $nin: [null, NaN],
+                                $in: [...newContent.$in, newValue],
+                            };
+                        }
                     }
                 } else {
                     previousFilter[filterPath] = {
