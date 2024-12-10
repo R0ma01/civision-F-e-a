@@ -134,7 +134,7 @@ function Repertoire() {
         >
             <div className="flex flex-col h-[100%] bg-[#F0F3F4] dark:bg-[#363636] items-center">
                 <div className="flex h-fit relative w-full pl-2">
-                    <div className="w-[240px] h-fit dark:text-white flex flex-col mt-2 ml-1 text-wrap whitespace-normal">
+                    <div className="w-[300px] h-fit dark:text-white flex flex-col mt-2 ml-1 text-wrap whitespace-normal ">
                         <p className="text-xs font-bold">
                             {RepertoirePromptsTranslations.div1_sentence[lang]}
                         </p>

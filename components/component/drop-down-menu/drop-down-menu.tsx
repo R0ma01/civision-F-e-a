@@ -18,7 +18,7 @@ interface DropdownProps {
     inputValue?: any;
     options: any;
     dataField?: any;
-    color?: boolean;
+    width?: string;
     onChange?: (value: any) => void;
     displayValue?: (value: any, lang: Language, field?: any) => string; // Function to display the value
     onMenuClick?: (value: any) => void;
@@ -31,7 +31,7 @@ const Dropdown = ({
     dropType = DropDownType.NORMAL,
     inputValue,
     options,
-    color = false,
+    width = 'w-48',
     dataField = undefined,
     onChange = () => {},
     onMenuClick = (e) => {},
@@ -142,22 +142,15 @@ const Dropdown = ({
                     onMenuClick(e);
                     toggleDropdown(e);
                 }}
-                className={`flex items-center justify-between ${color ? 'w-10' : 'w-48'} px-2 py-1 bg-gray-100 border max-h-8 h-8 
+                className={`flex items-center justify-between ${width} px-2 py-1 bg-gray-100 border max-h-8 h-8 
                 border-gray-300 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2
                  focus:ring-blue-500 focus:ring-opacity-50 text-xs ${className} shadow-sm`}
                 style={style}
             >
-                {!color && (
-                    <span className="overflow-hidden w-40 max-h-8">
-                        {displayText}
-                    </span>
-                )}
-                {color && (
-                    <div
-                        className="w-4 pl-1 h-3 hover:border-2 hover:border-black cursor-pointer transition-colors"
-                        style={{ backgroundColor: selectedValue }}
-                    ></div>
-                )}
+                <span className="overflow-hidden w-40 max-h-8">
+                    {displayText}
+                </span>
+
                 {dropdownOpen ? (
                     <div className="w-fit h-fit p-1">
                         <OpenArrowSVG className="fill-black w-4 h-4"></OpenArrowSVG>
@@ -171,32 +164,25 @@ const Dropdown = ({
             {dropdownOpen && (
                 <div
                     ref={dropdownRef}
-                    className={`absolute mt-1 p-1 bg-white border max-h-64 f-fit border-gray-300 dark:bg-gray-700 rounded-lg shadow-lg z-10  ${color ? 'w-10' : 'w-52'} overflow-hidden`}
+                    className={`absolute mt-1 bg-white border max-h-64 f-fit border-gray-300 dark:bg-gray-700 rounded-lg shadow-lg z-10  ${width} overflow-hidden`}
                 >
-                    <ul className="rounded-lg dark:bg-gray-700 max-h-64 overflow-y-scroll">
+                    <ul className="px-0.5 rounded-md dark:bg-gray-700 max-h-64 overflow-y-scroll overflow-x-hidden py-1 flex flex-col gap-1">
                         {options.map((option: any) => {
-                            if (!color) {
-                                return (
-                                    <li
-                                        key={option as unknown as string}
-                                        className="w-48 pl-1 text-gray-700 hover:bg-gray-100 cursor-pointer transition-colors text-wrap text-xs dark:text-white dark:hover:bg-black overflow-hidden text-ellipsis whitespace-nowrap"
-                                        onClick={() => handleSelection(option)}
-                                    >
-                                        {displayValue(option, lang, dataField)}
-                                    </li>
-                                );
-                            } else {
-                                return (
-                                    <li
-                                        key={option as unknown as string}
-                                        className="w-4 m-1 h-3 hover:border-2 hover:border-black cursor-pointer transition-colors"
-                                        style={{ backgroundColor: option }}
-                                        onClick={() => handleSelection(option)}
-                                    >
-                                        {' '}
-                                    </li>
-                                );
-                            }
+                            const isSelected = selectedValue === option;
+
+                            return (
+                                <li
+                                    key={option as unknown as string}
+                                    className={`w-full px-1 text-gray-700 cursor-pointer transition-colors text-wrap text-[10px] h-fit text-left py-1 flex items-center rounded-lg ${
+                                        isSelected
+                                            ? 'bg-logo-turquoise'
+                                            : 'bg-gray-100 hover:bg-gray-300'
+                                    }`}
+                                    onClick={() => handleSelection(option)}
+                                >
+                                    {displayValue(option, lang, dataField)}
+                                </li>
+                            );
                         })}
                     </ul>
                 </div>

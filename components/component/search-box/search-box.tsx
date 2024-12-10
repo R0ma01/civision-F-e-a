@@ -61,7 +61,6 @@ function SearchBox() {
         setSearchTerm(e.target.value);
     }
     async function flyToPoint(company: MapClusterPointData) {
-        console.log('i am called');
         // Handling RepertoireData type or any other type-specific logic
         // Assuming similar properties to CompanyInfo
 
@@ -119,7 +118,7 @@ function SearchBox() {
     return (
         <div
             id={html_object_constants.search_box_id}
-            className="flex flex-col h-full w-[450px] backdrop-filter px-3 pointer-events-auto"
+            className="flex flex-col h-full w-[400px] backdrop-filter px-3 pointer-events-auto"
         >
             <h2 className="text-smaller md:text-small dark:text-white text-black pb-2">
                 {RepertoirePromptsTranslations.search_box_title[lang]}
@@ -133,7 +132,7 @@ function SearchBox() {
                 className="mb-4 p-2 h-8 bg-transparent border border-logo-turquoise dark:border-logo-turquoise shadow-lg rounded cursor-pointer"
             />
 
-            <div className="overflow-y-auto max-h-[78%]">
+            <div className="overflow-y-auto h-[73%] max-h-[73%]">
                 {loading && (
                     <div className="w-full h-32 flex justify-center items-center">
                         <div className="loader-circle"></div>

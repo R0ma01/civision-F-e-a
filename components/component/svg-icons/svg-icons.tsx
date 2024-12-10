@@ -348,9 +348,9 @@ export const ServiceSVG = ({ className }: { className?: string }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            height="24px"
+            height="25px"
             viewBox="0 -960 960 960"
-            width="24px"
+            width="75px"
             fill="#5f6368"
             className={className}
         >

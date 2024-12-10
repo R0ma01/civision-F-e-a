@@ -18,6 +18,8 @@ import {
     ServiceSVG,
     TrashSVG,
     VisibleSVG,
+    OpenArrowSVG,
+    CloseArrowSVG,
 } from '../svg-icons/svg-icons';
 import { ButtonType } from '@/components/enums/button-type-enum';
 import Button from '../buttons/button';
@@ -27,6 +29,7 @@ import {
     FournisseurPromptsTranslations,
 } from '@/constants/translations/page-prompts';
 import useDataStore from '@/reducer/dataStore';
+import Image from 'next/image';
 
 interface ListeFournisseurProps {
     admin?: boolean;
@@ -136,7 +139,6 @@ export default function ListeFournisseurs({
     };
 
     function filterSearchParams() {
-        console.log(fournisseurData);
         const newData = fournisseurData.filter(filterPredicate);
 
         setFournisseurs(sortAlphabetically(newData));
@@ -152,7 +154,6 @@ export default function ListeFournisseurs({
     }
 
     function populateTable() {
-        console.log(fournisseurs);
         if (fournisseurs.length > 0) {
             return fournisseurs.map((fournisseur, index) => {
                 if (fournisseur.visible)
@@ -186,32 +187,57 @@ export default function ListeFournisseurs({
 
     return (
         <div
-            className={`w-[500px] bg-[#fefefe] dark:bg-[#2a2a2a] dark:text-white backdrop-blur-md bg-opacity-50 shadow-3xl
-                    rounded-xl py-8 px-10 pointer-events-auto flex flex-col items-center space-y-6 h-auto max-h-[80%] `}
+            className={`w-full h-full bg-[#F0F3F4] dark:bg-[#363636] dark:text-white backdrop-blur-md bg-opacity-50 shadow-3xl
+                    pointer-events-auto flex flex-col items-center p-2`}
         >
             {/* Search and Filters */}
-            <div className="flex flex-col w-full space-y-4">
-                <h1 className="font-semibold text-xl">
-                    {FournisseurPromptsTranslations.fournisseur_box_title[lang]}
-                </h1>
+            <div className="flex flex-col w-full p-1">
+                <Image
+                    src="/images/ORIA_NV.png"
+                    width={165}
+                    height={100}
+                    alt="logo-ORIA"
+                    className=""
+                />
+                <div className="flex flex-row w-full">
+                    <h1 className="w-[300px] text-smaller md:text-small dark:text-white text-black mt-6 ">
+                        {
+                            FournisseurPromptsTranslations
+                                .fournisseur_box_title[lang]
+                        }
+                    </h1>
+                    <Button
+                        buttonType={ButtonType.CONFIRM}
+                        onClick={() =>
+                            window.open(
+                                'https://forms.gle/x1rgzmTpfrT49LMG9',
+                                '_blank',
+                            )
+                        }
+                        className="w-[100px] text-xs absolute top-2 right-2"
+                        title="redirect:https://forms.gle/x1rgzmTpfrT49LMG9"
+                    >
+                        {FournisseurPromptsTranslations.subscribe[lang]}
+                    </Button>
+                </div>
                 <div className="flex flex-col items-center justify-between">
                     {/* Search Input */}
-                    <input
-                        type="text"
-                        placeholder={
-                            FournisseurPromptsTranslations
-                                .rechercher_fournisseur[lang]
-                        }
-                        value={searchString}
-                        onChange={handleSearchChange}
-                        className="w-full p-3 bg-white dark:bg-[#3a3a3a] border border-logo-turquoise dark:border-[#4fc3f7] 
-                               rounded-lg focus:outline-none focus:ring-2 focus:ring-logo-turquoise dark:focus:ring-[#4fc3f7] 
-                               shadow-sm transition ease-in-out duration-200"
-                    />
+                    <div className="w-full">
+                        <input
+                            type="text"
+                            placeholder={
+                                FournisseurPromptsTranslations
+                                    .rechercher_fournisseur[lang]
+                            }
+                            value={searchString}
+                            onChange={handleSearchChange}
+                            className="p-2 h-8 bg-transparent border border-logo-turquoise dark:border-logo-turquoise shadow-lg rounded cursor-pointer w-full mt-2"
+                        />
+                    </div>
 
                     {/* Dropdown Filters */}
-                    <div className="flex flex-row justify-evenly space-x-4 mt-2">
-                        <div className="flex flex-col">
+                    <div className="flex flex-row justify-between w-full mt-2">
+                        <div className="flex flex-col w-fit">
                             <p className="text-xs">
                                 {FournisseurPromptsTranslations.region[lang]}
                             </p>
@@ -220,6 +246,7 @@ export default function ListeFournisseurs({
                                     SharedPromptsTranslations.all[lang],
                                     ...Object.values(SecteursGeographiques),
                                 ]}
+                                width={'w-44'}
                                 inputValue={searchSecteur}
                                 onChange={(value: any) =>
                                     setSearchSecteur(value)
@@ -227,7 +254,7 @@ export default function ListeFournisseurs({
                                 className="hover:border-logo-turquoise text-black"
                             />
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col w-fit">
                             <p className="text-xs">
                                 {FournisseurPromptsTranslations.service[lang]}
                             </p>
@@ -236,6 +263,7 @@ export default function ListeFournisseurs({
                                     SharedPromptsTranslations.all[lang],
                                     ...Object.values(ServiceOffert),
                                 ]}
+                                width={'w-44'}
                                 inputValue={searchService}
                                 onChange={(value: any) =>
                                     setSearchService(value)
@@ -250,7 +278,7 @@ export default function ListeFournisseurs({
             {/* Table with Suppliers */}
             {!loading ? (
                 <>
-                    <div className="w-full overflow-y-auto max-h-[60%] rounded-md">
+                    <div className="w-full overflow-y-auto h-[70%] max-h-[70%] rounded-md mt-2">
                         <table className="min-w-full">
                             <tbody>{populateTable()}</tbody>
                         </table>
@@ -260,12 +288,12 @@ export default function ListeFournisseurs({
                             buttonType={ButtonType.ICON}
                             onClick={() => openAddDialog()}
                         >
-                            <AddCircleSVG></AddCircleSVG>
+                            <AddCircleSVG className="fill-black dark:fill-white"></AddCircleSVG>
                         </Button>
                     )}
                 </>
             ) : (
-                <div className="w-full h-32 flex justify-center items-center">
+                <div className="w-full h-full flex justify-center items-center">
                     <div className="loader-circle"></div>
                 </div>
             )}
@@ -302,154 +330,125 @@ function FournisseurListElement({
     return (
         <tr
             key={index}
-            className={`border-b border-gray-400 dark:border-gray-700 hover:shadow-lg dark:hover:shadow-md cursor-pointer relative transition-all ease-in-out duration-300 transform ${
-                isOpen ? 'h-auto' : 'h-12'
+            className={`border-b border-gray-400 dark:border-gray-700  hover:shadow-[0px_1px_5px_rgba(0,0,0,0.25)] dark:hover:shadow-[0px_1px_5px_rgba(255,255,255,0.45)] ursor-pointer relative transition-all ease-in-out duration-300 transform ${
+                isOpen ? 'h-auto' : 'h-9'
             } group flex flex-col`}
             onClick={handleRowClick}
         >
+            <div className="flex flex-col w-full justify-center h-9">
+                <p className="">
+                    {fournisseur.contact.firstName +
+                        ' ' +
+                        fournisseur.contact.lastName}
+                </p>
+            </div>
+            <Button
+                buttonType={ButtonType.ICON}
+                onClick={(e) => {
+                    handleButtonClick(e);
+                    handleRowClick();
+                }}
+                className="absolute top-1.5 right-1 z-10"
+                scaleOnHover={false}
+            >
+                {isOpen ? (
+                    <div className="w-fit h-fit p-1 bg-logo-turquoise rounded-lg">
+                        <OpenArrowSVG className="w-4 h-4 fill-custom-grey group-hover:fill-white"></OpenArrowSVG>
+                    </div>
+                ) : (
+                    <div className="w-fit h-fit p-1 bg-logo-turquoise rounded-lg">
+                        <CloseArrowSVG className="w-4 h-4 fill-custom-grey group-hover:fill-white"></CloseArrowSVG>
+                    </div>
+                )}
+            </Button>
+            <div className="flex-row justify-evenly mb-4 hidden group-hover:flex absolute top-1.5 right-4 space-x-1 p-1 bg-logo-turquoise rounded-l-md pr-3">
+                {admin && (
+                    <Button
+                        buttonType={ButtonType.ICON}
+                        onClick={(e) => {
+                            handleButtonClick(e);
+                            onClickEdit(fournisseur);
+                        }}
+                    >
+                        <EditSVG className="hover:fill-white fill-custom-grey w-4 h-4"></EditSVG>
+                    </Button>
+                )}
+                {admin && (
+                    <Button
+                        buttonType={ButtonType.ICON}
+                        onClick={(e) => {
+                            handleButtonClick(e);
+                            onClickDelete(fournisseur);
+                        }}
+                    >
+                        <TrashSVG className="hover:fill-white fill-custom-grey w-4 h-4"></TrashSVG>
+                    </Button>
+                )}
+                {admin && (
+                    <Button
+                        buttonType={ButtonType.ICON}
+                        onClick={(e) => {
+                            handleButtonClick(e);
+                            onClickVisible(fournisseur);
+                        }}
+                    >
+                        {fournisseur.visible ? (
+                            <VisibleSVG className=" hover:fill-white fill-custom-grey w-4 h-4"></VisibleSVG>
+                        ) : (
+                            <InvisibleSVG className=" hover:fill-white fill-custom-grey w-4 h-4"></InvisibleSVG>
+                        )}
+                    </Button>
+                )}
+            </div>
             {/* Main Row */}
-            {!isOpen ? (
-                <td colSpan={2} className="p-2">
-                    <div className="flex-row justify-evenly mb-4 hidden group-hover:flex absolute top-[25%] right-3 space-x-4">
-                        {admin && (
-                            <Button
-                                buttonType={ButtonType.ICON}
-                                onClick={(e) => {
-                                    handleButtonClick(e);
-                                    onClickEdit(fournisseur);
-                                }}
-                            >
-                                <EditSVG className="hover:scale-150 hover:fill-black dark:hover:fill-white dark:fill-custom-grey"></EditSVG>
-                            </Button>
-                        )}
-                        {admin && (
-                            <Button
-                                buttonType={ButtonType.ICON}
-                                onClick={(e) => {
-                                    handleButtonClick(e);
-                                    onClickDelete(fournisseur);
-                                }}
-                            >
-                                <TrashSVG className="hover:scale-150 hover:fill-black dark:hover:fill-white dark:fill-custom-grey"></TrashSVG>
-                            </Button>
-                        )}
-                        {admin && (
-                            <Button
-                                buttonType={ButtonType.ICON}
-                                onClick={(e) => {
-                                    handleButtonClick(e);
-                                    onClickVisible(fournisseur);
-                                }}
-                            >
-                                {fournisseur.visible ? (
-                                    <VisibleSVG className="hover:scale-150 hover:fill-black dark:hover:fill-white dark:fill-custom-grey"></VisibleSVG>
-                                ) : (
-                                    <InvisibleSVG className="hover:scale-150 hover:fill-black dark:hover:fill-white dark:fill-custom-grey"></InvisibleSVG>
-                                )}
-                            </Button>
-                        )}
-                    </div>
-                    <div className="flex space-x-4 w-full">
-                        <p className="font-bold">
-                            {fournisseur.contact.firstName +
-                                ' ' +
-                                fournisseur.contact.lastName.toUpperCase()}
-                        </p>
-                    </div>
-                </td>
-            ) : (
+            {isOpen && (
                 <>
-                    <td className="p-2 align-top flex flex-row justify-between">
-                        <div className="flex-row justify-evenly mb-4 hidden group-hover:flex absolute top-[25%] right-3 space-x-4">
-                            {admin && (
-                                <Button
-                                    buttonType={ButtonType.ICON}
-                                    onClick={(e) => {
-                                        handleButtonClick(e);
-                                        onClickEdit(fournisseur);
-                                    }}
-                                >
-                                    <EditSVG className="hover:scale-150 hover:fill-black dark:hover:fill-white dark:fill-custom-grey"></EditSVG>
-                                </Button>
-                            )}
-                            {admin && (
-                                <Button
-                                    buttonType={ButtonType.ICON}
-                                    onClick={(e) => {
-                                        handleButtonClick(e);
-                                        onClickDelete(fournisseur);
-                                    }}
-                                >
-                                    <TrashSVG className="hover:scale-150 hover:fill-black dark:hover:fill-white dark:fill-custom-grey"></TrashSVG>
-                                </Button>
-                            )}
-                            {admin && (
-                                <Button
-                                    buttonType={ButtonType.ICON}
-                                    onClick={(e) => {
-                                        handleButtonClick(e);
-                                        onClickVisible(fournisseur);
-                                    }}
-                                >
-                                    {fournisseur.visible ? (
-                                        <VisibleSVG className="hover:scale-150 hover:fill-black dark:hover:fill-white dark:fill-custom-grey"></VisibleSVG>
-                                    ) : (
-                                        <InvisibleSVG className="hover:scale-150 hover:fill-black dark:hover:fill-white dark:fill-custom-grey"></InvisibleSVG>
-                                    )}
-                                </Button>
-                            )}
-                        </div>
-                        <div className="flex flex-col">
-                            <p className="font-bold">
-                                {fournisseur.contact.firstName +
-                                    ' ' +
-                                    fournisseur.contact.lastName.toUpperCase()}
+                    <td className="align-top flex flex-row justify-between text-sm border-gray-200 dark:border-gray-700">
+                        <div>
+                            <p className="font-semibold text-gray-800 dark:text-gray-200">
+                                Companie:{' '}
+                                <span className="font-normal">
+                                    {fournisseur.contact.company}
+                                </span>
                             </p>
-                            <p>{fournisseur.contact.company}</p>
-                        </div>
-
-                        <div className="flex flex-row justify-end space-x-2">
-                            <a
-                                href={`tel:+1${fournisseur.contact.cellPhone}`}
-                                onClick={(e: any) => {
-                                    handleButtonClick(e);
-                                }}
-                            >
-                                <PhoneSVG className="bg-black fill-white p-1" />
-                            </a>
-                            <a
-                                href={`mailto:${fournisseur.contact.email}`}
-                                className="text-blue-500 underline"
-                                onClick={(e: any) => {
-                                    handleButtonClick(e);
-                                }}
-                            >
-                                <EmailSVG className="bg-black fill-white p-1" />
-                            </a>
-                            <a
-                                href={fournisseur.contact.linkedIn}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e: any) => {
-                                    handleButtonClick(e);
-                                }}
-                            >
-                                <LinkedInSVG className="bg-black fill-white p-1" />
-                            </a>
+                            <p className="font-semibold text-gray-800 dark:text-gray-200">
+                                Phone:{' '}
+                                <span className="font-normal">
+                                    {fournisseur.contact.cellPhone}
+                                </span>
+                            </p>
+                            <p className="font-semibold text-gray-800 dark:text-gray-200">
+                                Email:{' '}
+                                <span className="font-normal">
+                                    {fournisseur.contact.email}
+                                </span>
+                            </p>
+                            {fournisseur.contact.linkedIn && (
+                                <a
+                                    href={fournisseur.contact.linkedIn}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:opacity-75 transition-opacity font-bold underline"
+                                    onClick={(e: any) => handleButtonClick(e)}
+                                >
+                                    LinkedIn
+                                </a>
+                            )}
                         </div>
                     </td>
-                    {/* Expandable content */}
                     {isOpen && (
-                        <td colSpan={2} className="p-2">
-                            <div className="flex flex-col space-y-2">
-                                <div className="flex space-x-1">
-                                    <GlobeSVG className="bg-black fill-white p-1" />
-                                    <div className="flex flex-wrap">
+                        <td colSpan={2} className="">
+                            <div className="flex flex-col gap-2">
+                                <div className="">
+                                    <h4 className="text-xs font-semibold mb-1">
+                                        Secteurs géographiques
+                                    </h4>
+                                    <div className="flex flex-wrap gap-0.5 text-xs text-gray-700 dark:text-gray-300">
                                         {fournisseur.secteurs_geographique.map(
                                             (secteur, i) => (
                                                 <span
                                                     key={`${secteur}-${i}`}
-                                                    className="mr-2"
+                                                    className="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-lg"
                                                 >
                                                     {secteur}
                                                 </span>
@@ -457,14 +456,16 @@ function FournisseurListElement({
                                         )}
                                     </div>
                                 </div>
-                                <div className="flex space-x-1">
-                                    <ServiceSVG className="bg-black fill-white p-1" />
-                                    <div className="flex flex-wrap">
+                                <div className="">
+                                    <h4 className="text-xs font-semibold mb-1">
+                                        Services offerts
+                                    </h4>
+                                    <div className="flex flex-wrap gap-0.5 text-xs text-gray-700 dark:text-gray-300">
                                         {fournisseur.services_offerts.map(
                                             (service, i) => (
                                                 <span
                                                     key={`${service}-${i}`}
-                                                    className="mr-2"
+                                                    className="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-lg"
                                                 >
                                                     {service}
                                                 </span>

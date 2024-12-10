@@ -125,31 +125,21 @@ function Fournisseurs() {
         <>
             <PageContentContainer
                 filterMenu={true}
-                className="overflow-auto pb-10 pl-[30px] pt-10"
+                className="relative overflow-auto pb-10 pt-10 h-full w-[400px]"
             >
-                <ListeFournisseurs
-                    admin={user === UserType.ADMIN}
-                    openEditDialog={openEditDialog}
-                    openAddDialog={() => {
-                        setIsAddDialogOpen(true);
-                    }}
-                    openDeleteDialog={openDeleteDialog}
-                    toggleFournisseurVisibility={toggleFournisseurVisibility}
-                ></ListeFournisseurs>
-
-                <Button
-                    buttonType={ButtonType.CONFIRM}
-                    onClick={() =>
-                        window.open(
-                            'https://forms.gle/x1rgzmTpfrT49LMG9',
-                            '_blank',
-                        )
-                    }
-                    className="m-3 self-center"
-                    title="redirect:https://forms.gle/x1rgzmTpfrT49LMG9"
-                >
-                    {FournisseurPromptsTranslations.subscribe[lang]}
-                </Button>
+                <div className="absolute top-0 left-0 w-[400px] h-[100%]">
+                    <ListeFournisseurs
+                        admin={user === UserType.ADMIN}
+                        openEditDialog={openEditDialog}
+                        openAddDialog={() => {
+                            setIsAddDialogOpen(true);
+                        }}
+                        openDeleteDialog={openDeleteDialog}
+                        toggleFournisseurVisibility={
+                            toggleFournisseurVisibility
+                        }
+                    ></ListeFournisseurs>
+                </div>
 
                 {isEditDialogOpen && currentFournisseur && (
                     <EditFournisseurDialog
@@ -168,14 +158,6 @@ function Fournisseurs() {
                         deleteItem={currentFournisseur}
                     />
                 )}
-
-                <Image
-                    src="/images/ORIA.png"
-                    width={150}
-                    height={100}
-                    alt="logo-ORIA"
-                    className="absolute bottom-0 left-12"
-                />
             </PageContentContainer>
             {isAddDialogOpen && (
                 <AddManyFournisseursDialog
