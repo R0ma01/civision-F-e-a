@@ -26,28 +26,29 @@ export default function APropos() {
                             en affaires HEC Montréal et La sphère HEC Montréal.
                             Vous y retrouverez une adaptation numérique et
                             interactive de plusieurs études réalisées sur les
-                            entreprises familiales québécoises, dont L'album de
-                            familles (2020). Vous trouverez aussi des cartes
-                            interactives permettant l'identification des
-                            entreprises familiales à travers le Québec et
-                            l'identification de professionnels d'accompagnement
-                            spécialisé dans l'accompagnement des familles en
-                            affaires.
+                            entreprises familiales québécoises, dont
+                            L&apos;album de familles (2020). Vous trouverez
+                            aussi des cartes interactives permettant
+                            l&apos;identification des entreprises familiales à
+                            travers le Québec et l&apos;identification de
+                            professionnels d&apos;accompagnement spécialisé dans
+                            l&apos;accompagnement des familles en affaires.
                         </p>
                         <p className="font-thin">
                             Cette cartographie représente un hommage vibrant au
                             patrimoine québécois, une véritable source de
                             fierté, mettant en lumière les entreprises
-                            familiales qui façonnent l’histoire et la culture de
-                            notre province. Grâce à son interface conviviale et
-                            ses fonctionnalités avancées, notre application
-                            permet aux utilisateur(trice)s de découvrir ces
-                            entreprises remarquables, d'explorer leur histoire
-                            unique et de mener leurs propres investigations.
-                            Rejoignez-nous dans cette aventure captivante pois
-                            célébrer et soutenir l'esprit d'entreprise familiale
-                            qui anime le Québec ! Pour nous contacter ou en
-                            connaître davantage sur nos organisations:
+                            familiales qui façonnent l&apos;histoire et la
+                            culture de notre province. Grâce à son interface
+                            conviviale et ses fonctionnalités avancées, notre
+                            application permet aux utilisateur(trice)s de
+                            découvrir ces entreprises remarquables,
+                            d&apos;explorer leur histoire unique et de mener
+                            leurs propres investigations. Rejoignez-nous dans
+                            cette aventure captivante pois célébrer et soutenir
+                            l&apos;esprit d&apos;entreprise familiale qui anime
+                            le Québec ! Pour nous contacter ou en connaître
+                            davantage sur nos organisations:
                         </p>
                     </div>
 
@@ -59,8 +60,8 @@ export default function APropos() {
                                 className="rounded-lg shadow-md w-[150px] h-fit object-cover"
                             />{' '}
                             <a href="/login" className="text-[10px] underline">
-                                Pour en savoir plus sur l’album de familles,
-                                cliquez ici!
+                                Pour en savoir plus sur l&apos;album de
+                                familles, cliquez ici!
                             </a>
                         </div>
                     </div>
@@ -157,9 +158,9 @@ export default function APropos() {
                 </h2>
                 <div className="font-thin">
                     <p>
-                        Qu'est-ce qu'un petit commerce ayant pignon sur rue à
-                        Saint-Félicien, une PME touristique à Québec et une
-                        grande entreprise multinationale en Beauce ont en
+                        Qu&apos;est-ce qu&apos;un petit commerce ayant pignon
+                        sur rue à Saint-Félicien, une PME touristique à Québec
+                        et une grande entreprise multinationale en Beauce ont en
                         commun?
                     </p>
                     <p>
@@ -170,28 +171,28 @@ export default function APropos() {
                     </p>
                     <p>
                         Partout dans le monde, les entreprises familiales
-                        constituent des éléments essentiels de l'économie. Au
-                        Canada, selon l'enquête du Conference Board of Canada,
-                        63,1 % des entreprises privées sont des entreprises
-                        familiales. Cette étude estime que ces entreprises
-                        représentent deux tiers de toutes les firmes du secteur
-                        privé au Canada et la moitié du produit intérieur brut
-                        du secteur privé. Elle démontre aussi qu'en 2017, les
-                        entreprises familiales employaient 6,9 millions de
-                        personnes.
+                        constituent des éléments essentiels de l&apos;économie.
+                        Au Canada, selon l&apos;enquête du Conference Board of
+                        Canada, 63,1 % des entreprises privées sont des
+                        entreprises familiales. Cette étude estime que ces
+                        entreprises représentent deux tiers de toutes les firmes
+                        du secteur privé au Canada et la moitié du produit
+                        intérieur brut du secteur privé. Elle démontre aussi
+                        qu&apos;en 2017, les entreprises familiales employaient
+                        6,9 millions de personnes.
                     </p>
                     <p>
                         Les entreprises familiales sont indispensables à notre
-                        économie et, bien qu'en 1871 Frédéric Le Play les
-                        étudiait déjà dans son ouvrage L'organisation de la
+                        économie et, bien qu&apos;en 1871 Frédéric Le Play les
+                        étudiait déjà dans son ouvrage L&apos;organisation de la
                         famille, elles sont encore mal connues. Les études que
-                        l'on peut trouver se focalisent surtout sur les aspects
-                        liés à la succession ou sur d'autres thématiques très
-                        spécialisées. Dans d'autres recherches, les échantillons
-                        sont très petits ou ciblent seulement les entreprises
-                        cotées en bourse. Elles sont donc peu représentatives de
-                        la diversité des entreprises familiales. Voici où
-                        l'aventure commence.
+                        l&apos;on peut trouver se focalisent surtout sur les
+                        aspects liés à la succession ou sur d&apos;autres
+                        thématiques très spécialisées. Dans d&apos;autres
+                        recherches, les échantillons sont très petits ou ciblent
+                        seulement les entreprises cotées en bourse. Elles sont
+                        donc peu représentatives de la diversité des entreprises
+                        familiales. Voici où l&apos;aventure commence.
                     </p>
                 </div>
             </section>
