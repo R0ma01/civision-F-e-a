@@ -58,8 +58,8 @@ import { PagePaths } from './components/enums/page-paths-enum';
 
 export const config = {
     matcher: [
-        '/repertoire',
-        '/repertoire/:path*',
+        '/thematiques',
+        '/thematiques/:path*',
         '/admin/:path*',
         '/admin',
         '/recherche-academique',

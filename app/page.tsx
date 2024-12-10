@@ -29,31 +29,24 @@ const LandingPage = () => {
                         <RotatingLogo></RotatingLogo>
                     </div>
                     {/* Content Overlay */}
-                    <div className="absolute top-8 left-10 z-10 p-4">
-                        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold mb-3 pl-3 text-[#262626] dark:text-white">
-                            Découvrez les{' '}
-                        </h1>
-                        <div className="flex items-center">
-                            <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-3 pl-3 text-[#262626] dark:text-white">
-                                entreprises familiales
-                                <Image
-                                    src={Sun}
-                                    alt="Soleil"
-                                    className="w-4 h-auto inline-block -mt-8"
-                                />
-                            </h1>
+                    <div className="absolute top-8 left-10 z-10 p-4 h-[80%]">
+                        <div className="flex flex-row">
+                            <div className="flex flex-col items-center">
+                                <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-3 pl-3 text-[#262626] dark:text-white">
+                                    PANORAMA
+                                    <Image
+                                        src={Sun}
+                                        alt="Soleil"
+                                        className="w-4 h-auto inline-block -mt-8"
+                                    />
+                                </h1>
+                                <p className="text-xl font-semibold pl-6">
+                                    Découvres les entreprises familiales
+                                </p>
+                            </div>
                         </div>
-                        <h1 className="text-xl md:text-3xl lg:text-5xl font-bold pl-3 text-[#262626] dark:text-white">
-                            du Québec
-                        </h1>
 
-                        <Image
-                            src={Underline}
-                            alt="Underline"
-                            className="w-48 h-auto mt-0 ml-[75px] invert"
-                        />
-
-                        <div className="text-xs md:text-sm lg:text-sm mt-3 mb-2 ml-4 flex flex-col">
+                        <div className="text-xs md:text-sm lg:text-sm mt-3 mb-2 ml-4 flex-col h-[80%] flex justify-center">
                             <div className="w-[400px] md:w-[520px] lg:w-[670px] mb-2 text-justify">
                                 <h4>
                                     <strong>Bienvenue</strong> sur la nouvelle
@@ -63,35 +56,10 @@ const LandingPage = () => {
                                     retrouverez une adaptation numérique et
                                     interactive de plusieurs études réalisées
                                     sur les entreprises familiales québécoises,
-                                    dont L&apos;album de familles (2020). Vous
-                                    trouverez aussi des cartes interactives
-                                    permettant l&apos;identification des
-                                    entreprises familiales à travers le Québec
-                                    et l&apos;identification de professionnels
-                                    d&apos;accompagnement spécialisé dans
-                                    l&apos;accompagnement des familles en
-                                    affaires.
+                                    dont L&apos;album de familles (2020).
                                 </h4>
                             </div>
-                            <div className="mb-2 text-xs md:text-sm lg:text-sm w-[400px] md:w-[520px] lg:w-[670px] text-justify">
-                                <h4>
-                                    Cette cartographie représente un hommage
-                                    vibrant au patrimoine québécois, une
-                                    véritable source de fierté, mettant en
-                                    lumière les entreprises familiales qui
-                                    façonnent l&apos;histoire et la culture de
-                                    notre province. Grâce à son interface
-                                    conviviale et ses fonctionnalités avancées,
-                                    notre application permet aux
-                                    utilisateur(trice)s de découvrir ces
-                                    entreprises remarquables, d&apos;explorer
-                                    leur histoire unique et de mener leurs
-                                    propres investigations. Rejoignez-nous dans
-                                    cette aventure captivante pois célébrer et
-                                    soutenir l&apos;esprit d&apos;entreprise
-                                    familiale qui anime le Québec !
-                                </h4>
-                            </div>
+
                             <div className="flex flex-col justify-normal text-xs md:text-sm lg:text-sm">
                                 <div className="pr-2 flex flex-col items-start w-[400px] md:w-[520px] lg:w-[670px] justify-start gap-2">
                                     <p>
@@ -107,6 +75,7 @@ const LandingPage = () => {
                                                 <span className="text-xs md:text-md lg:text-lg text-[#000000] transition-duration-300">
                                                     <span className="text-center text-white">
                                                         S&apos;INSCRIRE
+                                                        GRATUITEMENT
                                                     </span>
                                                 </span>
                                             </Button>

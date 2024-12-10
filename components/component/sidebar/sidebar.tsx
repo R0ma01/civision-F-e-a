@@ -113,7 +113,7 @@ const Sidebar: React.FC = () => {
                     <SideBarItem
                         pagePath={PagePaths.REPERTOIRE}
                         hoverColor={hoverColor.green}
-                        active={user !== UserType.VISITOR}
+                        active={true}
                     >
                         <HomeSVG className="w-6 h-6 dark:fill-white" />
                         <span className="ml-5 hidden group-hover:block ease-in-out duration-300 transition-all">
@@ -124,6 +124,7 @@ const Sidebar: React.FC = () => {
                     <SideBarItem
                         pagePath={PagePaths.FOURNISSEURS}
                         hoverColor={hoverColor.green}
+                        active={true}
                     >
                         <FournisseurSVG className="w-6 h-6 fill-black dark:fill-white" />
                         <span className="ml-5 hidden group-hover:block ease-in-out duration-300 transition-all">
@@ -134,6 +135,7 @@ const Sidebar: React.FC = () => {
                     <SideBarItem
                         pagePath={PagePaths.THEMATIQUES}
                         hoverColor={hoverColor.green}
+                        active={user !== UserType.VISITOR}
                     >
                         <StatsSVG className="w-6 h-6 dark:fill-white" />
                         <span className="ml-5 hidden group-hover:block ease-in-out duration-300 transition-all">
